@@ -1,0 +1,176 @@
+{
+  "student_id": "test_student_001",
+  "path_name": "??????",
+  "goal": "??????????",
+  "topic": "??????",
+  "course": "??????",
+  "total_duration_days": 7,
+  "daily_minutes": 60,
+  "stages": [
+    {
+      "stage": 1,
+      "title": "基础认知构建",
+      "description": "通过结构化导图梳理学科脉络，建立基础概念网络，完成首轮知识图谱绘制",
+      "estimated_days": 2,
+      "daily_tasks": [
+        "观看配套讲解视频（每日2集）",
+        "对照思维导图补全缺失节点",
+        "完成基础概念自测"
+      ],
+      "focus_points": [
+        "核心术语定义",
+        "基础逻辑框架",
+        "典型应用场景识别"
+      ],
+      "suggested_resources": {
+        "lecture": "??????基础篇·第一章",
+        "exercise": "概念辨析单选题库",
+        "reading": "学科发展简史文献选读"
+      },
+      "expected_outcome": "准确复述三大基础模块要点，独立完成首版个人知识图谱"
+    },
+    {
+      "stage": 2,
+      "title": "深度解析突破",
+      "description": "聚焦难点专题精讲，结合案例拆解复杂问题解决路径，开展对比实验验证理论有效性",
+      "estimated_days": 3,
+      "daily_tasks": [
+        "研读高阶案例分析报告",
+        "参与线上研讨小组辩论赛",
+        "实施模拟实验方案"
+      ],
+      "focus_points": [
+        "关键机制运作原理",
+        "跨领域关联规律",
+        "创新解决方案设计"
+      ],
+      "suggested_resources": {
+        "lecture": "??????进阶篇·第二至三章",
+        "exercise": "复杂场景决策模拟题",
+        "reading": "前沿研究论文精读(Nature/Science相关)"
+      },
+      "expected_outcome": "能独立推导公式变体，提出创新性改进建议并获得导师反馈"
+    },
+    {
+      "stage": 3,
+      "title": "实战整合提升",
+      "description": "承接前期积累开展综合性项目开发，运用迭代优化思维打磨成品质量",
+      "estimated_days": 2,
+      "daily_tasks": [
+        "组建跨职能团队分工协作",
+        "执行敏捷开发流程管理",
+        "组织阶段性成果路演"
+      ],
+      "focus_points": [
+        "全流程项目管理能力",
+        "多工具协同工作模式",
+        "用户体验至上理念贯彻"
+      ],
+      "suggested_resources": {
+        "lecture": "??????实战手册·终章",
+        "exercise": "企业级项目沙盘推演",
+        "reading": "行业领袖访谈录及复盘报告"
+      },
+      "expected_outcome": "产出具有商业价值的原型产品，获得第三方客观评价报告"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "step_01",
+      "title": "基础认知构建",
+      "description": "通过结构化导图梳理学科脉络，建立基础概念网络，完成首轮知识图谱绘制",
+      "estimated_days": 2,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "准确复述三大基础模块要点，独立完成首版个人知识图谱",
+      "daily_tasks": [
+        {
+          "day": 1,
+          "title": "基础认知构建 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 2,
+          "title": "基础认知构建 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_02",
+      "title": "深度解析突破",
+      "description": "聚焦难点专题精讲，结合案例拆解复杂问题解决路径，开展对比实验验证理论有效性",
+      "estimated_days": 3,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "能独立推导公式变体，提出创新性改进建议并获得导师反馈",
+      "daily_tasks": [
+        {
+          "day": 3,
+          "title": "深度解析突破 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 4,
+          "title": "深度解析突破 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 5,
+          "title": "深度解析突破 - 第3天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_03",
+      "title": "实战整合提升",
+      "description": "承接前期积累开展综合性项目开发，运用迭代优化思维打磨成品质量",
+      "estimated_days": 2,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "产出具有商业价值的原型产品，获得第三方客观评价报告",
+      "daily_tasks": [
+        {
+          "day": 6,
+          "title": "实战整合提升 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 7,
+          "title": "实战整合提升 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "updated_at": "2026-07-12T18:33:09.786052"
+}

@@ -1,0 +1,609 @@
+{
+  "draft_id": "draft_d396ebfd",
+  "student_id": "p3_flow_test",
+  "topic": "Java后端开发",
+  "collected": {
+    "topic": "Java后端开发",
+    "profile": {
+      "mastered": [],
+      "weak": [],
+      "interests": [],
+      "cognitive_style": "",
+      "preferred_pace": "",
+      "daily_hours": 0,
+      "long_term_goal": "",
+      "short_term_goal": "",
+      "goal_attribute": ""
+    },
+    "market": [
+      {
+        "title": "001 尚硅谷 老韩图解Java... - YouTube",
+        "url": "https://www.youtube.com/watch?v=BVtO_Oi3VMc",
+        "snippet": "001 尚硅谷 老韩图解Java数据结构和算法 几个经典的算法面试题1【源码笔记在评论区置顶】.每一个方向都有完整的学习路线和全部课程，非常适合零基础学员成体系地学习IT技术。 进入我的频道，按照学习路线开始学习吧！"
+      },
+      {
+        "title": "建议先把后端面试场景题练到这个程度，7月再去面试Java...",
+        "url": "https://www.bilibili.com/video/BV1kx7h6qEot/",
+        "snippet": "建议先把后端面试场景题练到这个程度，7月再去面试Java后端开发，面试通过率直达90%！ 直接弯道超车拿下offer！"
+      },
+      {
+        "title": "【Shopee】 Golang岗-超详细的后端面经-帅地玩编程",
+        "url": "https://www.iamshuaidi.com/4556.html",
+        "snippet": "4 【Shopee】Golang岗-凉凉的后端开发面筋.面经 美团客户端开发面经 腾讯C++开发面经 腾讯Go开发面经 腾讯Java后端开发面经 腾讯前端开发面经 腾讯客户端开发面经 计算机网络 计算机网络面试."
+      }
+    ],
+    "resources": [],
+    "daily_hours": 3,
+    "basic_level": "入门",
+    "target": "应聘Java后端开发岗",
+    "cycle": "60天",
+    "feedback": "希望第一个阶段更基础，先讲清楚Java内存模型"
+  },
+  "path_name": "Java后端开发学习路径",
+  "overall_goal": "系统掌握Java后端开发",
+  "goal": "应聘Java后端开发岗",
+  "market_demand": "",
+  "total_duration_days": 60,
+  "daily_minutes": 180,
+  "stages": [
+    {
+      "stage": 1,
+      "title": "基础入门",
+      "description": "建立Java后端开发核心概念",
+      "estimated_days": 15,
+      "focus_points": [
+        "核心概念"
+      ],
+      "expected_outcome": "理解Java后端开发基本框架"
+    },
+    {
+      "stage": 2,
+      "title": "进阶实战",
+      "description": "Java后端开发核心技能强化",
+      "estimated_days": 15,
+      "focus_points": [
+        "实战"
+      ],
+      "expected_outcome": "能独立完成Java后端开发相关任务"
+    },
+    {
+      "stage": 3,
+      "title": "综合提升",
+      "description": "Java后端开发综合运用与查漏补缺",
+      "estimated_days": 30,
+      "focus_points": [
+        "综合",
+        "查漏"
+      ],
+      "expected_outcome": "形成Java后端开发完整知识体系"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "step_01",
+      "title": "基础入门",
+      "description": "建立Java后端开发核心概念",
+      "estimated_days": 15,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "理解Java后端开发基本框架",
+      "daily_tasks": [
+        {
+          "day": 1,
+          "title": "基础入门 - 第1天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 2,
+          "title": "基础入门 - 第2天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 3,
+          "title": "基础入门 - 第3天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 4,
+          "title": "基础入门 - 第4天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 5,
+          "title": "基础入门 - 第5天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 6,
+          "title": "基础入门 - 第6天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 7,
+          "title": "基础入门 - 第7天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 8,
+          "title": "基础入门 - 第8天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 9,
+          "title": "基础入门 - 第9天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 10,
+          "title": "基础入门 - 第10天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 11,
+          "title": "基础入门 - 第11天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 12,
+          "title": "基础入门 - 第12天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 13,
+          "title": "基础入门 - 第13天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 14,
+          "title": "基础入门 - 第14天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 15,
+          "title": "基础入门 - 第15天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_02",
+      "title": "进阶实战",
+      "description": "Java后端开发核心技能强化",
+      "estimated_days": 15,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能独立完成Java后端开发相关任务",
+      "daily_tasks": [
+        {
+          "day": 16,
+          "title": "进阶实战 - 第1天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 17,
+          "title": "进阶实战 - 第2天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 18,
+          "title": "进阶实战 - 第3天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 19,
+          "title": "进阶实战 - 第4天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 20,
+          "title": "进阶实战 - 第5天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 21,
+          "title": "进阶实战 - 第6天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 22,
+          "title": "进阶实战 - 第7天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 23,
+          "title": "进阶实战 - 第8天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 24,
+          "title": "进阶实战 - 第9天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 25,
+          "title": "进阶实战 - 第10天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 26,
+          "title": "进阶实战 - 第11天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 27,
+          "title": "进阶实战 - 第12天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 28,
+          "title": "进阶实战 - 第13天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 29,
+          "title": "进阶实战 - 第14天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 30,
+          "title": "进阶实战 - 第15天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_03",
+      "title": "综合提升",
+      "description": "Java后端开发综合运用与查漏补缺",
+      "estimated_days": 30,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "形成Java后端开发完整知识体系",
+      "daily_tasks": [
+        {
+          "day": 31,
+          "title": "综合提升 - 第1天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 32,
+          "title": "综合提升 - 第2天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 33,
+          "title": "综合提升 - 第3天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 34,
+          "title": "综合提升 - 第4天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 35,
+          "title": "综合提升 - 第5天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 36,
+          "title": "综合提升 - 第6天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 37,
+          "title": "综合提升 - 第7天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 38,
+          "title": "综合提升 - 第8天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 39,
+          "title": "综合提升 - 第9天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 40,
+          "title": "综合提升 - 第10天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 41,
+          "title": "综合提升 - 第11天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 42,
+          "title": "综合提升 - 第12天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 43,
+          "title": "综合提升 - 第13天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 44,
+          "title": "综合提升 - 第14天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 45,
+          "title": "综合提升 - 第15天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 46,
+          "title": "综合提升 - 第16天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 47,
+          "title": "综合提升 - 第17天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 48,
+          "title": "综合提升 - 第18天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 49,
+          "title": "综合提升 - 第19天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 50,
+          "title": "综合提升 - 第20天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 51,
+          "title": "综合提升 - 第21天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 52,
+          "title": "综合提升 - 第22天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 53,
+          "title": "综合提升 - 第23天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 54,
+          "title": "综合提升 - 第24天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 55,
+          "title": "综合提升 - 第25天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 56,
+          "title": "综合提升 - 第26天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 57,
+          "title": "综合提升 - 第27天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 58,
+          "title": "综合提升 - 第28天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 59,
+          "title": "综合提升 - 第29天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 60,
+          "title": "综合提升 - 第30天",
+          "description": "学习时长: 180分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    }
+  ],
+  "status": "draft",
+  "version": 1,
+  "created_at": "2026-08-10T11:45:28",
+  "revision_reason": "希望第一个阶段更基础，先讲清楚Java内存模型"
+}

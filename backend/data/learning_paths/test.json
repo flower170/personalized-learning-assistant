@@ -1,0 +1,440 @@
+{
+  "student_id": "test",
+  "path_name": "Python零基础到实战进阶之路",
+  "goal": "",
+  "topic": "Python基础",
+  "course": "",
+  "total_duration_days": 30,
+  "daily_minutes": 60,
+  "stages": [
+    {
+      "stage": 1,
+      "title": "启程：环境认知与基础语法",
+      "description": "建立Python运行环境认知，理解交互式解释器工作机制，掌握变量定义、数据类型转换及条件判断逻辑",
+      "estimated_days": 7,
+      "daily_tasks": [
+        "Day1: Anaconda安装与Jupyter Notebook启动",
+        "Day2: print()函数使用与字符串格式化",
+        "Day3: 整数/浮点数运算规则探究",
+        "Day4: input()获取用户输入并类型转换",
+        "Day5: if-elif-else条件分支实战",
+        "Day6: for循环遍历列表元素",
+        "Day7: while循环与break/continue对比实验"
+      ],
+      "focus_points": [
+        "缩进规范的重要性",
+        "PEP8编码标准初识"
+      ],
+      "suggested_resources": {
+        "lecture": "Python开发环境配置指南",
+        "exercise": "基础语法闯关题库(含答案解析)",
+        "reading": "《Head First Python》第1章摘要"
+      },
+      "expected_outcome": "熟练运用三种控制流语句解决简单数学问题"
+    },
+    {
+      "stage": 2,
+      "title": "进阶：复合数据结构与函数封装",
+      "description": "深入字典集合操作，理解递归思想本质，学会模块化编程方法",
+      "estimated_days": 8,
+      "daily_tasks": [
+        "Day8: list comprehension推导式速查表",
+        "Day9: dict键值对增删改查全流程",
+        "Day10: set去重原理演示",
+        "Day11: lambda匿名函数应用场景",
+        "Day12: 参数传递机制深度剖析",
+        "Day13: return返回值多路径测试",
+        "Day14: 作用域规则迷宫挑战赛"
+      ],
+      "focus_points": [
+        "闭包概念可视化",
+        "全局vs局部变量生命周期"
+      ],
+      "suggested_resources": {
+        "lecture": "Python高级特性精讲视频",
+        "exercise": "数据结构变形记习题集",
+        "reading": "《流畅的Python》第二章摘录"
+      },
+      "expected_outcome": "独立设计包含自定义函数的工具箱模块"
+    },
+    {
+      "stage": 3,
+      "title": "突破：面向对象思维构建",
+      "description": "掌握类实例化过程，理解继承多态特性，实现简单的工厂模式",
+      "estimated_days": 7,
+      "daily_tasks": [
+        "Day15: __init__构造方法妙用",
+        "Day16: @property装饰器属性访问控制",
+        "Day17: MRO方法解析顺序追踪",
+        "Day18: super()调用父类方法技巧",
+        "Day19: 抽象基类ABCMeta应用",
+        "Day20: 单例模式实现方案对比",
+        "Day21: 组合优于继承案例分析"
+      ],
+      "focus_points": [
+        "鸭子类型哲学",
+        "魔术方法清单"
+      ],
+      "suggested_resources": {
+        "lecture": "OOP设计模式入门讲座",
+        "exercise": "类图绘制工作坊",
+        "reading": "《Effective Python》Item1-10解读"
+      },
+      "expected_outcome": "重构遗留代码为面向对象架构"
+    },
+    {
+      "stage": 4,
+      "title": "实战：文件IO与异常捕获",
+      "description": "掌握文本/二进制文件读写技巧，构建健壮的错误处理机制",
+      "estimated_days": 5,
+      "daily_tasks": [
+        "Day22: with语句自动资源释放",
+        "Day23: json序列化反序列化实操",
+        "Day24: pickle持久化存储方案",
+        "Day25: try-except-finally异常链处理",
+        "Day26: logging模块日志记录规范"
+      ],
+      "focus_points": [
+        "上下文管理器原理",
+        "异常传播链路追踪"
+      ],
+      "suggested_resources": {
+        "lecture": "Python异常处理最佳实践",
+        "exercise": "文件批量重命名工具开发",
+        "reading": "《Clean Code》Chapter7节选"
+      },
+      "expected_outcome": "编写带完整错误提示的程序界面"
+    },
+    {
+      "stage": 5,
+      "title": "升华：第三方库生态接入",
+      "description": "引入NumPy科学计算框架，体验Matplotlib可视化魅力",
+      "estimated_days": 5,
+      "daily_tasks": [
+        "Day27: ndarray数组创建与索引",
+        "Day28: pandas Series/DataFrame操作",
+        "Day29: seaborn热力图生成",
+        "Day30: matplotlib折线图动态渲染"
+      ],
+      "focus_points": [
+        "向量化运算优势",
+        "图形渲染管线原理"
+      ],
+      "suggested_resources": {
+        "lecture": "数据分析三剑客快速上手",
+        "exercise": "房价预测模型搭建",
+        "reading": "《利用Python进行数据分析》导读"
+      },
+      "expected_outcome": "完成首个数据分析原型项目"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "step_01",
+      "title": "启程：环境认知与基础语法",
+      "description": "建立Python运行环境认知，理解交互式解释器工作机制，掌握变量定义、数据类型转换及条件判断逻辑",
+      "estimated_days": 7,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "熟练运用三种控制流语句解决简单数学问题",
+      "daily_tasks": [
+        {
+          "day": 1,
+          "title": "启程：环境认知与基础语法 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 2,
+          "title": "启程：环境认知与基础语法 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 3,
+          "title": "启程：环境认知与基础语法 - 第3天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 4,
+          "title": "启程：环境认知与基础语法 - 第4天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 5,
+          "title": "启程：环境认知与基础语法 - 第5天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 6,
+          "title": "启程：环境认知与基础语法 - 第6天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 7,
+          "title": "启程：环境认知与基础语法 - 第7天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_02",
+      "title": "进阶：复合数据结构与函数封装",
+      "description": "深入字典集合操作，理解递归思想本质，学会模块化编程方法",
+      "estimated_days": 8,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "独立设计包含自定义函数的工具箱模块",
+      "daily_tasks": [
+        {
+          "day": 8,
+          "title": "进阶：复合数据结构与函数封装 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 9,
+          "title": "进阶：复合数据结构与函数封装 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 10,
+          "title": "进阶：复合数据结构与函数封装 - 第3天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 11,
+          "title": "进阶：复合数据结构与函数封装 - 第4天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 12,
+          "title": "进阶：复合数据结构与函数封装 - 第5天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 13,
+          "title": "进阶：复合数据结构与函数封装 - 第6天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 14,
+          "title": "进阶：复合数据结构与函数封装 - 第7天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 15,
+          "title": "进阶：复合数据结构与函数封装 - 第8天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_03",
+      "title": "突破：面向对象思维构建",
+      "description": "掌握类实例化过程，理解继承多态特性，实现简单的工厂模式",
+      "estimated_days": 7,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "重构遗留代码为面向对象架构",
+      "daily_tasks": [
+        {
+          "day": 16,
+          "title": "突破：面向对象思维构建 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 17,
+          "title": "突破：面向对象思维构建 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 18,
+          "title": "突破：面向对象思维构建 - 第3天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 19,
+          "title": "突破：面向对象思维构建 - 第4天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 20,
+          "title": "突破：面向对象思维构建 - 第5天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 21,
+          "title": "突破：面向对象思维构建 - 第6天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 22,
+          "title": "突破：面向对象思维构建 - 第7天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_04",
+      "title": "实战：文件IO与异常捕获",
+      "description": "掌握文本/二进制文件读写技巧，构建健壮的错误处理机制",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "编写带完整错误提示的程序界面",
+      "daily_tasks": [
+        {
+          "day": 23,
+          "title": "实战：文件IO与异常捕获 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 24,
+          "title": "实战：文件IO与异常捕获 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 25,
+          "title": "实战：文件IO与异常捕获 - 第3天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 26,
+          "title": "实战：文件IO与异常捕获 - 第4天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 27,
+          "title": "实战：文件IO与异常捕获 - 第5天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_05",
+      "title": "升华：第三方库生态接入",
+      "description": "引入NumPy科学计算框架，体验Matplotlib可视化魅力",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise"
+      ],
+      "reason": "完成首个数据分析原型项目",
+      "daily_tasks": [
+        {
+          "day": 28,
+          "title": "升华：第三方库生态接入 - 第1天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 29,
+          "title": "升华：第三方库生态接入 - 第2天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 30,
+          "title": "升华：第三方库生态接入 - 第3天",
+          "description": "学习时长: 60分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "updated_at": "2026-07-01T13:36:11.302928"
+}

@@ -1,0 +1,825 @@
+{
+  "student_id": "stu_001",
+  "path_topic": "",
+  "records": {
+    "step_01": [
+      {
+        "card_id": "leetcode_数组基础夯实与概念重构l_数组基础夯实与概念重构l",
+        "node_id": "step_01",
+        "platform": "LeetCode",
+        "problem_no": "",
+        "title": "数组基础夯实与概念重构 · LeetCode练习题",
+        "link": "https://leetcode.cn/problemset/?search=%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E4%B8%8E%E6%A6%82%E5%BF%B5%E9%87%8D%E6%9E%84",
+        "knowledge_point": "数组基础夯实与概念重构",
+        "difficulty": "简单",
+        "status": "correct",
+        "my_answer": "",
+        "note": "测试笔记",
+        "search_url": "https://leetcode.cn/problemset/?search=%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E4%B8%8E%E6%A6%82%E5%BF%B5%E9%87%8D%E6%9E%84",
+        "created_at": "2026-08-10T16:43:59",
+        "updated_at": "2026-08-10T16:43:59",
+        "solved_at": "2026-08-10T16:43:59",
+        "_fallback": true
+      },
+      {
+        "card_id": "牛客_数组基础夯实与概念重构牛_数组基础夯实与概念重构牛",
+        "node_id": "step_01",
+        "platform": "牛客",
+        "problem_no": "",
+        "title": "数组基础夯实与概念重构 · 牛客练习题",
+        "link": "https://www.nowcoder.com/search?query=%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E4%B8%8E%E6%A6%82%E5%BF%B5%E9%87%8D%E6%9E%84",
+        "knowledge_point": "数组基础夯实与概念重构",
+        "difficulty": "简单",
+        "status": "correct",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.nowcoder.com/search?query=%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E4%B8%8E%E6%A6%82%E5%BF%B5%E9%87%8D%E6%9E%84",
+        "created_at": "2026-08-10T16:43:59",
+        "updated_at": "2026-08-10T16:57:54",
+        "solved_at": "2026-08-10T16:57:54",
+        "_fallback": true
+      },
+      {
+        "card_id": "洛谷_数组基础夯实与概念重构洛_数组基础夯实与概念重构洛",
+        "node_id": "step_01",
+        "platform": "洛谷",
+        "problem_no": "",
+        "title": "数组基础夯实与概念重构 · 洛谷练习题",
+        "link": "https://www.luogu.com.cn/problem/list?keyword=%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E4%B8%8E%E6%A6%82%E5%BF%B5%E9%87%8D%E6%9E%84",
+        "knowledge_point": "数组基础夯实与概念重构",
+        "difficulty": "简单",
+        "status": "done",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.luogu.com.cn/problem/list?keyword=%E6%95%B0%E7%BB%84%E5%9F%BA%E7%A1%80%E5%A4%AF%E5%AE%9E%E4%B8%8E%E6%A6%82%E5%BF%B5%E9%87%8D%E6%9E%84",
+        "created_at": "2026-08-10T16:43:59",
+        "updated_at": "2026-08-10T16:57:42",
+        "solved_at": "2026-08-10T16:57:42",
+        "_fallback": true
+      },
+      {
+        "card_id": "leetcode_实验原理与装置认知lee_实验原理与装置认知lee",
+        "node_id": "step_01",
+        "platform": "LeetCode",
+        "problem_no": "",
+        "title": "实验原理与装置认知 · LeetCode练习题",
+        "link": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A3%85%E7%BD%AE%E8%AE%A4%E7%9F%A5",
+        "knowledge_point": "实验原理与装置认知",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A3%85%E7%BD%AE%E8%AE%A4%E7%9F%A5",
+        "created_at": "2026-08-11T10:17:29",
+        "updated_at": "2026-08-11T10:17:29",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "牛客_实验原理与装置认知牛客练_实验原理与装置认知牛客练",
+        "node_id": "step_01",
+        "platform": "牛客",
+        "problem_no": "",
+        "title": "实验原理与装置认知 · 牛客练习题",
+        "link": "https://www.nowcoder.com/search?query=%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A3%85%E7%BD%AE%E8%AE%A4%E7%9F%A5",
+        "knowledge_point": "实验原理与装置认知",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.nowcoder.com/search?query=%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A3%85%E7%BD%AE%E8%AE%A4%E7%9F%A5",
+        "created_at": "2026-08-11T10:17:29",
+        "updated_at": "2026-08-11T10:17:29",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "洛谷_实验原理与装置认知洛谷练_实验原理与装置认知洛谷练",
+        "node_id": "step_01",
+        "platform": "洛谷",
+        "problem_no": "",
+        "title": "实验原理与装置认知 · 洛谷练习题",
+        "link": "https://www.luogu.com.cn/problem/list?keyword=%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A3%85%E7%BD%AE%E8%AE%A4%E7%9F%A5",
+        "knowledge_point": "实验原理与装置认知",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.luogu.com.cn/problem/list?keyword=%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86%E4%B8%8E%E8%A3%85%E7%BD%AE%E8%AE%A4%E7%9F%A5",
+        "created_at": "2026-08-11T10:17:29",
+        "updated_at": "2026-08-11T10:17:29",
+        "solved_at": null,
+        "_fallback": true
+      }
+    ],
+    "step_02": [
+      {
+        "card_id": "leetcode_数组进阶应用与易错题型攻_数组进阶应用与易错题型攻",
+        "node_id": "step_02",
+        "platform": "LeetCode",
+        "problem_no": "",
+        "title": "数组进阶应用与易错题型攻坚 · LeetCode练习题",
+        "link": "https://leetcode.cn/problemset/?search=%E6%95%B0%E7%BB%84%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%E4%B8%8E%E6%98%93%E9%94%99%E9%A2%98%E5%9E%8B%E6%94%BB%E5%9D%9A",
+        "knowledge_point": "数组进阶应用与易错题型攻坚",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://leetcode.cn/problemset/?search=%E6%95%B0%E7%BB%84%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%E4%B8%8E%E6%98%93%E9%94%99%E9%A2%98%E5%9E%8B%E6%94%BB%E5%9D%9A",
+        "created_at": "2026-08-10T16:59:04",
+        "updated_at": "2026-08-10T16:59:04",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "牛客_数组进阶应用与易错题型攻_数组进阶应用与易错题型攻",
+        "node_id": "step_02",
+        "platform": "牛客",
+        "problem_no": "",
+        "title": "数组进阶应用与易错题型攻坚 · 牛客练习题",
+        "link": "https://www.nowcoder.com/search?query=%E6%95%B0%E7%BB%84%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%E4%B8%8E%E6%98%93%E9%94%99%E9%A2%98%E5%9E%8B%E6%94%BB%E5%9D%9A",
+        "knowledge_point": "数组进阶应用与易错题型攻坚",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.nowcoder.com/search?query=%E6%95%B0%E7%BB%84%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%E4%B8%8E%E6%98%93%E9%94%99%E9%A2%98%E5%9E%8B%E6%94%BB%E5%9D%9A",
+        "created_at": "2026-08-10T16:59:04",
+        "updated_at": "2026-08-10T16:59:04",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "洛谷_数组进阶应用与易错题型攻_数组进阶应用与易错题型攻",
+        "node_id": "step_02",
+        "platform": "洛谷",
+        "problem_no": "",
+        "title": "数组进阶应用与易错题型攻坚 · 洛谷练习题",
+        "link": "https://www.luogu.com.cn/problem/list?keyword=%E6%95%B0%E7%BB%84%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%E4%B8%8E%E6%98%93%E9%94%99%E9%A2%98%E5%9E%8B%E6%94%BB%E5%9D%9A",
+        "knowledge_point": "数组进阶应用与易错题型攻坚",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.luogu.com.cn/problem/list?keyword=%E6%95%B0%E7%BB%84%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%E4%B8%8E%E6%98%93%E9%94%99%E9%A2%98%E5%9E%8B%E6%94%BB%E5%9D%9A",
+        "created_at": "2026-08-10T16:59:04",
+        "updated_at": "2026-08-10T16:59:04",
+        "solved_at": null,
+        "_fallback": true
+      }
+    ]
+  },
+  "ai_exercises": [
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_f9cfe8193da81ca8",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "关于SQL中数组类型的操作，下列说法正确的是：",
+      "options": [
+        {
+          "label": "A",
+          "text": "所有数据库系统都支持数组类型"
+        },
+        {
+          "label": "B",
+          "text": "PostgreSQL支持数组类型，可以使用ARRAY构造函数创建数组"
+        },
+        {
+          "label": "C",
+          "text": "MySQL不支持数组类型，但可以通过JSON类型模拟数组操作"
+        },
+        {
+          "label": "D",
+          "text": "SQL Server支持原生数组类型，可以直接使用数组下标访问元素"
+        }
+      ],
+      "answer": "B",
+      "explanation": "PostgreSQL确实支持数组类型，并提供了ARRAY构造函数，而MySQL不支持原生数组类型，SQL Server也不直接支持数组类型。",
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 3,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:47:37"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_b6ba8f25b1b72800",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "在PostgreSQL中，要查询一个数组字段中是否包含特定值，应使用哪个操作符？",
+      "options": [
+        {
+          "label": "A",
+          "text": "CONTAINS"
+        },
+        {
+          "label": "B",
+          "text": "IN"
+        },
+        {
+          "label": "C",
+          "text": "ANY"
+        },
+        {
+          "label": "D",
+          "text": "@>"
+        }
+      ],
+      "answer": "D",
+      "explanation": "在PostgreSQL中，@>操作符用于检查一个数组是否包含特定值，CONTAINS不是PostgreSQL的数组操作符。",
+      "user_answer": "A",
+      "correct": false,
+      "attempts": 6,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:48:22"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_5ba353b2f256739d",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "在PostgreSQL中，以下哪个函数可以获取数组的长度？",
+      "options": [
+        {
+          "label": "A",
+          "text": "LENGTH()"
+        },
+        {
+          "label": "B",
+          "text": "ARRAY_LENGTH()"
+        },
+        {
+          "label": "C",
+          "text": "COUNT()"
+        },
+        {
+          "label": "D",
+          "text": "SIZE()"
+        }
+      ],
+      "answer": "B",
+      "explanation": "在PostgreSQL中，ARRAY_LENGTH()函数用于获取数组的长度，LENGTH()函数用于获取字符串长度，COUNT()用于计数，SIZE()不是PostgreSQL的内置函数。",
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:32:29"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_57fc9148803deb70",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "在PostgreSQL中，要将两个数组合并为一个，应使用哪个操作符？",
+      "options": [
+        {
+          "label": "A",
+          "text": "+"
+        },
+        {
+          "label": "B",
+          "text": "||"
+        },
+        {
+          "label": "C",
+          "text": "&"
+        },
+        {
+          "label": "D",
+          "text": "|"
+        }
+      ],
+      "answer": "B",
+      "explanation": "在PostgreSQL中，||操作符用于数组合并，+操作符用于数值相加，&和|用于位运算。",
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 2,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:48:26"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_708fe0b6963aedeb",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "在PostgreSQL中，要从数组中移除特定元素，应使用哪个函数？",
+      "options": [
+        {
+          "label": "A",
+          "text": "REMOVE()"
+        },
+        {
+          "label": "B",
+          "text": "DELETE()"
+        },
+        {
+          "label": "C",
+          "text": "ARRAY_REMOVE()"
+        },
+        {
+          "label": "D",
+          "text": "UNSET()"
+        }
+      ],
+      "answer": "C",
+      "explanation": "在PostgreSQL中，ARRAY_REMOVE()函数用于从数组中移除特定元素，REMOVE()、DELETE()和UNSET()都不是PostgreSQL的数组函数。",
+      "user_answer": "A",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:32:29"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_1a0f51b1b0844d50",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "在PostgreSQL中，以下哪个表达式可以获取数组中的第一个元素？",
+      "options": [
+        {
+          "label": "A",
+          "text": "array[0]"
+        },
+        {
+          "label": "B",
+          "text": "array[1]"
+        },
+        {
+          "label": "C",
+          "text": "array.first"
+        },
+        {
+          "label": "D",
+          "text": "array.get(0)"
+        }
+      ],
+      "answer": "B",
+      "explanation": "在PostgreSQL中，数组下标从1开始，所以array[1]获取的是第一个元素，不是array[0]。",
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 2,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:48:39"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_7bbce925f4a94520",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "advanced",
+      "question": "在PostgreSQL中，要对数组中的每个元素应用函数并返回结果数组，应使用哪个函数？",
+      "options": [
+        {
+          "label": "A",
+          "text": "APPLY()"
+        },
+        {
+          "label": "B",
+          "text": "MAP()"
+        },
+        {
+          "label": "C",
+          "text": "ARRAY_MAP()"
+        },
+        {
+          "label": "D",
+          "text": "ARRAY_TRANSFORM()"
+        }
+      ],
+      "answer": "D",
+      "explanation": "在PostgreSQL中，ARRAY_TRANSFORM()函数可以对数组中的每个元素应用函数并返回结果数组，APPLY()、MAP()和ARRAY_MAP()都不是PostgreSQL的内置函数。",
+      "user_answer": "C",
+      "correct": false,
+      "attempts": 2,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:48:29"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_2c0e0505e2726b52",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "关于SQL连接操作，以下说法正确的有：",
+      "options": [
+        {
+          "label": "A",
+          "text": "INNER JOIN只返回两个表中匹配的记录"
+        },
+        {
+          "label": "B",
+          "text": "LEFT JOIN返回左表中的所有记录，即使右表中没有匹配"
+        },
+        {
+          "label": "C",
+          "text": "RIGHT JOIN返回右表中的所有记录，即使左表中没有匹配"
+        },
+        {
+          "label": "D",
+          "text": "FULL OUTER JOIN返回两个表中的所有记录，无论是否匹配"
+        }
+      ],
+      "answer": "ABCD",
+      "explanation": "所有这些描述都是正确的，INNER JOIN只返回匹配记录，LEFT JOIN返回左表所有记录，RIGHT JOIN返回右表所有记录，FULL OUTER JOIN返回两个表的所有记录。",
+      "user_answer": "AC",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:32:29"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_41ab380ca31c97bf",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "关于SQL聚合函数，以下说法正确的有：",
+      "options": [
+        {
+          "label": "A",
+          "text": "COUNT()函数可以计算行的数量"
+        },
+        {
+          "label": "B",
+          "text": "SUM()函数计算指定列的总和"
+        },
+        {
+          "label": "C",
+          "text": "AVG()函数计算指定列的平均值"
+        },
+        {
+          "label": "D",
+          "text": "DISTINCT关键字可以与聚合函数一起使用，去除重复值"
+        }
+      ],
+      "answer": "ABCD",
+      "explanation": "所有这些描述都是正确的，COUNT()计算行数，SUM()计算总和，AVG()计算平均值，DISTINCT可以与聚合函数一起使用去除重复值。",
+      "user_answer": "A",
+      "correct": false,
+      "attempts": 2,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:48:34"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_0e05e8b948c08801",
+      "topic": "给我几道SQL练习题",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "关于SQL子查询，以下说法正确的有：",
+      "options": [
+        {
+          "label": "A",
+          "text": "子查询可以嵌套在SELECT、FROM或WHERE子句中"
+        },
+        {
+          "label": "B",
+          "text": "相关子查询依赖于外部查询的值"
+        },
+        {
+          "label": "C",
+          "text": "EXISTS操作符用于测试子查询是否返回任何行"
+        },
+        {
+          "label": "D",
+          "text": "所有子查询都可以转换为连接操作"
+        }
+      ],
+      "answer": "ABCD",
+      "explanation": "所有这些描述都是正确的，子查询可以嵌套在多个子句中，相关子查询依赖于外部查询，EXISTS测试子查询是否返回行，大多数子查询可以转换为连接。",
+      "user_answer": "B",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:32:19",
+      "updated_at": "2026-08-14T17:32:29"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_37ac6a3109fe444d",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "在PostgreSQL中，以下哪条语句可以创建一个包含整数1、2、3的数组？",
+      "options": [
+        {
+          "label": "A",
+          "text": "CREATE ARRAY (1, 2, 3);"
+        },
+        {
+          "label": "B",
+          "text": "SELECT ARRAY[1, 2, 3];"
+        },
+        {
+          "label": "C",
+          "text": "INSERT INTO table VALUES (1, 2, 3);"
+        },
+        {
+          "label": "D",
+          "text": "DECLARE arr AS INT[] = (1, 2, 3);"
+        }
+      ],
+      "answer": "B",
+      "explanation": "在PostgreSQL中，使用ARRAY[]语法创建数组，选项B是正确的语法。",
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_eb70e4ae7293e0bf",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "假设有一个数组arr = ARRAY[10, 20, 30, 40]，以下哪个表达式可以获取数组的第二个元素？",
+      "options": [
+        {
+          "label": "A",
+          "text": "arr[0]"
+        },
+        {
+          "label": "B",
+          "text": "arr[1]"
+        },
+        {
+          "label": "C",
+          "text": "arr[2]"
+        },
+        {
+          "label": "D",
+          "text": "arr.second"
+        }
+      ],
+      "answer": "B",
+      "explanation": "在大多数数据库系统中，数组索引从1开始，所以第二个元素是arr[1]。",
+      "user_answer": "C",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_d6f0c47c6e2449d8",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "在PostgreSQL中，以下哪个函数可以连接两个数组？",
+      "options": [
+        {
+          "label": "A",
+          "text": "CONCAT()"
+        },
+        {
+          "label": "B",
+          "text": "ARRAY_APPEND()"
+        },
+        {
+          "label": "C",
+          "text": "ARRAY_CAT()"
+        },
+        {
+          "label": "D",
+          "text": "MERGE()"
+        }
+      ],
+      "answer": "C",
+      "explanation": "在PostgreSQL中，ARRAY_CAT()函数用于连接两个数组，ARRAY_APPEND()用于向数组添加单个元素。",
+      "user_answer": "A",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_43ee8eb39ad0f38e",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "假设有一个学生表，包含id和courses字段（courses是数组类型，存储学生选修的课程ID），以下哪条语句可以查询选修了课程ID为3的所有学生？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT * FROM students WHERE courses = 3;"
+        },
+        {
+          "label": "B",
+          "text": "SELECT * FROM students WHERE courses @> ARRAY[3];"
+        },
+        {
+          "label": "C",
+          "text": "SELECT * FROM students WHERE courses LIKE '%3%';"
+        },
+        {
+          "label": "D",
+          "text": "SELECT * FROM students WHERE courses CONTAINS 3;"
+        }
+      ],
+      "answer": "B",
+      "explanation": "在PostgreSQL中，使用@>操作符检查数组是否包含特定元素。",
+      "user_answer": "C",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_0c50b4514608b23f",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "advanced",
+      "question": "假设有一个订单表，包含id和items字段（items是数组类型，存储订单中的商品ID），以下哪条语句可以统计每个商品被订购的总次数？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT item, COUNT(*) FROM orders, unnest(items) AS item GROUP BY item;"
+        },
+        {
+          "label": "B",
+          "text": "SELECT items, COUNT(*) FROM orders GROUP BY items;"
+        },
+        {
+          "label": "C",
+          "text": "SELECT COUNT(items) FROM orders;"
+        },
+        {
+          "label": "D",
+          "text": "SELECT SUM(items) FROM orders;"
+        }
+      ],
+      "answer": "A",
+      "explanation": "选项A使用 unnest 函数将数组展开为多行，然后按商品ID分组计数，可以统计每个商品被订购的次数。",
+      "user_answer": "B",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_bbf5c7e1e8df9505",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "在PostgreSQL中，以下哪个函数可以将数组转换为字符串？",
+      "options": [
+        {
+          "label": "A",
+          "text": "TO_STRING()"
+        },
+        {
+          "label": "B",
+          "text": "ARRAY_TO_STRING()"
+        },
+        {
+          "label": "C",
+          "text": "CAST_AS_STRING()"
+        },
+        {
+          "label": "D",
+          "text": "CONVERT()"
+        }
+      ],
+      "answer": "B",
+      "explanation": "在PostgreSQL中，ARRAY_TO_STRING()函数用于将数组元素转换为字符串并用指定的分隔符连接。",
+      "user_answer": "A",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_3ec58d253cd61b31",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "以下哪个SQL语句可以查询\"employees\"表中年龄大于30的员工？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT * FROM employees WHERE age > 30;"
+        },
+        {
+          "label": "B",
+          "text": "SELECT * FROM employees WHERE age > 30;"
+        },
+        {
+          "label": "C",
+          "text": "SELECT * FROM employees HAVING age > 30;"
+        },
+        {
+          "label": "D",
+          "text": "SELECT * FROM employees GROUP BY age > 30;"
+        }
+      ],
+      "answer": "A",
+      "explanation": "在SQL中，使用WHERE子句进行条件过滤，选项A是正确的语法。",
+      "user_answer": "B",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_e166f8247553c0de",
+      "topic": "给我几道SQL题目练习",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "假设有\"employees\"表和\"departments\"表，分别包含员工信息和部门信息，以下哪条语句可以查询所有员工及其对应的部门名称？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT employees.name, departments.name FROM employees, departments WHERE employees.dept_id = departments.id;"
+        },
+        {
+          "label": "B",
+          "text": "SELECT employees.name, departments.name FROM employees JOIN departments ON employees.dept_id = departments.id;"
+        },
+        {
+          "label": "C",
+          "text": "SELECT employees.name, departments.name FROM employees INNER JOIN departments ON employees.dept_id = departments.id;"
+        },
+        {
+          "label": "D",
+          "text": "以上都可以"
+        }
+      ],
+      "answer": "D",
+      "explanation": "选项A使用隐式连接语法，选项B和C使用显式连接语法，INNER JOIN可以省略INNER关键字，所有选项都是正确的连接方式。",
+      "user_answer": "B",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T17:50:01",
+      "updated_at": "2026-08-14T17:50:01"
+    }
+  ],
+  "collections": [
+    {
+      "collection_id": "col_b05b7f94ef3a",
+      "name": "sql错题",
+      "created_at": "2026-08-14T17:31:18",
+      "updated_at": "2026-08-14T17:47:09",
+      "questions": [
+        {
+          "qid": "cq_f9cfe8193da81ca8",
+          "topic": "给我几道SQL练习题",
+          "type": "choice",
+          "difficulty": "basic",
+          "question": "关于SQL中数组类型的操作，下列说法正确的是：",
+          "options": [
+            {
+              "label": "A",
+              "text": "所有数据库系统都支持数组类型"
+            },
+            {
+              "label": "B",
+              "text": "PostgreSQL支持数组类型，可以使用ARRAY构造函数创建数组"
+            },
+            {
+              "label": "C",
+              "text": "MySQL不支持数组类型，但可以通过JSON类型模拟数组操作"
+            },
+            {
+              "label": "D",
+              "text": "SQL Server支持原生数组类型，可以直接使用数组下标访问元素"
+            }
+          ],
+          "answer": "B",
+          "explanation": "PostgreSQL确实支持数组类型，并提供了ARRAY构造函数，而MySQL不支持原生数组类型，SQL Server也不直接支持数组类型。",
+          "user_answer": "B",
+          "correct": true,
+          "attempts": 1,
+          "created_at": "2026-08-14T17:31:18",
+          "updated_at": "2026-08-14T17:47:09"
+        }
+      ]
+    }
+  ],
+  "node_studies": [],
+  "checkins": [
+    {
+      "date": "2026-08-10",
+      "node_id": "step_01",
+      "note": "今天学了数组基础夯实与概念重构"
+    }
+  ],
+  "streak": {
+    "current": 1,
+    "longest": 1,
+    "last_checkin": "2026-08-10"
+  },
+  "created_at": "2026-08-10T16:43:59",
+  "updated_at": "2026-08-14T17:50:01"
+}

@@ -1,0 +1,286 @@
+{
+  "student_id": "bbb",
+  "path_topic": "",
+  "records": {
+    "step_01": [
+      {
+        "card_id": "leetcode_搜索子查询_搜索子查询",
+        "node_id": "step_01",
+        "platform": "LeetCode",
+        "problem_no": "",
+        "title": "搜索「子查询」",
+        "link": "https://leetcode.cn/problemset/?search=%E5%AD%90%E6%9F%A5%E8%AF%A2",
+        "knowledge_point": "子查询",
+        "difficulty": "简单",
+        "status": "done",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://leetcode.cn/problemset/?search=%E5%AD%90%E6%9F%A5%E8%AF%A2",
+        "created_at": "2026-08-14T12:30:41",
+        "updated_at": "2026-08-14T12:33:07",
+        "solved_at": "2026-08-14T12:33:07",
+        "_fallback": true
+      },
+      {
+        "card_id": "牛客_搜索子查询_搜索子查询",
+        "node_id": "step_01",
+        "platform": "牛客",
+        "problem_no": "",
+        "title": "搜索「子查询」",
+        "link": "https://www.nowcoder.com/search?query=%E5%AD%90%E6%9F%A5%E8%AF%A2",
+        "knowledge_point": "子查询",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.nowcoder.com/search?query=%E5%AD%90%E6%9F%A5%E8%AF%A2",
+        "created_at": "2026-08-14T12:30:41",
+        "updated_at": "2026-08-14T12:30:41",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "洛谷_搜索子查询_搜索子查询",
+        "node_id": "step_01",
+        "platform": "洛谷",
+        "problem_no": "",
+        "title": "搜索「子查询」",
+        "link": "https://www.luogu.com.cn/problem/list?keyword=%E5%AD%90%E6%9F%A5%E8%AF%A2",
+        "knowledge_point": "子查询",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.luogu.com.cn/problem/list?keyword=%E5%AD%90%E6%9F%A5%E8%AF%A2",
+        "created_at": "2026-08-14T12:30:41",
+        "updated_at": "2026-08-14T12:30:41",
+        "solved_at": null,
+        "_fallback": true
+      }
+    ]
+  },
+  "ai_exercises": [
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_cb27923121346dc4",
+      "topic": "我想练习一下SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "在订单表 Orders 中，找出订单金额大于该客户平均订单金额的订单 ID。",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT order_id FROM Orders WHERE amount > (SELECT AVG(amount) FROM Orders);"
+        },
+        {
+          "label": "B",
+          "text": "SELECT order_id FROM Orders WHERE amount > (SELECT AVG(amount) FROM Orders GROUP BY customer_id);"
+        },
+        {
+          "label": "C",
+          "text": "SELECT order_id FROM Orders WHERE amount > (SELECT MAX(amount) FROM Orders);"
+        },
+        {
+          "label": "D",
+          "text": "SELECT order_id FROM Orders WHERE amount > (SELECT AVG(amount) FROM Orders HAVING COUNT(*) > 1);"
+        }
+      ],
+      "answer": "B",
+      "explanation": "标量子查询用于计算每个客户的平均金额，必须按客户分组。",
+      "user_answer": "A",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T12:36:27",
+      "updated_at": "2026-08-14T12:36:27"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_da3fad0ed3a0cb9f",
+      "topic": "我想练习一下SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "下列关于窗口函数的说法正确的是？",
+      "options": [
+        {
+          "label": "A",
+          "text": "窗口函数必须与 GROUP BY 子句一起使用。"
+        },
+        {
+          "label": "B",
+          "text": "窗口函数不会减少查询结果集的行数。"
+        },
+        {
+          "label": "C",
+          "text": "窗口函数只能用于 SELECT 子句中。"
+        },
+        {
+          "label": "D",
+          "text": "窗口函数在 SQL 标准中最早出现，比 GROUP BY 更早。"
+        }
+      ],
+      "answer": "B",
+      "explanation": "窗口函数不会改变结果集的行数，它只是对行进行聚合计算或排序。",
+      "user_answer": "C",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T12:36:27",
+      "updated_at": "2026-08-14T12:36:27"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_7360cd18147808e6",
+      "topic": "我想练习一下SQL的题目",
+      "type": "choice",
+      "difficulty": "advanced",
+      "question": "假设有一个销售表 Sales，请选出每个销售员在其所在部门的销售总额排名前 3 的记录。",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT * FROM Sales ORDER BY SUM(amount) DESC;"
+        },
+        {
+          "label": "B",
+          "text": "SELECT * FROM Sales DENSE_RANK() OVER (PARTITION BY sales_id ORDER BY SUM(amount) DESC) <= 3;"
+        },
+        {
+          "label": "C",
+          "text": "SELECT * FROM Sales WHERE sales_id IN (SELECT sales_id FROM Sales GROUP BY sales_id ORDER BY SUM(amount) DESC LIMIT 3);"
+        },
+        {
+          "label": "D",
+          "text": "SELECT * FROM Sales ROW_NUMBER() OVER (PARTITION BY department ORDER BY SUM(amount) DESC) <= 3;"
+        }
+      ],
+      "answer": "D",
+      "explanation": "使用窗口函数 ROW_NUMBER() 或 RANK() 结合 PARTITION BY 按部门分组，按销售额降序排名，然后筛选排名 <= 3 的记录。",
+      "user_answer": "C",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T12:36:27",
+      "updated_at": "2026-08-14T12:36:27"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_da7f8e32fc51f2fc",
+      "topic": "我想练习一下SQL的题目",
+      "type": "choice",
+      "difficulty": "advanced",
+      "question": "要计算每个销售员当月的累计销售额，应使用下列哪个窗口函数？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SUM(amount) OVER (PARTITION BY sales_id ORDER BY order_date)"
+        },
+        {
+          "label": "B",
+          "text": "SUM(amount) OVER (ORDER BY order_date)"
+        },
+        {
+          "label": "C",
+          "text": "SUM(amount) OVER (PARTITION BY sales_id)"
+        },
+        {
+          "label": "D",
+          "text": "SUM(amount) OVER (ORDER BY order_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "使用 SUM() OVER 结合 PARTITION BY 按销售员分组，ORDER BY 按日期排序，即可计算每个销售员按时间顺序的累计总额。",
+      "user_answer": "A",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-14T12:36:27",
+      "updated_at": "2026-08-14T12:36:27"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_e71baaeb55b18fee",
+      "topic": "我想练习一下SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "以下哪种子查询类型通常效率较低，因为它会对每一行都执行一次子查询？",
+      "options": [
+        {
+          "label": "A",
+          "text": "相关子查询"
+        },
+        {
+          "label": "B",
+          "text": "标量子查询"
+        },
+        {
+          "label": "C",
+          "text": "列表子查询"
+        },
+        {
+          "label": "D",
+          "text": "表子查询"
+        }
+      ],
+      "answer": "A",
+      "explanation": "相关子查询会对外层查询的每一行都执行一次内部查询，效率通常较低。",
+      "user_answer": "B",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T12:36:27",
+      "updated_at": "2026-08-14T12:36:27"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_c24ba9b3b1f3b64f",
+      "topic": "我想练习一下SQL的题目",
+      "type": "judge",
+      "difficulty": "basic",
+      "question": "窗口函数 LAG(col, n) 用于获取当前行往前第 n 行的值。",
+      "options": [],
+      "answer": "A",
+      "explanation": "LAG(col, n) 函数正是用来获取当前行之前第 n 行的值。",
+      "user_answer": "true",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-14T12:36:27",
+      "updated_at": "2026-08-14T12:36:27"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_902f9d604128d24f",
+      "topic": "我想练习一下SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "在多选题中，关于子查询和窗口函数的混合使用，以下哪项描述是正确的？",
+      "options": [
+        {
+          "label": "A",
+          "text": "可以在子查询中使用窗口函数。"
+        },
+        {
+          "label": "B",
+          "text": "窗口函数不能在 FROM 子句中使用。"
+        },
+        {
+          "label": "C",
+          "text": "子查询可以嵌套在窗口函数的 OVER 子句中。"
+        },
+        {
+          "label": "D",
+          "text": "窗口函数和子查询的使用场景是完全互斥的。"
+        }
+      ],
+      "answer": "A",
+      "explanation": "子查询可以返回一个结果集，这个结果集可以被窗口函数作为基础数据进行计算。",
+      "user_answer": "A",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-14T12:36:27",
+      "updated_at": "2026-08-14T12:36:27"
+    }
+  ],
+  "checkins": [],
+  "streak": {
+    "current": 0,
+    "longest": 0,
+    "last_checkin": null
+  },
+  "created_at": "2026-08-14T12:30:41",
+  "updated_at": "2026-08-14T12:36:27"
+}
