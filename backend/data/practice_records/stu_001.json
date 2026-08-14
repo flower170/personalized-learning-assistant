@@ -110,6 +110,60 @@
         "updated_at": "2026-08-11T10:17:29",
         "solved_at": null,
         "_fallback": true
+      },
+      {
+        "card_id": "leetcode_搜索c语言基础入门_搜索c语言基础入门",
+        "node_id": "step_01",
+        "platform": "LeetCode",
+        "problem_no": "",
+        "title": "搜索「c语言 · 基础入门」",
+        "link": "https://leetcode.cn/problemset/?search=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8",
+        "knowledge_point": "c语言 · 基础入门",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://leetcode.cn/problemset/?search=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8",
+        "created_at": "2026-08-14T23:09:53",
+        "updated_at": "2026-08-14T23:09:53",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "牛客_搜索c语言基础入门_搜索c语言基础入门",
+        "node_id": "step_01",
+        "platform": "牛客",
+        "problem_no": "",
+        "title": "搜索「c语言 · 基础入门」",
+        "link": "https://www.nowcoder.com/search?query=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8",
+        "knowledge_point": "c语言 · 基础入门",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.nowcoder.com/search?query=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8",
+        "created_at": "2026-08-14T23:09:53",
+        "updated_at": "2026-08-14T23:09:53",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "洛谷_搜索c语言基础入门_搜索c语言基础入门",
+        "node_id": "step_01",
+        "platform": "洛谷",
+        "problem_no": "",
+        "title": "搜索「c语言 · 基础入门」",
+        "link": "https://www.luogu.com.cn/problem/list?keyword=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8",
+        "knowledge_point": "c语言 · 基础入门",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.luogu.com.cn/problem/list?keyword=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8",
+        "created_at": "2026-08-14T23:09:53",
+        "updated_at": "2026-08-14T23:09:53",
+        "solved_at": null,
+        "_fallback": true
       }
     ],
     "step_02": [
@@ -164,6 +218,60 @@
         "search_url": "https://www.luogu.com.cn/problem/list?keyword=%E6%95%B0%E7%BB%84%E8%BF%9B%E9%98%B6%E5%BA%94%E7%94%A8%E4%B8%8E%E6%98%93%E9%94%99%E9%A2%98%E5%9E%8B%E6%94%BB%E5%9D%9A",
         "created_at": "2026-08-10T16:59:04",
         "updated_at": "2026-08-10T16:59:04",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "leetcode_搜索c语言核心技能_搜索c语言核心技能",
+        "node_id": "step_02",
+        "platform": "LeetCode",
+        "problem_no": "",
+        "title": "搜索「c语言 · 核心技能」",
+        "link": "https://leetcode.cn/problemset/?search=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+        "knowledge_point": "c语言 · 核心技能",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://leetcode.cn/problemset/?search=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+        "created_at": "2026-08-14T23:08:43",
+        "updated_at": "2026-08-14T23:08:43",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "牛客_搜索c语言核心技能_搜索c语言核心技能",
+        "node_id": "step_02",
+        "platform": "牛客",
+        "problem_no": "",
+        "title": "搜索「c语言 · 核心技能」",
+        "link": "https://www.nowcoder.com/search?query=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+        "knowledge_point": "c语言 · 核心技能",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.nowcoder.com/search?query=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+        "created_at": "2026-08-14T23:08:43",
+        "updated_at": "2026-08-14T23:08:43",
+        "solved_at": null,
+        "_fallback": true
+      },
+      {
+        "card_id": "洛谷_搜索c语言核心技能_搜索c语言核心技能",
+        "node_id": "step_02",
+        "platform": "洛谷",
+        "problem_no": "",
+        "title": "搜索「c语言 · 核心技能」",
+        "link": "https://www.luogu.com.cn/problem/list?keyword=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+        "knowledge_point": "c语言 · 核心技能",
+        "difficulty": "简单",
+        "status": "undone",
+        "my_answer": "",
+        "note": "",
+        "search_url": "https://www.luogu.com.cn/problem/list?keyword=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+        "created_at": "2026-08-14T23:08:43",
+        "updated_at": "2026-08-14T23:08:43",
         "solved_at": null,
         "_fallback": true
       }
@@ -230,11 +338,11 @@
       ],
       "answer": "D",
       "explanation": "在PostgreSQL中，@>操作符用于检查一个数组是否包含特定值，CONTAINS不是PostgreSQL的数组操作符。",
-      "user_answer": "A",
-      "correct": false,
-      "attempts": 6,
+      "user_answer": "D",
+      "correct": true,
+      "attempts": 7,
       "created_at": "2026-08-14T17:32:19",
-      "updated_at": "2026-08-14T17:48:22"
+      "updated_at": "2026-08-14T22:55:49"
     },
     {
       "record_type": "ai_exercise",
@@ -329,11 +437,11 @@
       ],
       "answer": "C",
       "explanation": "在PostgreSQL中，ARRAY_REMOVE()函数用于从数组中移除特定元素，REMOVE()、DELETE()和UNSET()都不是PostgreSQL的数组函数。",
-      "user_answer": "A",
+      "user_answer": "D",
       "correct": false,
-      "attempts": 1,
+      "attempts": 2,
       "created_at": "2026-08-14T17:32:19",
-      "updated_at": "2026-08-14T17:32:29"
+      "updated_at": "2026-08-14T22:55:50"
     },
     {
       "record_type": "ai_exercise",
@@ -395,11 +503,11 @@
       ],
       "answer": "D",
       "explanation": "在PostgreSQL中，ARRAY_TRANSFORM()函数可以对数组中的每个元素应用函数并返回结果数组，APPLY()、MAP()和ARRAY_MAP()都不是PostgreSQL的内置函数。",
-      "user_answer": "C",
-      "correct": false,
-      "attempts": 2,
+      "user_answer": "D",
+      "correct": true,
+      "attempts": 4,
       "created_at": "2026-08-14T17:32:19",
-      "updated_at": "2026-08-14T17:48:29"
+      "updated_at": "2026-08-14T22:55:48"
     },
     {
       "record_type": "ai_exercise",
@@ -461,11 +569,11 @@
       ],
       "answer": "ABCD",
       "explanation": "所有这些描述都是正确的，COUNT()计算行数，SUM()计算总和，AVG()计算平均值，DISTINCT可以与聚合函数一起使用去除重复值。",
-      "user_answer": "A",
-      "correct": false,
-      "attempts": 2,
+      "user_answer": "ABCD",
+      "correct": true,
+      "attempts": 4,
       "created_at": "2026-08-14T17:32:19",
-      "updated_at": "2026-08-14T17:48:34"
+      "updated_at": "2026-08-14T22:55:41"
     },
     {
       "record_type": "ai_exercise",
@@ -560,11 +668,11 @@
       ],
       "answer": "B",
       "explanation": "在大多数数据库系统中，数组索引从1开始，所以第二个元素是arr[1]。",
-      "user_answer": "C",
-      "correct": false,
-      "attempts": 1,
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 3,
       "created_at": "2026-08-14T17:50:01",
-      "updated_at": "2026-08-14T17:50:01"
+      "updated_at": "2026-08-14T22:55:10"
     },
     {
       "record_type": "ai_exercise",
@@ -593,11 +701,11 @@
       ],
       "answer": "C",
       "explanation": "在PostgreSQL中，ARRAY_CAT()函数用于连接两个数组，ARRAY_APPEND()用于向数组添加单个元素。",
-      "user_answer": "A",
-      "correct": false,
-      "attempts": 1,
+      "user_answer": "C",
+      "correct": true,
+      "attempts": 3,
       "created_at": "2026-08-14T17:50:01",
-      "updated_at": "2026-08-14T17:50:01"
+      "updated_at": "2026-08-14T22:55:15"
     },
     {
       "record_type": "ai_exercise",
@@ -626,11 +734,11 @@
       ],
       "answer": "B",
       "explanation": "在PostgreSQL中，使用@>操作符检查数组是否包含特定元素。",
-      "user_answer": "C",
-      "correct": false,
-      "attempts": 1,
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 2,
       "created_at": "2026-08-14T17:50:01",
-      "updated_at": "2026-08-14T17:50:01"
+      "updated_at": "2026-08-14T22:55:17"
     },
     {
       "record_type": "ai_exercise",
@@ -659,11 +767,11 @@
       ],
       "answer": "A",
       "explanation": "选项A使用 unnest 函数将数组展开为多行，然后按商品ID分组计数，可以统计每个商品被订购的次数。",
-      "user_answer": "B",
-      "correct": false,
-      "attempts": 1,
+      "user_answer": "A",
+      "correct": true,
+      "attempts": 3,
       "created_at": "2026-08-14T17:50:01",
-      "updated_at": "2026-08-14T17:50:01"
+      "updated_at": "2026-08-14T22:55:20"
     },
     {
       "record_type": "ai_exercise",
@@ -692,11 +800,11 @@
       ],
       "answer": "B",
       "explanation": "在PostgreSQL中，ARRAY_TO_STRING()函数用于将数组元素转换为字符串并用指定的分隔符连接。",
-      "user_answer": "A",
-      "correct": false,
-      "attempts": 1,
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 3,
       "created_at": "2026-08-14T17:50:01",
-      "updated_at": "2026-08-14T17:50:01"
+      "updated_at": "2026-08-14T22:55:22"
     },
     {
       "record_type": "ai_exercise",
@@ -725,11 +833,11 @@
       ],
       "answer": "A",
       "explanation": "在SQL中，使用WHERE子句进行条件过滤，选项A是正确的语法。",
-      "user_answer": "B",
-      "correct": false,
-      "attempts": 1,
+      "user_answer": "A",
+      "correct": true,
+      "attempts": 3,
       "created_at": "2026-08-14T17:50:01",
-      "updated_at": "2026-08-14T17:50:01"
+      "updated_at": "2026-08-14T22:55:25"
     },
     {
       "record_type": "ai_exercise",
@@ -758,11 +866,11 @@
       ],
       "answer": "D",
       "explanation": "选项A使用隐式连接语法，选项B和C使用显式连接语法，INNER JOIN可以省略INNER关键字，所有选项都是正确的连接方式。",
-      "user_answer": "B",
-      "correct": false,
-      "attempts": 1,
+      "user_answer": "D",
+      "correct": true,
+      "attempts": 4,
       "created_at": "2026-08-14T17:50:01",
-      "updated_at": "2026-08-14T17:50:01"
+      "updated_at": "2026-08-14T22:55:31"
     }
   ],
   "collections": [
@@ -813,13 +921,18 @@
       "date": "2026-08-10",
       "node_id": "step_01",
       "note": "今天学了数组基础夯实与概念重构"
+    },
+    {
+      "date": "2026-08-14",
+      "node_id": "step_01",
+      "note": "学习了基本知识"
     }
   ],
   "streak": {
     "current": 1,
     "longest": 1,
-    "last_checkin": "2026-08-10"
+    "last_checkin": "2026-08-14"
   },
   "created_at": "2026-08-10T16:43:59",
-  "updated_at": "2026-08-14T17:50:01"
+  "updated_at": "2026-08-14T23:09:53"
 }

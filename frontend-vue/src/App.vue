@@ -30,10 +30,12 @@ const appStyle = computed(() => ({
 .login-layout {
   width: 100vw;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 .app-layout {
   display: flex;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
 }
@@ -42,7 +44,6 @@ const appStyle = computed(() => ({
   display: flex;
   flex-direction: column;
   min-width: 0;
-  max-width: 1200px;
 }
 .router-view {
   flex: 1;

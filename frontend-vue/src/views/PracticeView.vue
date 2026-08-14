@@ -30,7 +30,7 @@
         <div class="prv-card">
           <div class="prv-card-head">
             <div>
-              <div class="prv-path-name">📚 {{ path.path_name || '学习路径' }}</div>
+              <div class="prv-path-name">{{ path.path_name || '学习路径' }}</div>
               <div v-if="path.goal" class="prv-path-goal">{{ path.goal }}</div>
             </div>
             <el-tag :type="pathProgressTag" effect="light">{{ pathStatusText }}</el-tag>
@@ -129,7 +129,7 @@
               <!-- 外部平台学习（自评，呼应路径进度） -->
               <div class="prv-node-study">
                 <div v-if="node.node_study" class="prv-node-study-summary">
-                  <span>📊 {{ node.node_study.platform || '外部平台' }}</span>
+                  <span>{{ node.node_study.platform || '外部平台' }}</span>
                   <span>累计 {{ node.node_study.total_hours }}h</span>
                   <span>{{ node.node_study.total_problems }} 题</span>
                   <span class="prv-mastery">{{ masteryStars(node.node_study.mastery) }}</span>
@@ -278,7 +278,7 @@
         <div class="prv-grid">
           <!-- 错题集（OJ 错题 + AI 错题，全量不截断） -->
           <div class="prv-card">
-            <div class="prv-sec-label">📕 错题集</div>
+            <div class="prv-sec-label">错题集</div>
 
             <!-- OJ 错题：跳官方平台重做 -->
             <div v-if="wrongOj.length" class="prv-sub-sec">
@@ -291,7 +291,7 @@
                     <a v-if="c.link" :href="c.link" target="_blank" rel="noopener" class="prv-mistake-link">重做 →</a>
                   </div>
                   <div class="prv-mistake-title">{{ c.title }}</div>
-                  <div v-if="c.note" class="prv-mistake-note">📝 {{ c.note }}</div>
+                  <div v-if="c.note" class="prv-mistake-note">{{ c.note }}</div>
                 </div>
               </div>
             </div>
@@ -301,7 +301,7 @@
               <div class="prv-sub-label">AI 错题 <span class="prv-stat-mini">({{ wrongAi.length }} 道，页内重做)</span></div>
               <div class="prv-ai-wrong-list">
                 <div v-for="rec in wrongAi" :key="rec.exercise_id + '-' + rec.updated_at" class="prv-ai-wrong-item">
-                  <div class="prv-ai-wrong-topic">📚 {{ rec.topic || 'AI 练习' }}</div>
+                  <div class="prv-ai-wrong-topic">{{ rec.topic || 'AI 练习' }}</div>
                   <ExerciseCard
                     :exercise="aiToCard(rec)"
                     :current-index="0"
@@ -313,7 +313,7 @@
               </div>
             </div>
 
-            <div v-if="!wrongOj.length && !wrongAi.length" class="prv-empty-small">太棒了，目前没有错题！🎉</div>
+            <div v-if="!wrongOj.length && !wrongAi.length" class="prv-empty-small">太棒了，目前没有错题</div>
           </div>
 
           <!-- 最近练习记录 -->
@@ -472,7 +472,7 @@ async function onRedoAi(rec, e) {
   try {
     const res = await practiceApi.redoAiExercise(chatStore.userId, rec.exercise_id, e.userAnswer)
     if (res.ok) {
-      if (res.correct) ElMessage.success('回答正确！已移出错题集 🎉')
+      if (res.correct) ElMessage.success('回答正确！已移出错题集')
       else ElMessage.warning('还是不对，看下解析想清楚后再试一次吧')
       await refresh(true)
     }

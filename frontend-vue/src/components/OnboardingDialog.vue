@@ -9,7 +9,6 @@
   >
     <template #header>
       <div class="ob-dialog-title">
-        <span class="ob-dialog-emoji">🚀</span>
         <div>
           <div class="ob-dialog-h1">三步开启个性化学习</div>
           <div class="ob-dialog-sub">先画像 → 再路径 → 自由使用资源</div>
@@ -26,7 +25,7 @@
       >
         <span class="ob-step-num">{{ i + 1 }}</span>
         <div class="ob-step-main">
-          <div class="ob-step-label">{{ step.icon }} {{ step.label }}</div>
+          <div class="ob-step-label">{{ step.label }}</div>
           <div class="ob-step-desc">{{ step.desc }}</div>
         </div>
         <div class="ob-step-actions">
@@ -78,17 +77,17 @@ const steps = computed(() => {
 
   return [
     {
-      key: 'profile', icon: '👤', label: '学习画像',
+      key: 'profile', label: '学习画像',
       desc: '聊聊基础情况，AI 个性化推荐', startLabel: '去构建',
       status: profileStatus,
     },
     {
-      key: 'path', icon: '🗺️', label: '学习路径',
+      key: 'path', label: '学习路径',
       desc: '宏观阶段 + 每日计划，含官方练习', startLabel: '去规划',
       status: pathStatus,
     },
     {
-      key: 'resource', icon: '📚', label: '学习资源',
+      key: 'resource', label: '学习资源',
       desc: '讲义 / 思维导图 / 练习题 / 视频', startLabel: '去使用',
       status: (profileStatus === 'done' || profileStatus === 'skipped') && (pathStatus === 'done' || pathStatus === 'skipped')
         ? 'done' : 'todo',

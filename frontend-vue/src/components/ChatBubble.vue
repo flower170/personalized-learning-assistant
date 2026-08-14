@@ -43,7 +43,7 @@
         <div class="exercise-section-header">
           <div class="exercise-section-title">
             <el-icon :size="20" color="#6366f1"><EditPen /></el-icon>
-            <span>📝 练习题</span>
+            <span>练习题</span>
           </div>
           <div class="exercise-header-right">
             <span class="exercise-count">共 {{ exercises.length }} 题</span>
@@ -53,13 +53,13 @@
               class="mode-toggle-btn"
               @click="exerciseDisplayMode = exerciseDisplayMode === 'flat' ? 'interactive' : 'flat'"
             >
-              {{ exerciseDisplayMode === 'flat' ? '✏️ 答题模式' : '📄 预览模式' }}
+              {{ exerciseDisplayMode === 'flat' ? '答题模式' : '预览模式' }}
             </el-button>
           </div>
         </div>
 
         <!-- 友好开场：模型只输出 JSON，开场白由前端补，省 token 且数字准确 -->
-        <div class="ex-intro">📝 已为您准备 {{ exercises.length }} 道练习题，现在开始作答吧！</div>
+        <div class="ex-intro">已为您准备 {{ exercises.length }} 道练习题，现在开始作答</div>
 
         <!-- 平铺展示模式（纯白底纯文本，题目全前置→答案全后置） -->
         <div v-if="exerciseDisplayMode === 'flat'" class="ex-flat">
@@ -103,7 +103,7 @@
               class="summarize-btn flat-summarize-btn"
               @click="emitSummary"
             >
-              <el-icon><DataAnalysis /></el-icon> 提交批改 🎯
+              <el-icon><DataAnalysis /></el-icon> 提交批改
             </el-button>
           </div>
         </div>
@@ -159,7 +159,7 @@
               class="summarize-btn"
               @click="emitSummary"
             >
-              <el-icon><DataAnalysis /></el-icon> 提交批改 🎯
+              <el-icon><DataAnalysis /></el-icon> 提交批改
             </el-button>
           </div>
         </template>
@@ -690,9 +690,11 @@ function openVideo(v) {
   overflow: hidden;
 }
 .msg-row.user .msg-bubble {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #eef0ff 0%, #e0e7ff 100%);
+  color: #1a1a1a;
+  font-weight: 400;
   border-bottom-right-radius: 4px;
+  border: 1px solid #c7d2fe;
 }
 .msg-row.assistant .msg-bubble {
   background: #f5f7fa;

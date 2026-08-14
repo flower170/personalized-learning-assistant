@@ -176,7 +176,7 @@
           <span class="answer-value">{{ formattedAnswer }}</span>
         </div>
         <div class="exercise-explanation">
-          <span class="explanation-label">💡 解析：</span>
+          <span class="explanation-label">解析：</span>
           <span class="explanation-text">{{ exercise.explanation }}</span>
         </div>
       </div>

@@ -63,7 +63,7 @@
     </div>
 
     <div class="setting-section">
-      <h3 class="section-title">👤 {{ t('settings.personal_info') }}</h3>
+      <h3 class="section-title">{{ t('settings.personal_info') }}</h3>
       <div class="info-form">
         <el-form label-width="100px" size="small" class="form-section">
           <el-form-item :label="t('settings.student_id')">
@@ -128,11 +128,11 @@
     </div>
 
     <div class="setting-section">
-      <h3 class="section-title">📊 数据报告</h3>
+      <h3 class="section-title">数据报告</h3>
       <p class="section-desc">生成并导出学习数据报告，包含画像、学习进度和会话记录</p>
       <div class="report-card">
         <div class="report-info">
-          <div class="report-icon">📊</div>
+          <div class="report-icon"></div>
           <div class="report-text">
             <span class="report-title">学习数据报告</span>
             <span class="report-desc">包含学生画像、能力雷达图、知识掌握情况、学习路径进度和近期会话记录</span>

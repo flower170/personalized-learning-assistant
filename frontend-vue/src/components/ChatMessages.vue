@@ -2,9 +2,6 @@
   <div class="chat-messages" ref="msgContainer">
     <!-- 空状态欢迎页 -->
     <div v-if="chatStore.messages.length === 0" class="welcome">
-      <div class="welcome-icon">
-        <el-icon :size="48" color="#c7d2fe"><MagicStick /></el-icon>
-      </div>
       <h2 class="welcome-title">你好！我是你的 AI 学习助手</h2>
       <p class="welcome-desc">
         我可以帮你构建学习画像、生成学习资料、制定学习路径
@@ -64,7 +61,7 @@ import { ref, computed, watch, nextTick } from 'vue'
 import { useChatStore } from '@/stores/chat'
 import { marked } from 'marked'
 import ChatBubble from './ChatBubble.vue'
-import { MagicStick, User, Reading, MapLocation, EditPen, DataAnalysis } from '@element-plus/icons-vue'
+import { User, Reading, MapLocation, EditPen, DataAnalysis } from '@element-plus/icons-vue'
 
 const emit = defineEmits(['send', 'open-path-wizard', 'open-skill-gap'])
 
@@ -73,12 +70,12 @@ const msgContainer = ref(null)
 const bottomRef = ref(null)
 
 const welcomeTips = [
-  { text: '我想完善我的学习画像', label: '📋 学习画像', icon: User, explicitType: 'profile' },
+  { text: '我想完善我的学习画像', label: '学习画像', icon: User, explicitType: 'profile' },
   // "学习资料"按钮行为同顶部"资料"按钮：触发大模型自我介绍 + 能力说明，而非自动生成资源
-  { text: '', label: '📚 学习资料', icon: Reading, intro: true },
+  { text: '', label: '学习资料', icon: Reading, intro: true },
   // 学习路径统一走交互式向导：画像起步 → 信息不足提问 → 草案确认
-  { text: '', label: '🗺️ 学习路径', icon: MapLocation, action: 'path-wizard' },
-  { text: '', label: '📡 技能差距', icon: DataAnalysis, action: 'skill-gap' },
+  { text: '', label: '学习路径', icon: MapLocation, action: 'path-wizard' },
+  { text: '', label: '技能差距', icon: DataAnalysis, action: 'skill-gap' },
 ]
 
 function handleTipClick(tip) {
@@ -170,7 +167,6 @@ watch(() => chatStore.streamingText, () => nextTick(scrollToBottom))
   text-align: center;
   padding: 80px 20px 40px;
 }
-.welcome-icon { margin-bottom: 16px; }
 .welcome-title {
   font-size: 22px;
   color: #1f2937;

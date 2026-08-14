@@ -96,7 +96,7 @@
 
       <!-- 雷达图（ECharts） -->
       <div class="pv-section">
-        <h3 class="pv-section-title">📊 维度评分</h3>
+        <h3 class="pv-section-title">维度评分</h3>
         <div v-if="chatStore.radarData.length" class="pv-radar-row">
           <RadarChart :data="chatStore.radarData" :size="400" />
           <div class="pv-legend-list">
@@ -115,7 +115,7 @@
 
       <!-- 知识基础 -->
       <div class="pv-section">
-        <h3 class="pv-section-title">📚 知识基础</h3>
+        <h3 class="pv-section-title">知识基础</h3>
         <div class="pv-kb-row">
           <div class="pv-kb-col">
             <div class="pv-kb-head mastered">✅ 已掌握</div>
@@ -132,7 +132,7 @@
             <span v-else class="pv-empty-small">暂无</span>
           </div>
           <div class="pv-kb-col">
-            <div class="pv-kb-head untouched">📖 未接触</div>
+            <div class="pv-kb-head untouched">未接触</div>
             <div v-if="chatStore.profile.knowledge_base?.untouched?.length" class="pv-tags">
               <el-tag v-for="k in chatStore.profile.knowledge_base.untouched" :key="k" size="small" type="info" effect="plain">{{ k }}</el-tag>
             </div>
@@ -145,7 +145,7 @@
 
       <!-- 兴趣方向 -->
       <div class="pv-section" v-if="chatStore.profile.interests?.length">
-        <h3 class="pv-section-title">🎯 兴趣方向</h3>
+        <h3 class="pv-section-title">兴趣方向</h3>
         <div class="pv-tags">
           <el-tag v-for="int in chatStore.profile.interests" :key="int" style="margin:0 6px 6px 0" type="primary" effect="plain">{{ int }}</el-tag>
         </div>

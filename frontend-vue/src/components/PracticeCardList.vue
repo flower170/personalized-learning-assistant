@@ -43,7 +43,7 @@
     </div>
 
     <div class="pc-footer">
-      <el-button v-if="canSearch" size="small" :loading="loading" @click="$emit('find')">🔍 去官方找题</el-button>
+      <el-button v-if="canSearch" size="small" :loading="loading" @click="$emit('find')">去官方找题</el-button>
       <span v-if="updatedCardId" class="pc-saved">✓ 已保存</span>
     </div>
   </div>

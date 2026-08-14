@@ -2,7 +2,7 @@
   <div class="report-view">
     <div class="report-header">
       <div class="header-left">
-        <h1>📊 学习数据报告</h1>
+        <h1>学习数据报告</h1>
         <p class="subtitle">生成时间: {{ reportData.generatedAt }}</p>
       </div>
       <div class="header-actions">
@@ -23,7 +23,7 @@
     <div v-else class="report-content" id="report-print-area">
       <div class="report-card info-card">
         <div class="card-header">
-          <h2>👤 学生基本信息</h2>
+          <h2>学生基本信息</h2>
         </div>
         <div class="info-grid">
           <div class="info-item">
@@ -55,7 +55,7 @@
 
       <div class="report-card">
         <div class="card-header">
-          <h2>🎯 能力雷达图</h2>
+          <h2>能力雷达图</h2>
         </div>
         <div v-if="reportData.radar?.dimensions?.length" class="radar-container">
           <div class="radar-chart">
@@ -122,7 +122,7 @@
 
       <div class="report-card">
         <div class="card-header">
-          <h2>📚 知识掌握情况</h2>
+          <h2>知识掌握情况</h2>
         </div>
         <div v-if="reportData.profile?.knowledge_base" class="knowledge-section">
           <div class="knowledge-block mastered">
@@ -178,7 +178,7 @@
 
       <div class="report-card">
         <div class="card-header">
-          <h2>🗺️ 学习路径进度</h2>
+          <h2>学习路径进度</h2>
         </div>
         <div v-if="reportData.learningPath" class="learning-path-section">
           <div class="path-info">
@@ -245,7 +245,7 @@
 
       <div class="report-card suggestion-card">
         <div class="card-header">
-          <h2>💡 AI 学习建议</h2>
+          <h2>AI 学习建议</h2>
         </div>
         <div v-if="suggestion" class="suggestion-content">
           <p>{{ suggestion }}</p>

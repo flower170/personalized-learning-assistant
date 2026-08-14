@@ -83,7 +83,7 @@ function render() {
                 ${dim.description ? `<div style="font-size:12px;color:#6b7280;margin-top:6px;max-width:200px;line-height:1.4">${dim.description}</div>` : ''}`
           }
           // 兜底：全部维度对比
-          let html = '<div style="font-weight:600;font-size:13px;margin-bottom:6px">📊 维度对比</div>'
+          let html = '<div style="font-weight:600;font-size:13px;margin-bottom:6px">维度对比</div>'
           props.data.forEach((d, i) => {
             const c = colors[i % colors.length]
             html += `<div style="display:flex;justify-content:space-between;gap:16px;padding:2px 0;border-bottom:${i < props.data.length - 1 ? '1px solid #f3f4f6' : 'none'}">
@@ -108,7 +108,7 @@ function render() {
         }
 
         // ── 方案C: 兜底 - 显示所有维度 ──
-        let html = '<div style="font-weight:600;font-size:13px;margin-bottom:6px">📊 维度评分</div>'
+        let html = '<div style="font-weight:600;font-size:13px;margin-bottom:6px">维度评分</div>'
         props.data.forEach((d, i) => {
           const val = params.value[i]
           const c = colors[i % colors.length]

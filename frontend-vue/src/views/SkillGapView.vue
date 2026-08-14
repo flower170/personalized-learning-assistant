@@ -61,7 +61,7 @@
 
       <!-- 优先补齐建议 -->
       <div class="sgv-section" v-if="result.top_priority">
-        <h3 class="sgv-section-title">🎯 最值得优先补齐</h3>
+        <h3 class="sgv-section-title">最值得优先补齐</h3>
         <div class="sgv-priority">
           <template v-if="Array.isArray(result.top_priority)">
             <el-tag
@@ -80,7 +80,7 @@
 
       <!-- 市场需求摘要 -->
       <div class="sgv-section" v-if="result.market_summary">
-        <h3 class="sgv-section-title">📡 市场怎么说</h3>
+        <h3 class="sgv-section-title">市场怎么说</h3>
         <p class="sgv-summary">{{ result.market_summary }}</p>
       </div>
 

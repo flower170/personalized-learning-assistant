@@ -81,7 +81,6 @@
             :class="{ active: currentMode === m.key }"
             @click="selectMode(m.key)"
           >
-            <span class="mode-icon">{{ m.icon }}</span>
             <span class="mode-label">{{ m.label }}</span>
           </button>
         </div>
@@ -106,11 +105,11 @@ const currentMode = ref('auto')
 const showModeMenu = ref(false)
 
 const modes = [
-  { key: 'auto', icon: '🤖', label: '智能模式' },
-  { key: 'profile', icon: '📋', label: '学习画像' },
-  { key: 'resource', icon: '📚', label: '学习资料' },
-  { key: 'plan', icon: '🗺️', label: '学习路径' },
-  { key: 'tutor', icon: '💡', label: '辅导答疑' },
+  { key: 'auto', label: '智能模式' },
+  { key: 'profile', label: '学习画像' },
+  { key: 'resource', label: '学习资料' },
+  { key: 'plan', label: '学习路径' },
+  { key: 'tutor', label: '辅导答疑' },
 ]
 
 const modeLabels = {
@@ -155,7 +154,7 @@ function handleUpload(file) {
           status: 'vectored',
         })
         // ✅ 不上传后自动发送消息 — 只显示提示，让用户自己输入需求
-        chatStore.addSystemMessage(`📎 已上传文件: **${file.name}**，上传成功。现在你可以告诉我需要基于这份文档生成什么学习资料。`)
+        chatStore.addSystemMessage(`已上传文件: **${file.name}**，上传成功。现在你可以告诉我需要基于这份文档生成什么学习资料。`)
       } else {
         chatStore.addSystemMessage(`❌ 文件上传失败: ${data.msg || '未知错误'}`)
       }

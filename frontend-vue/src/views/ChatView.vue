@@ -15,7 +15,7 @@
         title="新手引导"
         @click="showOnboarding = true"
       >
-        🚀<span class="ob-fab-text">引导</span>
+        <span class="ob-fab-text">引导</span>
       </button>
 
       <!-- 首次登录引导弹窗：账号未全部完成时弹出一次，点步骤→交接给聊天/画像页 -->
@@ -64,7 +64,7 @@ async function openPathWizard(preTopic = '') {
     try {
       const { value } = await ElMessageBox.prompt(
         '你想完成哪些科目？我会根据你的学习情况来制定学习计划。',
-        '🗺️ 学习路径规划',
+        '学习路径规划',
         {
           inputPlaceholder: '如：SQL / Python数据分析 / 统计学 / C语言 / 数学…',
           confirmButtonText: '开始规划',

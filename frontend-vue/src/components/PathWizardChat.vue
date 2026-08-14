@@ -8,7 +8,7 @@
 
     <!-- 提问补充 -->
     <div v-else-if="w.status === 'ask'" class="pw-step">
-      <div class="pw-head">🗺️ 学习路径规划</div>
+      <div class="pw-head">学习路径规划</div>
 
       <!-- 画像已识别科目 → 让用户确认（不用开放提问） -->
       <template v-if="w.confirmSubject">
@@ -60,7 +60,7 @@
 
     <!-- 草案预览 -->
     <div v-else-if="w.status === 'draft'" class="pw-step">
-      <div class="pw-head">📋 路径草案</div>
+      <div class="pw-head">路径草案</div>
       <div v-if="w.revised && w.draft.revision_reason" class="pw-revision">
         🔄 已按你的意见修改：<b>{{ w.draft.revision_reason }}</b>
       </div>
@@ -69,7 +69,7 @@
         <span class="pw-tag">每日 {{ w.draft.daily_minutes }} 分钟</span>
         <span v-if="w.draft.goal" class="pw-tag">{{ w.draft.goal }}</span>
       </div>
-      <div v-if="w.draft.market_demand" class="pw-demand">📈 {{ w.draft.market_demand }}</div>
+      <div v-if="w.draft.market_demand" class="pw-demand">{{ w.draft.market_demand }}</div>
 
       <el-timeline class="pw-timeline">
         <el-timeline-item
@@ -132,9 +132,8 @@
 
     <!-- 完成 -->
     <div v-else-if="w.status === 'done'" class="pw-step pw-done">
-      <div class="pw-done-icon">🎉</div>
-      <div class="pw-head">学习路径已保存！</div>
-      <div class="pw-desc">你可以在左侧「📒 我的练习」页面查看路径、打卡和进度。</div>
+      <div class="pw-head">学习路径已保存</div>
+      <div class="pw-desc">你可以在左侧「我的练习」页面查看路径、打卡和进度。</div>
     </div>
 
     <!-- 错误 -->

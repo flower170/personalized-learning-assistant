@@ -4,7 +4,6 @@
       <img src="/logo.jpg" class="header-icon" alt="彩迹熊" />
       <div class="header-info">
         <span class="header-title">彩迹熊 AI 学习助手</span>
-        <span class="header-subtitle">个性化智能学习平台</span>
       </div>
       <el-tag v-if="chatStore.loading" size="small" type="warning" effect="light" class="loading-tag">
         <span class="loading-dot"></span>
@@ -82,6 +81,9 @@ async function quickAction(type) {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
+  flex-shrink: 1;
+  overflow: hidden;
 }
 .header-icon {
   width: 30px;
@@ -92,12 +94,16 @@ async function quickAction(type) {
 .header-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 .header-title {
   font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .header-subtitle {
   font-size: 11px;
@@ -121,6 +127,7 @@ async function quickAction(type) {
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
 }
 .header-action-btn {
   display: flex;
@@ -134,6 +141,8 @@ async function quickAction(type) {
   cursor: pointer;
   font-size: 12px;
   transition: all 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .header-action-btn:hover {
   background: #f5f5f5;

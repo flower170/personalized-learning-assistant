@@ -1,9 +1,9 @@
 {
-  "draft_id": "draft_f12e35ec",
+  "draft_id": "draft_58653d9d",
   "student_id": "stu_001",
-  "topic": "物理",
+  "topic": "c语言",
   "collected": {
-    "topic": "物理",
+    "topic": "c语言",
     "profile": {
       "mastered": [
         "408计算机学科专业基础综合"
@@ -16,103 +16,303 @@
       ],
       "cognitive_style": "视觉型",
       "preferred_pace": "快速速成",
-      "daily_hours": 5,
+      "daily_hours": 5.0,
       "long_term_goal": "考研",
       "short_term_goal": "考研",
       "goal_attribute": "考研"
     },
     "market": [],
     "resources": [],
-    "subject": "牛顿第二定律实验",
-    "long_term_goal": "牛顿第二定律实验"
+    "subject": "c语言",
+    "long_term_goal": "c语言"
   },
-  "path_name": "牛顿第二定律实验学习路径",
-  "overall_goal": "系统掌握牛顿第二定律实验，能独立完成相关任务",
-  "goal": "系统掌握牛顿第二定律实验",
-  "market_demand": "物理实验技能是科研与工程领域的基石，强调对控制变量法的应用及数据的严谨处理能力。",
-  "total_duration_days": 30,
+  "path_name": "c语言学习路径",
+  "overall_goal": "系统掌握c语言",
+  "goal": "系统掌握c语言",
+  "market_demand": "",
+  "total_duration_days": 60,
   "daily_minutes": 300,
   "stages": [
     {
       "stage": 1,
-      "title": "实验原理与装置认知",
-      "description": "深入理解牛顿第二定律的物理意义，掌握气垫导轨与光电门等实验器材的构造与使用方法。",
-      "estimated_days": 3,
+      "title": "c语言 · 基础入门",
+      "description": "系统学习c语言的「c语言 · 基础入门」，配练习巩固",
+      "estimated_days": 20,
       "focus_points": [
-        "牛顿第二定律核心公式推导",
-        "气垫导轨水平调节原理",
-        "光电门计时机制",
-        "控制变量法实验设计"
+        "核心概念",
+        "基础工具"
       ],
-      "expected_outcome": "能够画出实验装置示意图，并清晰阐述如何通过控制变量法研究加速度与力、质量的关系。",
-      "practice_cards": []
+      "expected_outcome": "掌握c语言·c语言 · 基础入门并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索核心概念_搜索核心概念",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「核心概念」",
+          "link": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
+          "knowledge_point": "核心概念",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索核心概念_搜索核心概念",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「核心概念」",
+          "link": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
+          "knowledge_point": "核心概念",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索基础工具_搜索基础工具",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「基础工具」",
+          "link": "https://leetcode.cn/problemset/?search=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
+          "knowledge_point": "基础工具",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索基础工具_搜索基础工具",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「基础工具」",
+          "link": "https://www.nowcoder.com/search?query=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
+          "knowledge_point": "基础工具",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
     },
     {
       "stage": 2,
-      "title": "实验操作与数据采集",
-      "description": "模拟或实际操作实验，熟练掌握滑块质量调节、砝码牵引及多组数据的采集流程。",
-      "estimated_days": 4,
+      "title": "c语言 · 核心技能",
+      "description": "系统学习c语言的「c语言 · 核心技能」，配练习巩固",
+      "estimated_days": 20,
       "focus_points": [
-        "滑块质量与牵引力的精确设置",
-        "保持质量不变改变力（$m$不变）",
-        "保持力不变改变质量（$F$不变）",
-        "多组数据的重复采集与记录"
+        "核心技能",
+        "练习"
       ],
-      "expected_outcome": "能够独立完成实验操作，获取至少两组不同条件下的加速度数据，并确保数据的有效性。",
-      "practice_cards": []
+      "expected_outcome": "掌握c语言·c语言 · 核心技能并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索核心技能_搜索核心技能",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「核心技能」",
+          "link": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+          "knowledge_point": "核心技能",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索核心技能_搜索核心技能",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「核心技能」",
+          "link": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+          "knowledge_point": "核心技能",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索练习_搜索练习",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「练习」",
+          "link": "https://leetcode.cn/problemset/?search=%E7%BB%83%E4%B9%A0",
+          "knowledge_point": "练习",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E7%BB%83%E4%B9%A0",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索练习_搜索练习",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「练习」",
+          "link": "https://www.nowcoder.com/search?query=%E7%BB%83%E4%B9%A0",
+          "knowledge_point": "练习",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E7%BB%83%E4%B9%A0",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
     },
     {
       "stage": 3,
-      "title": "数据处理与图像分析",
-      "description": "利用作图法处理实验数据，通过线性拟合验证物理规律，计算斜率与截距。",
-      "estimated_days": 4,
+      "title": "c语言 · 综合实战",
+      "description": "系统学习c语言的「c语言 · 综合实战」，配练习巩固",
+      "estimated_days": 20,
       "focus_points": [
-        "绘制$a-F$图像与$a-1/m$图像",
-        "线性回归与斜率计算",
-        "图像拟合优度分析",
-        "利用图像验证$F=ma$"
+        "综合",
+        "实战"
       ],
-      "expected_outcome": "能够独立完成数据的计算与作图，通过图像斜率准确计算出系统的加速度与质量关系。",
-      "practice_cards": []
-    },
-    {
-      "stage": 4,
-      "title": "误差分析与实验报告",
-      "description": "分析实验中的系统误差与偶然误差，撰写规范的实验报告。",
-      "estimated_days": 3,
-      "focus_points": [
-        "系统误差来源分析（如摩擦力、空气阻力）",
-        "偶然误差的统计规律",
-        "不确定度计算",
-        "实验结论与反思"
-      ],
-      "expected_outcome": "能够撰写一份逻辑严密、数据详实的实验报告，并针对误差提出改进建议。",
-      "practice_cards": []
+      "expected_outcome": "掌握c语言·c语言 · 综合实战并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索综合_搜索综合",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「综合」",
+          "link": "https://leetcode.cn/problemset/?search=%E7%BB%BC%E5%90%88",
+          "knowledge_point": "综合",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E7%BB%BC%E5%90%88",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索综合_搜索综合",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「综合」",
+          "link": "https://www.nowcoder.com/search?query=%E7%BB%BC%E5%90%88",
+          "knowledge_point": "综合",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E7%BB%BC%E5%90%88",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索实战_搜索实战",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「实战」",
+          "link": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E6%88%98",
+          "knowledge_point": "实战",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E6%88%98",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索实战_搜索实战",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「实战」",
+          "link": "https://www.nowcoder.com/search?query=%E5%AE%9E%E6%88%98",
+          "knowledge_point": "实战",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E5%AE%9E%E6%88%98",
+          "created_at": "2026-08-14T23:05:08",
+          "updated_at": "2026-08-14T23:05:08",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
     }
   ],
   "nodes": [
     {
       "node_id": "step_01",
-      "title": "实验原理与装置认知",
-      "description": "深入理解牛顿第二定律的物理意义，掌握气垫导轨与光电门等实验器材的构造与使用方法。",
-      "estimated_days": 3,
+      "title": "c语言 · 基础入门",
+      "description": "系统学习c语言的「c语言 · 基础入门」，配练习巩固",
+      "estimated_days": 20,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
-      "reason": "能够画出实验装置示意图，并清晰阐述如何通过控制变量法研究加速度与力、质量的关系。",
+      "reason": "掌握c语言·c语言 · 基础入门并能独立应用",
       "daily_tasks": [
         {
           "day": 1,
-          "title": "实验原理与装置认知 - 第1天",
+          "title": "c语言 · 基础入门 - 第1天",
           "description": "学习时长: 300分钟",
           "completed": false,
+          "checkin_date": null,
           "checkin_notes": ""
         },
         {
           "day": 2,
-          "title": "实验原理与装置认知 - 第2天",
+          "title": "c语言 · 基础入门 - 第2天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
@@ -120,7 +320,143 @@
         },
         {
           "day": 3,
-          "title": "实验原理与装置认知 - 第3天",
+          "title": "c语言 · 基础入门 - 第3天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 4,
+          "title": "c语言 · 基础入门 - 第4天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 5,
+          "title": "c语言 · 基础入门 - 第5天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 6,
+          "title": "c语言 · 基础入门 - 第6天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 7,
+          "title": "c语言 · 基础入门 - 第7天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 8,
+          "title": "c语言 · 基础入门 - 第8天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 9,
+          "title": "c语言 · 基础入门 - 第9天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 10,
+          "title": "c语言 · 基础入门 - 第10天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 11,
+          "title": "c语言 · 基础入门 - 第11天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 12,
+          "title": "c语言 · 基础入门 - 第12天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 13,
+          "title": "c语言 · 基础入门 - 第13天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 14,
+          "title": "c语言 · 基础入门 - 第14天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 15,
+          "title": "c语言 · 基础入门 - 第15天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 16,
+          "title": "c语言 · 基础入门 - 第16天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 17,
+          "title": "c语言 · 基础入门 - 第17天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 18,
+          "title": "c语言 · 基础入门 - 第18天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 19,
+          "title": "c语言 · 基础入门 - 第19天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 20,
+          "title": "c语言 · 基础入门 - 第20天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
@@ -130,43 +466,171 @@
     },
     {
       "node_id": "step_02",
-      "title": "实验操作与数据采集",
-      "description": "模拟或实际操作实验，熟练掌握滑块质量调节、砝码牵引及多组数据的采集流程。",
-      "estimated_days": 4,
+      "title": "c语言 · 核心技能",
+      "description": "系统学习c语言的「c语言 · 核心技能」，配练习巩固",
+      "estimated_days": 20,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
-      "reason": "能够独立完成实验操作，获取至少两组不同条件下的加速度数据，并确保数据的有效性。",
+      "reason": "掌握c语言·c语言 · 核心技能并能独立应用",
       "daily_tasks": [
         {
-          "day": 4,
-          "title": "实验操作与数据采集 - 第1天",
+          "day": 21,
+          "title": "c语言 · 核心技能 - 第1天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 5,
-          "title": "实验操作与数据采集 - 第2天",
+          "day": 22,
+          "title": "c语言 · 核心技能 - 第2天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 6,
-          "title": "实验操作与数据采集 - 第3天",
+          "day": 23,
+          "title": "c语言 · 核心技能 - 第3天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 7,
-          "title": "实验操作与数据采集 - 第4天",
+          "day": 24,
+          "title": "c语言 · 核心技能 - 第4天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 25,
+          "title": "c语言 · 核心技能 - 第5天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 26,
+          "title": "c语言 · 核心技能 - 第6天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 27,
+          "title": "c语言 · 核心技能 - 第7天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 28,
+          "title": "c语言 · 核心技能 - 第8天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 29,
+          "title": "c语言 · 核心技能 - 第9天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 30,
+          "title": "c语言 · 核心技能 - 第10天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 31,
+          "title": "c语言 · 核心技能 - 第11天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 32,
+          "title": "c语言 · 核心技能 - 第12天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 33,
+          "title": "c语言 · 核心技能 - 第13天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 34,
+          "title": "c语言 · 核心技能 - 第14天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 35,
+          "title": "c语言 · 核心技能 - 第15天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 36,
+          "title": "c语言 · 核心技能 - 第16天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 37,
+          "title": "c语言 · 核心技能 - 第17天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 38,
+          "title": "c语言 · 核心技能 - 第18天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 39,
+          "title": "c语言 · 核心技能 - 第19天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 40,
+          "title": "c语言 · 核心技能 - 第20天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
@@ -176,81 +640,171 @@
     },
     {
       "node_id": "step_03",
-      "title": "数据处理与图像分析",
-      "description": "利用作图法处理实验数据，通过线性拟合验证物理规律，计算斜率与截距。",
-      "estimated_days": 4,
+      "title": "c语言 · 综合实战",
+      "description": "系统学习c语言的「c语言 · 综合实战」，配练习巩固",
+      "estimated_days": 20,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
-      "reason": "能够独立完成数据的计算与作图，通过图像斜率准确计算出系统的加速度与质量关系。",
+      "reason": "掌握c语言·c语言 · 综合实战并能独立应用",
       "daily_tasks": [
         {
-          "day": 8,
-          "title": "数据处理与图像分析 - 第1天",
+          "day": 41,
+          "title": "c语言 · 综合实战 - 第1天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 9,
-          "title": "数据处理与图像分析 - 第2天",
+          "day": 42,
+          "title": "c语言 · 综合实战 - 第2天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 10,
-          "title": "数据处理与图像分析 - 第3天",
+          "day": 43,
+          "title": "c语言 · 综合实战 - 第3天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 11,
-          "title": "数据处理与图像分析 - 第4天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        }
-      ]
-    },
-    {
-      "node_id": "step_04",
-      "title": "误差分析与实验报告",
-      "description": "分析实验中的系统误差与偶然误差，撰写规范的实验报告。",
-      "estimated_days": 3,
-      "resource_types": [
-        "lecture",
-        "exercise",
-        "oj"
-      ],
-      "reason": "能够撰写一份逻辑严密、数据详实的实验报告，并针对误差提出改进建议。",
-      "daily_tasks": [
-        {
-          "day": 12,
-          "title": "误差分析与实验报告 - 第1天",
+          "day": 44,
+          "title": "c语言 · 综合实战 - 第4天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 13,
-          "title": "误差分析与实验报告 - 第2天",
+          "day": 45,
+          "title": "c语言 · 综合实战 - 第5天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
           "checkin_notes": ""
         },
         {
-          "day": 14,
-          "title": "误差分析与实验报告 - 第3天",
+          "day": 46,
+          "title": "c语言 · 综合实战 - 第6天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 47,
+          "title": "c语言 · 综合实战 - 第7天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 48,
+          "title": "c语言 · 综合实战 - 第8天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 49,
+          "title": "c语言 · 综合实战 - 第9天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 50,
+          "title": "c语言 · 综合实战 - 第10天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 51,
+          "title": "c语言 · 综合实战 - 第11天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 52,
+          "title": "c语言 · 综合实战 - 第12天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 53,
+          "title": "c语言 · 综合实战 - 第13天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 54,
+          "title": "c语言 · 综合实战 - 第14天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 55,
+          "title": "c语言 · 综合实战 - 第15天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 56,
+          "title": "c语言 · 综合实战 - 第16天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 57,
+          "title": "c语言 · 综合实战 - 第17天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 58,
+          "title": "c语言 · 综合实战 - 第18天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 59,
+          "title": "c语言 · 综合实战 - 第19天",
+          "description": "学习时长: 300分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 60,
+          "title": "c语言 · 综合实战 - 第20天",
           "description": "学习时长: 300分钟",
           "completed": false,
           "checkin_date": null,
@@ -261,11 +815,11 @@
   ],
   "status": "approved",
   "version": 1,
-  "created_at": "2026-08-11T09:53:10",
-  "approved_at": "2026-08-11T09:56:58",
+  "created_at": "2026-08-14T23:05:08",
+  "approved_at": "2026-08-14T23:05:22",
   "data_source": {
     "market": "search|model",
     "practice": "search|model"
   },
-  "updated_at": "2026-08-14T14:07:56.864013"
+  "updated_at": "2026-08-14T23:05:22.641346"
 }

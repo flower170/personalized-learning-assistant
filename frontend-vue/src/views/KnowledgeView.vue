@@ -10,12 +10,11 @@
     <el-card shadow="never" class="kb-card">
       <template #header>
         <div class="card-header">
-          <span>📄 上传文档</span>
+          <span>上传文档</span>
         </div>
       </template>
       <el-upload
         drag
-        :auto-upload="false"
         :show-file-list="false"
         :before-upload="handleUpload"
         accept=".pdf,.doc,.docx,.md,.txt"
@@ -36,7 +35,7 @@
 
     <el-card shadow="never" class="kb-card">
       <template #header>
-        <span>📋 已上传文档</span>
+        <span>已上传文档</span>
       </template>
       <div v-if="chatStore.uploadedFiles.length === 0" style="color:#9ca3af;font-size:13px;padding:8px 0;">
         暂无上传文档
@@ -50,9 +49,9 @@
           </div>
         </div>
         <div class="file-status-col">
-          <el-tag v-if="f.status === 'vectored'" size="small" type="success">就绪</el-tag>
-          <el-tag v-else-if="f.status === 'failed'" size="small" type="danger">失败</el-tag>
-          <el-tag v-else size="small" type="warning">处理中</el-tag>
+          <span v-if="f.status === 'vectored'" class="file-active-badge status-ready">就绪</span>
+          <span v-else-if="f.status === 'failed'" class="file-active-badge status-failed">失败</span>
+          <span v-else class="file-active-badge status-processing">处理中</span>
           <span v-if="f.id === chatStore.tempFileId" class="file-active-badge">当前</span>
         </div>
       </div>
@@ -156,5 +155,18 @@ async function handleUpload(file) {
 .file-active-badge {
   font-size: 11px; color: #6366f1; font-weight: 600;
   background: #eef0ff; padding: 1px 8px; border-radius: 8px;
+}
+/* 状态标签：与"当前"风格一致，颜色区分 */
+.status-ready {
+  color: #059669;
+  background: #ecfdf5;
+}
+.status-failed {
+  color: #dc2626;
+  background: #fef2f2;
+}
+.status-processing {
+  color: #d97706;
+  background: #fffbeb;
 }
 </style>

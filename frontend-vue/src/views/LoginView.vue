@@ -5,17 +5,14 @@
       <div class="panel-decoration dec-1"></div>
       <div class="panel-decoration dec-2"></div>
       <div class="panel-decoration dec-3"></div>
-      
+
       <div class="brand-header">
-        <div class="logo">
-          <el-icon :size="36"><MagicStick /></el-icon>
-        </div>
         <div class="brand-info">
-          <span class="brand-name">A3 智能学习助手</span>
+          <span class="brand-name">彩迹熊智能学习助手</span>
           <span class="brand-slogan">AI-Powered Learning Assistant</span>
         </div>
       </div>
-      
+
       <div class="brand-content">
         <div class="hero-section">
           <h1 class="main-title">智能驱动</h1>
@@ -37,7 +34,7 @@
       </div>
       
       <div class="brand-footer">
-        <p>© 2026 A3 智能学习助手 · 让学习更智慧</p>
+        <p>© 2026 彩迹熊 · 让学习更智慧</p>
       </div>
     </div>
     
@@ -92,7 +89,7 @@
             
             <div class="form-options">
               <el-checkbox v-model="rememberMe" class="remember-checkbox">记住我</el-checkbox>
-              <a href="#" class="forgot-link">忘记密码？</a>
+              <a href="javascript:void(0)" class="forgot-link" @click="handleForgotPassword">忘记密码？</a>
             </div>
             
             <el-form-item>
@@ -204,10 +201,10 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useChatStore } from '@/stores/chat'
 import {
-  MagicStick, User, Lock, Message, ChatDotSquare,
+  User, Lock, Message, ChatDotSquare,
   PieChart, Compass, Reading, Connection
 } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 const router = useRouter()
 const chatStore = useChatStore()
@@ -226,7 +223,7 @@ const features = [
   { icon: ChatDotSquare, title: '智能问答', desc: '随时随地获取知识解答' },
   { icon: PieChart, title: '学习分析', desc: '多维度洞察学习效果' },
   { icon: Compass, title: '路径规划', desc: '个性化学习方案定制' },
-  { icon: Connection, title: '多语言支持', desc: '中英日韩语言切换' }
+  { icon: Connection, title: '多语言支持', desc: '中英双语界面切换' }
 ]
 
 const form = reactive({
@@ -300,6 +297,45 @@ function handleQuickLogin(userId) {
     loading.value = false
   }, 500)
 }
+
+async function handleForgotPassword() {
+  try {
+    const { value: username } = await ElMessageBox.prompt(
+      '请输入要重置密码的用户名',
+      '忘记密码',
+      {
+        confirmButtonText: '下一步',
+        cancelButtonText: '取消',
+        inputPlaceholder: '用户名',
+        inputPattern: /\S+/,
+        inputErrorMessage: '用户名不能为空',
+      }
+    )
+    if (!username || !username.trim()) return
+
+    const { value: newPassword } = await ElMessageBox.prompt(
+      `为「${username.trim()}」设置新密码`,
+      '重置密码',
+      {
+        confirmButtonText: '确认重置',
+        cancelButtonText: '取消',
+        inputPlaceholder: '新密码（至少6位）',
+        inputType: 'password',
+        inputPattern: /.{6,}/,
+        inputErrorMessage: '密码至少6位',
+      }
+    )
+    if (!newPassword || newPassword.length < 6) {
+      ElMessage.error('密码至少6位')
+      return
+    }
+
+    localStorage.setItem(`password_${username.trim()}`, newPassword)
+    ElMessage.success('密码已重置，请用新密码登录')
+  } catch {
+    // 用户取消，忽略
+  }
+}
 </script>
 
 <style scoped>
@@ -362,24 +398,13 @@ function handleQuickLogin(userId) {
   transform: translate(-50%, -50%);
 }
 
+
 .brand-header {
   display: flex;
   align-items: center;
   gap: 14px;
   z-index: 1;
   margin-bottom: auto;
-}
-
-.logo {
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
 }
 
 .brand-info {

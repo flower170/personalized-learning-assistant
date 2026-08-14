@@ -91,16 +91,6 @@
                 <el-option value="demo" label="demo" />
               </el-select>
             </div>
-            <div class="user-detail">
-              <span v-if="chatStore.userGrade" class="detail-item">
-                <el-icon size="12"><Briefcase /></el-icon>
-                {{ chatStore.userGrade }}
-              </span>
-              <span v-if="chatStore.userMajor" class="detail-item">
-                <el-icon size="12"><Reading /></el-icon>
-                {{ chatStore.userMajor }}
-              </span>
-            </div>
             <div class="user-actions">
               <el-button text size="small" class="logout-btn" @click="handleLogout">
                 <el-icon size="14"><SwitchButton /></el-icon>
@@ -124,7 +114,7 @@ import { useChatStore } from '@/stores/chat'
 import {
   MagicStick, Plus, ChatDotSquare, User, Connection,
   Reading, Setting, ChatLineSquare, Close, Fold,
-  Briefcase, SwitchButton, Notebook, TrendCharts,
+  SwitchButton, Notebook, TrendCharts,
 } from '@element-plus/icons-vue'
 
 const router = useRouter()
@@ -165,9 +155,10 @@ function handleLogout() {
 
 <style scoped>
 .side-nav {
-  width: 260px;
-  min-width: 260px;
-  height: 100vh;
+  width: 240px;
+  min-width: 240px;
+  height: 100%;
+  flex-shrink: 0;
   background: var(--bg-primary);
   border-right: 1px solid var(--border-primary);
   display: flex;
@@ -226,7 +217,7 @@ function handleLogout() {
   flex: 1; min-width: 0;
 }
 .user-avatar {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  background: var(--accent-primary) !important;
   flex-shrink: 0;
 }
 .user-info {
@@ -248,13 +239,6 @@ function handleLogout() {
     border-radius: 6px !important;
     padding: 2px 8px !important;
   }
-}
-.user-detail {
-  display: flex; align-items: center; gap: 10px;
-}
-.detail-item {
-  display: flex; align-items: center; gap: 3px;
-  font-size: 11px; color: var(--text-muted);
 }
 .collapse-btn { flex-shrink: 0; color: var(--text-muted); }
 .fade-enter-active, .fade-leave-active { transition: opacity 0.2s; }
