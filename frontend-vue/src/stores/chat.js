@@ -410,7 +410,7 @@ export const useChatStore = defineStore('chat', () => {
       const planSummary = existingPlan.content.slice(0, 1500)
       const tutorQuestion = `我有一个学习计划，请根据这个计划回答我的问题。\n\n计划内容：\n${planSummary}\n\n问题：${text}\n\n请给出具体、可执行的第一天学习建议。`
       // 用 tutor API 直接提问（不走 LangGraph 意图分类）
-      const tutorResp = await fetch('http://127.0.0.1:8000/api/tutor/ask', {
+      const tutorResp = await fetch('/api/tutor/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -492,7 +492,7 @@ export const useChatStore = defineStore('chat', () => {
     })
     streamingText.value = '正在查询文档...'
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/kb/chat', {
+      const resp = await fetch('/api/kb/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -648,7 +648,7 @@ export const useChatStore = defineStore('chat', () => {
       })
       console.log('[SSE] 发送资源请求:', topic, types)
 
-      const response = await fetch('http://127.0.0.1:8000/api/dispatch/generate', {
+      const response = await fetch('/api/dispatch/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body,
@@ -872,7 +872,7 @@ export const useChatStore = defineStore('chat', () => {
       } catch { /* 落库失败不阻断批改 */ }
 
       // 方式一：优先调用专用批改接口（SSE 流式）
-      const resp = await fetch('http://127.0.0.1:8000/api/exercise/summarize', {
+      const resp = await fetch('/api/exercise/summarize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

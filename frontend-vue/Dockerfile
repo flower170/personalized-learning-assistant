@@ -1,6 +1,6 @@
 # ============================================================
 # A3 多智能体学习系统 — 前端 Dockerfile
-# 构建上下文为项目根目录（由 docker-compose 传入）
+# 构建上下文为 frontend-vue/ 目录（Zeabur 等平台按服务目录部署）
 # ============================================================
 
 # ---- Build Stage ----
@@ -9,11 +9,11 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 # 先复制依赖文件，利用 Docker 层缓存
-COPY frontend-vue/package.json frontend-vue/package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm ci
 
 # 复制源码并构建
-COPY frontend-vue/ .
+COPY . .
 RUN npm run build
 
 
@@ -24,7 +24,7 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # 复制 Nginx 配置
-COPY frontend-vue/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 暴露端口
 EXPOSE 80

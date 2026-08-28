@@ -215,7 +215,7 @@ export const onlinePathApi = {
 
   /** 流式生成路径草案（SSE）：返回 fetch Response，由调用方 parseSSEStream 消费 */
   draftStream: async (studentId, topic, collected = {}, draftId = '') => {
-    const response = await fetch('http://127.0.0.1:8000/api/online-path/draft-stream', {
+    const response = await fetch('/api/online-path/draft-stream', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ student_id: studentId, topic, collected, draft_id: draftId }),

@@ -1,6 +1,6 @@
 # ============================================================
 # A3 多智能体学习系统 — 后端 Dockerfile
-# 构建上下文为项目根目录（由 docker-compose 传入）
+# 构建上下文为 backend/ 目录（Zeabur 等平台按服务目录部署）
 # ============================================================
 
 FROM python:3.11-slim AS builder
@@ -8,7 +8,7 @@ FROM python:3.11-slim AS builder
 WORKDIR /build
 
 # 仅复制依赖文件，利用 Docker 层缓存
-COPY backend/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 
@@ -32,8 +32,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 从 builder 复制已安装的 Python 包
 COPY --from=builder /install /usr/local
 
-# 复制后端代码（仅 backend/ 下的文件）
-COPY backend/ .
+# 复制后端代码（构建上下文内的全部文件）
+COPY . .
 
 # 创建运行时目录
 RUN mkdir -p /app/static/mindmap /app/static/uploads /app/data/profiles
