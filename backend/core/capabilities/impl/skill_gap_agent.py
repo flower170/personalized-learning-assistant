@@ -42,12 +42,12 @@ JD_SYSTEM_PROMPT = """你是招聘市场技能分析师。从岗位描述文本�
 
 
 class SkillGapAgent(BaseAgent):
-    fallback_model = "glm-4.5-flash"
+    fallback_model = "qwen-turbo"
 
     def __init__(self):
         super().__init__(
             name="SkillGapAgent",
-            model_name="glm-4.7-flash",
+            model_name="qwen-plus",
             system_prompt=JD_SYSTEM_PROMPT,
             temperature=0.3,
         )

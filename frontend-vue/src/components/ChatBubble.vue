@@ -167,7 +167,20 @@
 
       <!-- Markdown 内容（排除 JSON 和已渲染的练习部分） -->
       <div class="msg-content-wrapper">
-        <div class="msg-content" v-html="renderedContent"></div>
+        <!-- 思维导图：主体用 markmap 浅色渲染，仅当后端输出为 Markdown 大纲时触发 -->
+        <template v-if="isMindmap">
+          <div class="msg-content">
+            <MindmapBlock
+              :markdown="msg.mindmapOutline"
+              title="知识点思维导图"
+              :is-streaming="isStreaming"
+              @save="onMindmapSave"
+            />
+            <div v-if="mindmapTailHtml" class="mindmap-tail" v-html="mindmapTailHtml"></div>
+          </div>
+        </template>
+        <div v-else-if="msg.role === 'assistant'" ref="contentRef" class="msg-content" v-html="renderedContent"></div>
+        <div v-else class="msg-content">{{ msg.content }}</div>
 
         <!-- 语音朗读按钮 -->
         <button
@@ -229,17 +242,113 @@
       :exercise="saveExercise"
       :topic="saveTopic"
     />
+
+    <!-- 保存思维导图图片到「我的笔记」 -->
+    <SaveMindmapDialog
+      v-model="saveMindmapVisible"
+      :default-title="saveMindmapTitle"
+      :topic="saveMindmapTitle"
+      :image-file="saveMindmapFile"
+    />
   </div>
 </template>
 
 <script setup>
-import { computed, ref, onUnmounted, reactive, watch } from 'vue'
-import { marked } from 'marked'
+import { computed, ref, onMounted, onUnmounted, reactive, watch, nextTick } from 'vue'
+import { renderMarkdown } from '@/utils/markdown'
+import mermaid from 'mermaid'
 import { useChatStore } from '@/stores/chat'
 import { VideoPlay, VideoCameraFilled, EditPen, Refresh, Plus, DataAnalysis } from '@element-plus/icons-vue'
 import ExerciseCard from './ExerciseCard.vue'
 import PathWizardChat from './PathWizardChat.vue'
 import SaveExerciseDialog from './SaveExerciseDialog.vue'
+import SaveMindmapDialog from './SaveMindmapDialog.vue'
+import MindmapBlock from './MindmapBlock.vue'
+
+// ==================== Mermaid 流程图渲染 ====================
+
+let mermaidReady = false
+function ensureMermaid() {
+  if (mermaidReady) return
+  try {
+    mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose', fontFamily: 'inherit' })
+    mermaidReady = true
+  } catch (e) { console.error('[mermaid] 初始化失败', e) }
+}
+
+let mermaidSeq = 0
+let mermaidRenderTimer = null
+async function renderMermaidBlocks(root) {
+  if (!root) return
+  const blocks = root.querySelectorAll('pre.mermaid-block code.language-mermaid')
+  for (const block of blocks) {
+    if (block.getAttribute('data-mermaid-state')) continue
+    const text = (block.textContent || '').trim()
+    if (!text) continue
+    block.setAttribute('data-mermaid-state', 'rendering')
+    const id = 'mmd' + (++mermaidSeq) + '-' + Date.now()
+    try {
+      ensureMermaid()
+      const { svg } = await mermaid.render(id, text)
+      const holder = document.createElement('div')
+      holder.className = 'mermaid-rendered'
+      holder.innerHTML = svg
+      block.replaceWith(holder)
+    } catch (e) {
+      block.setAttribute('data-mermaid-state', 'error')
+      console.error('[mermaid] 渲染失败', id, e)
+    }
+  }
+}
+function scheduleMermaidRender() {
+  // 流式期间内容不完整：渲染半截图会失败并永久标记 error，生成完成后才真正渲染
+  if (props.isStreaming) return
+  if (mermaidRenderTimer) clearTimeout(mermaidRenderTimer)
+  mermaidRenderTimer = setTimeout(() => renderMermaidBlocks(contentRef.value), 350)
+}
+
+// 把裸写的 mermaid 块（LLM 偶尔忘加围栏）包成 ```mermaid 围栏
+function wrapBareMermaid(md) {
+  // 指令行必须是「纯指令」：graph TD / flowchart LR / sequenceDiagram 等，后跟方向(可选)、分号(可选)即行尾；
+  // 避免把「graph TD 是一种语法…」这类自然语言句子误判成指令行
+  const DIRECTIVE = /^\s*(graph|flowchart|sequenceDiagram|stateDiagram(?:-v2)?|classDiagram|erDiagram|gantt|pie|journey|gitGraph|timeline|block-beta|quadrantChart)(?:\s+[A-Za-z]{1,2})?\s*;?\s*$/
+  const isMermaidLine = (l) => /\[|\{|\(|--[->]|---|:::|==|--x|-\.->/.test(l)
+  const lines = String(md).split('\n')
+  const out = []
+  let i = 0
+  while (i < lines.length) {
+    const line = lines[i]
+    const m = DIRECTIVE.exec(line)
+    if (m && !/^```/.test(line.trim())) {
+      const block = [line.trim()]
+      let j = i + 1
+      let collected = false
+      let skippedBlanks = 0
+      while (j < lines.length) {
+        const t = lines[j].trim()
+        if (!t) {
+          // 指令后/节点间允许空行（mermaid 语法支持）；空行过多则视为块结束
+          if (!collected && skippedBlanks < 2) { skippedBlanks++; j++; continue }
+          break
+        }
+        if (/^```/.test(t)) break
+        if (isMermaidLine(t)) { block.push(lines[j]); collected = true; j++ }
+        else break
+      }
+      if (collected) {
+        out.push('```mermaid\n' + block.join('\n') + '\n```')
+        i = j
+      } else {
+        out.push(line); i++
+      }
+    } else {
+      out.push(line); i++
+    }
+  }
+  return out.join('\n')
+}
+
+const contentRef = ref(null)
 
 const props = defineProps({
   msg: { type: Object, required: true },
@@ -254,11 +363,32 @@ const isPlaying = ref(false)
 const saveDialogVisible = ref(false)
 const saveExercise = ref(null)
 const saveTopic = ref('')
+// 保存思维导图图片到「我的笔记」的弹窗状态
+const saveMindmapVisible = ref(false)
+const saveMindmapTitle = ref('')
+const saveMindmapFile = ref(null)
 const utterance = ref(null)
 const speechSynth = window.speechSynthesis
 
+onMounted(() => {
+  nextTick(() => scheduleMermaidRender())
+})
+
+// 内容变化（含流式）时重新渲染 Mermaid 图；已渲染过的块会被跳过。
+// 注意：不能 watch renderedContent.value —— renderedContent 声明在文件后部，watch 首次求值发生在 setup 阶段，会触发 TDZ 报错。
+// 改 watch 它的反应式输入源（msg.displayContent / msg.content），二者在 setup 时已就绪。
+watch(() => props.msg.displayContent || props.msg.content, () => {
+  nextTick(() => scheduleMermaidRender())
+})
+
+// 流式结束（内容完整）后统一渲染 Mermaid 图——流式中被 scheduleMermaidRender 跳过的块在此补齐
+watch(() => props.isStreaming, (v) => {
+  if (!v) nextTick(() => scheduleMermaidRender())
+})
+
 onUnmounted(() => {
   if (speechSynth.speaking) speechSynth.cancel()
+  if (mermaidRenderTimer) clearTimeout(mermaidRenderTimer)
 })
 
 function toggleSpeech() {
@@ -519,6 +649,13 @@ function onSaveExercise(ex) {
   saveDialogVisible.value = true
 }
 
+/** 保存思维导图图片到「我的笔记」：MindmapBlock 导出 PNG 后触发 */
+function onMindmapSave(file) {
+  saveMindmapFile.value = file
+  saveMindmapTitle.value = getConversationTopic() || '知识点思维导图'
+  saveMindmapVisible.value = true
+}
+
 // 计算统计
 const exerciseAnswersCount = computed(() => Object.keys(exerciseAnswers).length)
 const correctCount = computed(() => Object.values(exerciseAnswers).filter(a => a.correct === true).length)
@@ -624,6 +761,19 @@ const videoCards = computed(() => {
   }
 })
 
+// 思维导图：主体交给 markmap 渲染，仅当有实际大纲内容时才算导图模式；
+// 空大纲（''）视为非导图，避免先渲染出一个空的思维导图框
+const isMindmap = computed(() => !!props.msg.mindmapOutline)
+
+const mindmapTailHtml = computed(() => {
+  const c = props.msg.content || ''
+  const o = props.msg.mindmapOutline
+  if (!o) return ''
+  const idx = c.indexOf(o)
+  const tail = idx >= 0 ? c.slice(idx + o.length) : ''
+  return tail.trim() ? renderMarkdown(tail) : ''
+})
+
 const renderedContent = computed(() => {
   if (!props.msg.content) return ''
   try {
@@ -649,7 +799,7 @@ const renderedContent = computed(() => {
       content = content.replace(/答案与简要解析[\s\S]*$/, '')
     }
     if (!content.trim()) return ''
-    return marked(content)
+    return renderMarkdown(wrapBareMermaid(content))
   } catch {
     return props.msg.content
   }
@@ -685,7 +835,7 @@ function openVideo(v) {
   line-height: 1.7;
   word-break: break-word;
   position: relative;
-  max-width: 680px;
+  max-width: 100%;
   width: fit-content;
   overflow: hidden;
 }
@@ -710,6 +860,23 @@ function openVideo(v) {
 .msg-content-wrapper {
   display: flex;
   flex-direction: column;
+}
+.mindmap-tail {
+  margin-top: 10px;
+}
+/* Mermaid 渲染结果 */
+.mermaid-rendered {
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 10px 0;
+  overflow-x: auto;
+}
+.mermaid-rendered svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Speech button */
@@ -756,14 +923,15 @@ function openVideo(v) {
   background: #f8f9fa;
   color: #374151;
   padding: 14px 16px;
-  border-radius: 0;
+  border-radius: 8px;
   overflow-x: auto;
   font-size: 13px;
   line-height: 1.5;
   margin: 10px 0;
-  border: none;
+  border: 1px solid #eef0f4;
 }
 .msg-content :deep(pre code) { background: transparent; padding: 0; color: inherit; }
+.msg-content :deep(pre code.hljs) { background: transparent; }
 .msg-content :deep(code) {
   background: #f3f4f6;
   color: #dc2626;

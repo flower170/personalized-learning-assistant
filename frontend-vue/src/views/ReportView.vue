@@ -56,59 +56,84 @@
       <div class="report-card">
         <div class="card-header">
           <h2>能力雷达图</h2>
+          <span class="radar-scale-note">满分：10分</span>
         </div>
-        <div v-if="reportData.radar?.dimensions?.length" class="radar-container">
+        <div v-if="radarDims.length" class="radar-container">
           <div class="radar-chart">
-            <svg viewBox="0 0 200 200" class="radar-svg">
+            <svg viewBox="0 0 300 300" class="radar-svg">
+              <!-- 网格（每圈 2 分刻度） -->
               <polygon
-                v-for="level in [1, 0.8, 0.6, 0.4, 0.2]"
-                :key="level"
+                v-for="level in [0.2, 0.4, 0.6, 0.8, 1]"
+                :key="'grid-' + level"
                 :points="getPolygonPoints(level)"
                 class="radar-grid"
               />
+              <!-- 刻度数值（沿顶部轴） -->
+              <text
+                v-for="(lv, i) in [2, 4, 6, 8, 10]"
+                :key="'scale-' + lv"
+                :x="getScaleLabelX()"
+                :y="getScaleLabelY(i)"
+                class="radar-scale"
+              >{{ lv }}</text>
+              <!-- 轴线 -->
               <line
-                v-for="(dim, idx) in reportData.radar.dimensions"
+                v-for="(dim, idx) in radarDims"
                 :key="'axis-' + idx"
-                x1="100"
-                y1="100"
+                x1="150"
+                y1="150"
                 :x2="getPointX(idx, 1)"
                 :y2="getPointY(idx, 1)"
                 class="radar-axis"
               />
+              <!-- 数据多边形 -->
               <polygon
                 :points="getDataPoints()"
                 class="radar-data"
               />
+              <!-- 顶点 -->
               <circle
-                v-for="(dim, idx) in reportData.radar.dimensions"
+                v-for="(dim, idx) in radarDims"
                 :key="'point-' + idx"
                 :cx="getPointX(idx, dim.score / 10)"
                 :cy="getPointY(idx, dim.score / 10)"
-                r="4"
+                :r="hoveredKey === dim.key ? 6 : 4"
+                :fill="dim.color"
                 class="radar-point"
+                :class="{ 'is-hover': hoveredKey === dim.key }"
+                @mouseenter="hoveredKey = dim.key"
+                @mouseleave="hoveredKey = ''"
               />
+              <!-- 维度标签 -->
               <text
-                v-for="(dim, idx) in reportData.radar.dimensions"
+                v-for="(dim, idx) in radarDims"
                 :key="'label-' + idx"
                 :x="getLabelX(idx)"
                 :y="getLabelY(idx)"
+                :text-anchor="getLabelAnchor(idx)"
+                :fill="hoveredKey === dim.key ? dim.color : undefined"
                 class="radar-label"
-              >
-                {{ dim.name }}
-              </text>
+                :class="{ 'is-hover': hoveredKey === dim.key }"
+                @mouseenter="hoveredKey = dim.key"
+                @mouseleave="hoveredKey = ''"
+              >{{ dim.name }}</text>
             </svg>
           </div>
           <div class="radar-scores">
             <div
-              v-for="dim in reportData.radar.dimensions"
-              :key="dim.name"
+              v-for="dim in sortedDims"
+              :key="dim.key"
               class="score-item"
+              :class="{ 'is-hover': hoveredKey === dim.key }"
+              @mouseenter="hoveredKey = dim.key"
+              @mouseleave="hoveredKey = ''"
             >
+              <span class="score-dot" :style="{ background: dim.color }"></span>
               <span class="score-name">{{ dim.name }}</span>
               <div class="score-bar">
                 <div
                   class="score-fill"
-                  :style="{ width: (dim.score / 10) * 100 + '%' }"
+                  :style="{ width: (dim.score / 10) * 100 + '%', background: dim.color }"
                 ></div>
               </div>
               <span class="score-value">{{ dim.score.toFixed(1) }}</span>
@@ -126,7 +151,7 @@
         </div>
         <div v-if="reportData.profile?.knowledge_base" class="knowledge-section">
           <div class="knowledge-block mastered">
-            <h3>✅ 已掌握知识点</h3>
+            <h3>已掌握知识点</h3>
             <div class="knowledge-tags">
               <span
                 v-for="(item, idx) in reportData.profile.knowledge_base.mastered"
@@ -141,7 +166,7 @@
             </div>
           </div>
           <div class="knowledge-block weak">
-            <h3>⚠️ 需要加强</h3>
+            <h3>需要加强</h3>
             <div class="knowledge-tags">
               <span
                 v-for="(item, idx) in reportData.profile.knowledge_base.weak"
@@ -156,7 +181,7 @@
             </div>
           </div>
           <div class="knowledge-block untouched">
-            <h3>🔄 待学习内容</h3>
+            <h3>待学习内容</h3>
             <div class="knowledge-tags">
               <span
                 v-for="(item, idx) in reportData.profile.knowledge_base.untouched"
@@ -219,61 +244,18 @@
           <p>暂无学习路径数据，请先生成学习路径</p>
         </div>
       </div>
-
-      <div class="report-card">
-        <div class="card-header">
-          <h2>💬 近期会话记录</h2>
-        </div>
-        <div v-if="reportData.chatHistory?.length" class="chat-history">
-          <div
-            v-for="chat in reportData.chatHistory"
-            :key="chat.sessionId"
-            class="chat-item"
-          >
-            <div class="chat-title">{{ chat.title }}</div>
-            <div class="chat-meta">
-              <span>{{ chat.time }}</span>
-              <span>{{ chat.messageCount }} 条消息</span>
-            </div>
-            <div class="chat-preview">{{ chat.lastMessage }}</div>
-          </div>
-        </div>
-        <div v-else class="empty-state">
-          <p>暂无会话记录</p>
-        </div>
-      </div>
-
-      <div class="report-card suggestion-card">
-        <div class="card-header">
-          <h2>AI 学习建议</h2>
-        </div>
-        <div v-if="suggestion" class="suggestion-content">
-          <p>{{ suggestion }}</p>
-        </div>
-        <div v-else-if="suggestionLoading" class="suggestion-loading">
-          <div class="spinner small"></div>
-          <span>正在生成建议...</span>
-        </div>
-        <div v-else class="empty-state">
-          <el-button @click="generateSuggestion" size="small" type="primary">
-            生成学习建议
-          </el-button>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { Printer, Back } from '@element-plus/icons-vue'
-import { reportApi, chatApi } from '@/api'
+import { reportApi } from '@/api'
 
 const route = useRoute()
 const loading = ref(true)
-const suggestionLoading = ref(false)
-const suggestion = ref('')
 
 const reportData = ref({
   profile: null,
@@ -300,46 +282,42 @@ async function loadReport() {
   }
 }
 
-async function generateSuggestion() {
-  suggestionLoading.value = true
-  try {
-    const profile = reportData.value.profile
-    const prompt = `基于以下学生画像生成一份学习建议报告：
-学号：${profile?.student_id || ''}
-姓名：${profile?.name || ''}
-年级：${profile?.grade || ''}
-专业：${profile?.major || ''}
-学习风格：${profile?.cognitive_style || ''}
-学习节奏：${profile?.preferred_pace || ''}
-已掌握知识点：${profile?.knowledge_base?.mastered?.join(', ') || ''}
-薄弱知识点：${profile?.knowledge_base?.weak?.join(', ') || ''}
-兴趣：${profile?.interests?.join(', ') || ''}
-学习目标：${profile?.learning_goals?.short_term || ''}
-
-请给出针对性的学习建议，包括：
-1. 当前知识薄弱环节的改进方法
-2. 学习计划建议
-3. 资源推荐方向
-4. 学习方法建议
-
-输出格式：分点列出，语言简洁明了。`
-
-    const res = await chatApi.send(userId, prompt)
-    suggestion.value = res.reply || '暂无建议'
-  } catch (e) {
-    suggestion.value = '生成建议失败，请稍后重试'
-  } finally {
-    suggestionLoading.value = false
-  }
-}
-
 function handlePrint() {
   window.print()
 }
 
+// ==================== 能力雷达图 ====================
+// 展示层维度元信息：名称替换 + 主题色；「高频易错短板」为负向属性，反向映射为正向「知识掌握扎实度」
+const DIM_META = {
+  '知识基础水平': { label: '知识基础', color: '#6366f1' },
+  '认知学习风格': { label: '学习风格', color: '#8b5cf6' },
+  '高频易错短板': { label: '知识掌握扎实度', color: '#7c3aed', reverse: true },
+  '个人兴趣方向': { label: '兴趣方向', color: '#4f46e5' },
+  '学习目标': { label: '学习目标', color: '#a855f7' },
+  '目标属性': { label: '目标属性', color: '#d946ef' },
+}
+
+const hoveredKey = ref('')
+
+// 正向化的维度列表（保持后端原始顺序，供雷达图绘制）
+const radarDims = computed(() => {
+  const raw = reportData.value.radar?.dimensions || []
+  return raw.map((d) => {
+    const meta = DIM_META[d.name] || { label: d.name, color: '#6366f1' }
+    const score = meta.reverse ? Math.max(0, Math.min(10, 10 - d.score)) : d.score
+    return { key: d.name, name: meta.label, score, color: meta.color, description: d.description }
+  })
+})
+
+// 右侧进度条按分值从高到低降序
+const sortedDims = computed(() => [...radarDims.value].sort((a, b) => b.score - a.score))
+
+const CENTER = 150
+const DATA_RADIUS = 62
+const LABEL_RADIUS = 88
+
 function getPolygonPoints(level) {
-  const dims = reportData.value.radar?.dimensions || []
-  const count = dims.length || 6
+  const count = radarDims.value.length || 6
   const points = []
   for (let i = 0; i < count; i++) {
     points.push(`${getPointX(i, level)},${getPointY(i, level)}`)
@@ -348,41 +326,53 @@ function getPolygonPoints(level) {
 }
 
 function getDataPoints() {
-  const dims = reportData.value.radar?.dimensions || []
   const points = []
-  for (let i = 0; i < dims.length; i++) {
-    const score = dims[i].score / 10
+  for (let i = 0; i < radarDims.value.length; i++) {
+    const score = radarDims.value[i].score / 10
     points.push(`${getPointX(i, score)},${getPointY(i, score)}`)
   }
   return points.join(' ')
 }
 
 function getPointX(index, level) {
-  const dims = reportData.value.radar?.dimensions || []
-  const count = dims.length || 6
+  const count = radarDims.value.length || 6
   const angle = (Math.PI * 2 * index) / count - Math.PI / 2
-  return 100 + 80 * level * Math.cos(angle)
+  return CENTER + DATA_RADIUS * level * Math.cos(angle)
 }
 
 function getPointY(index, level) {
-  const dims = reportData.value.radar?.dimensions || []
-  const count = dims.length || 6
+  const count = radarDims.value.length || 6
   const angle = (Math.PI * 2 * index) / count - Math.PI / 2
-  return 100 + 80 * level * Math.sin(angle)
+  return CENTER + DATA_RADIUS * level * Math.sin(angle)
 }
 
 function getLabelX(index) {
-  const dims = reportData.value.radar?.dimensions || []
-  const count = dims.length || 6
+  const count = radarDims.value.length || 6
   const angle = (Math.PI * 2 * index) / count - Math.PI / 2
-  return 100 + 95 * Math.cos(angle)
+  return CENTER + LABEL_RADIUS * Math.cos(angle)
 }
 
 function getLabelY(index) {
-  const dims = reportData.value.radar?.dimensions || []
-  const count = dims.length || 6
+  const count = radarDims.value.length || 6
   const angle = (Math.PI * 2 * index) / count - Math.PI / 2
-  return 100 + 95 * Math.sin(angle)
+  return CENTER + LABEL_RADIUS * Math.sin(angle)
+}
+
+function getLabelAnchor(index) {
+  const count = radarDims.value.length || 6
+  const angle = (Math.PI * 2 * index) / count - Math.PI / 2
+  const cos = Math.cos(angle)
+  if (Math.abs(cos) < 0.35) return 'middle'
+  return cos > 0 ? 'start' : 'end'
+}
+
+function getScaleLabelX() {
+  return CENTER + 6
+}
+
+function getScaleLabelY(levelIndex) {
+  const level = (levelIndex + 1) * 0.2
+  return CENTER - DATA_RADIUS * level + 3
 }
 </script>
 
@@ -390,7 +380,10 @@ function getLabelY(index) {
 .report-view {
   padding: 24px;
   background: var(--bg-secondary);
-  min-height: 100vh;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 .report-header {
   display: flex;
@@ -436,7 +429,7 @@ function getLabelY(index) {
   to { transform: rotate(360deg); }
 }
 .report-content {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 .report-card {
@@ -447,12 +440,20 @@ function getLabelY(index) {
   border: 1px solid var(--border-primary);
 }
 .card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   margin-bottom: 16px;
 }
 .card-header h2 {
   font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);
+}
+.radar-scale-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .info-grid {
@@ -477,15 +478,18 @@ function getLabelY(index) {
 
 .radar-container {
   display: flex;
-  gap: 32px;
+  gap: 24px;
   align-items: center;
 }
 .radar-chart {
   flex-shrink: 0;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-start;
 }
 .radar-svg {
-  width: 220px;
-  height: 220px;
+  width: 240px;
+  height: auto;
 }
 .radar-grid {
   fill: none;
@@ -497,38 +501,67 @@ function getLabelY(index) {
   stroke-width: 1;
 }
 .radar-data {
-  fill: rgba(99, 102, 241, 0.2);
+  fill: rgba(99, 102, 241, 0.18);
   stroke: #6366f1;
   stroke-width: 2;
 }
 .radar-point {
-  fill: #6366f1;
+  stroke: #fff;
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: r 0.15s ease, filter 0.15s ease;
+}
+.radar-point.is-hover {
+  filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.65));
 }
 .radar-label {
-  font-size: 11px;
+  font-size: 10px;
   fill: var(--text-secondary);
-  text-anchor: middle;
+  cursor: pointer;
   dominant-baseline: middle;
+  transition: fill 0.15s ease;
+}
+.radar-label.is-hover {
+  font-weight: 700;
+}
+.radar-scale {
+  font-size: 8px;
+  fill: #b0b5c0;
+  text-anchor: start;
 }
 .radar-scores {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 .score-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.score-item.is-hover {
+  background: rgba(99, 102, 241, 0.06);
+}
+.score-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .score-name {
   font-size: 13px;
-  color: var(--text-secondary);
-  width: 70px;
+  color: var(--text-primary);
+  white-space: nowrap;
   flex-shrink: 0;
 }
 .score-bar {
   flex: 1;
+  min-width: 0;
   height: 8px;
   background: var(--bg-tertiary);
   border-radius: 4px;
@@ -536,15 +569,16 @@ function getLabelY(index) {
 }
 .score-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
   border-radius: 4px;
+  transition: width 0.4s ease;
 }
 .score-value {
   font-size: 13px;
   color: var(--text-primary);
   font-weight: 600;
-  width: 40px;
+  width: 36px;
   text-align: right;
+  flex-shrink: 0;
 }
 
 .knowledge-section {
@@ -710,33 +744,23 @@ function getLabelY(index) {
   white-space: nowrap;
 }
 
-.suggestion-card {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-  border-color: rgba(99, 102, 241, 0.2);
-}
-.suggestion-content p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  white-space: pre-wrap;
-}
-.suggestion-loading {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px;
-  justify-content: center;
-}
-.suggestion-loading span {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
 .empty-state {
   padding: 24px;
   text-align: center;
   color: var(--text-muted);
   font-size: 14px;
+}
+
+/* 窄屏：雷达图在上、进度条在下，优先保证维度名称单行完整可读 */
+@media (max-width: 720px) {
+  .radar-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .radar-chart {
+    flex: none;
+    width: 100%;
+  }
 }
 
 @media print {
@@ -749,6 +773,9 @@ function getLabelY(index) {
   .report-view {
     padding: 0;
     background: white;
+    overflow-y: visible;
+    height: auto;
+    flex: none;
   }
   .report-card {
     break-inside: avoid;

@@ -27,11 +27,11 @@ class LLMService:
 
     # 模型优先级（降级顺序）——仅使用当前已授权模型
     FALLBACK_CHAIN = [
-        "spark-4.0-ultra",      # 旗舰（已授权）
-        "spark-lite",           # 轻量兜底（已授权）
+        "qwen-plus",      # 主力（通义千问）
+        "qwen-turbo",     # 快速兜底（通义千问）
     ]
 
-    def __init__(self, default_model: str = "spark-4.0-ultra"):
+    def __init__(self, default_model: str = "qwen-plus"):
         self.default_model = default_model
         self._clients: dict[str, SparkAPIClient] = {}
         logger.info(f"[LLMService] 初始化，默认模型: {default_model}")

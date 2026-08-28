@@ -229,7 +229,7 @@ async def assistant_intro():
         reply = await llm_service.simple_chat(
             ASSISTANT_INTRO_SYSTEM_PROMPT,
             "请做自我介绍",
-            model="spark-lite",
+            model="qwen-plus",
             temperature=0.7,
         )
         if reply:
@@ -316,7 +316,7 @@ async def chat_send(req: ChatRequest):
                             system = ("你是「彩迹熊 AI 学习助手」。请基于提供的文档参考资料，用中文回答学生的问题。"
                                       "要求：1. 优先基于参考资料回答；2. 引用文档内容时保持原文信息准确；"
                                       "3. 资料不足以完整回答时如实说明；4. 回答结构清晰、口语化，适合学生理解。")
-                            reply = await llm_service.simple_chat(system, prompt, model="spark-4.0-ultra")
+                            reply = await llm_service.simple_chat(system, prompt, model="qwen-plus")
                             if reply and reply.startswith("\n\n[生成中断"):
                                 reply = ""
                         except Exception as e:
@@ -623,8 +623,9 @@ async def dispatch_generate(req: DispatchRequest):
             logger.exception("[dispatch_generate] 生成异常")
             err = {"event": "error", "message": f"生成失败: {str(e)[:150]}"}
             yield f"data: {json.dumps(err, ensure_ascii=False)}\n\n"
-        finally:
-            yield "data: [DONE]\n\n"
+        # 注意：不要用 finally + yield 组合——生成器在 aclose 时再 yield 会触发
+        # anyio/starlette 的 "cancel scope" RuntimeError，客户端中断流时会出现噪音报错
+        yield "data: [DONE]\n\n"
 
     return StreamingResponse(
         event_stream(),
@@ -1020,7 +1021,7 @@ async def kb_chat(req: ChatRequest):
                         system = ("你是「彩迹熊 AI 学习助手」。请基于提供的文档参考资料，用中文回答学生的问题。"
                                   "要求：1. 优先基于参考资料回答；2. 引用文档内容时保持原文信息准确；"
                                   "3. 资料不足以完整回答时如实说明；4. 回答结构清晰、口语化，适合学生理解。")
-                        async for chunk in llm_service.simple_chat_stream(system, prompt, model="spark-4.0-ultra"):
+                        async for chunk in llm_service.simple_chat_stream(system, prompt, model="qwen-plus"):
                             if chunk and not chunk.startswith("\n\n[生成中断"):
                                 yield f"data: {json.dumps({'chunk': chunk}, ensure_ascii=False)}\n\n"
                                 context_used = True

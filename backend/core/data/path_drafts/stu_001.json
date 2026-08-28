@@ -1,819 +1,211 @@
 {
-  "draft_id": "draft_58653d9d",
+  "draft_id": "draft_42a4dc52",
   "student_id": "stu_001",
-  "topic": "c语言",
+  "topic": "编译原理",
   "collected": {
-    "topic": "c语言",
-    "profile": {
-      "mastered": [
-        "408计算机学科专业基础综合"
-      ],
-      "weak": [
-        "数组相关知识点"
-      ],
-      "interests": [
-        "数据分析与挖掘"
-      ],
-      "cognitive_style": "视觉型",
-      "preferred_pace": "快速速成",
-      "daily_hours": 5.0,
-      "long_term_goal": "考研",
-      "short_term_goal": "考研",
-      "goal_attribute": "考研"
-    },
-    "market": [],
-    "resources": [],
-    "subject": "c语言",
-    "long_term_goal": "c语言"
+    "subject": "编译原理",
+    "daily_hours": 1,
+    "foundation": "入门",
+    "cycle": ""
   },
-  "path_name": "c语言学习路径",
-  "overall_goal": "系统掌握c语言",
-  "goal": "系统掌握c语言",
-  "market_demand": "",
-  "total_duration_days": 60,
-  "daily_minutes": 300,
+  "path_name": "编译原理学习路径",
+  "overall_goal": "系统掌握编译原理，能独立完成词法分析器、递归下降语法分析器、中间代码生成与简单优化，并理解运行时环境与目标代码生成机制。",
+  "goal": "系统掌握编译原理",
+  "market_demand": "编译器开发、编程语言设计、静态分析工具、IDE插件（如语法高亮/智能提示）及AI代码生成底层均依赖编译原理核心能力，大厂基础软件/语言团队与DevOps平台岗持续需求扎实的编译工程能力。",
+  "total_duration_days": 100,
+  "daily_minutes": 60,
   "stages": [
     {
       "stage": 1,
-      "title": "c语言 · 基础入门",
-      "description": "系统学习c语言的「c语言 · 基础入门」，配练习巩固",
-      "estimated_days": 20,
+      "title": "词法分析与正则文法建模",
+      "description": "从源码字符流出发，构建识别关键字、标识符、数字、运算符等基本记号的确定有限自动机（DFA），并用正则表达式精确描述词法规则。",
+      "estimated_days": 18,
       "focus_points": [
-        "核心概念",
-        "基础工具"
+        "正则表达式：+ * ? | ( ) [ ] 的语义与组合规则",
+        "NFA构造：ε-闭包、子集构造法转换为DFA",
+        "DFA最小化：等价状态合并算法",
+        "词法单元（token）结构定义：type/value/line/column字段设计",
+        "手写简易Lexer：switch-case或查表驱动状态转移",
+        "Lex/Flex工具语法：%{ %}、%%规则段、yytext/yyleng/yylineno使用",
+        "常见词法错误检测：非法字符、未闭合字符串/注释",
+        "Unicode标识符识别：字母/连接符/数字的Unicode类别判定"
       ],
-      "expected_outcome": "掌握c语言·c语言 · 基础入门并能独立应用",
-      "practice_cards": [
-        {
-          "card_id": "leetcode_搜索核心概念_搜索核心概念",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「核心概念」",
-          "link": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "knowledge_point": "核心概念",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索核心概念_搜索核心概念",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「核心概念」",
-          "link": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "knowledge_point": "核心概念",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "leetcode_搜索基础工具_搜索基础工具",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「基础工具」",
-          "link": "https://leetcode.cn/problemset/?search=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "knowledge_point": "基础工具",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索基础工具_搜索基础工具",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「基础工具」",
-          "link": "https://www.nowcoder.com/search?query=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "knowledge_point": "基础工具",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        }
-      ]
+      "expected_outcome": "能手写C/Python版词法分析器，正确切分含注释、浮点数、十六进制整数、转义字符的C风格源码，并输出带行列号的token序列；能用Flex生成等效Lexer并调试冲突警告。",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": []
     },
     {
       "stage": 2,
-      "title": "c语言 · 核心技能",
-      "description": "系统学习c语言的「c语言 · 核心技能」，配练习巩固",
-      "estimated_days": 20,
+      "title": "上下文无关文法与LL(1)语法分析",
+      "description": "掌握BNF/EBNF文法表示，构建无左递归、无左公因子的文法，计算FIRST/FOLLOW集，构造LL(1)分析表，实现递归下降或表驱动预测分析。",
+      "estimated_days": 22,
       "focus_points": [
-        "核心技能",
-        "练习"
+        "BNF与EBNF语法元符号：::= | ε * + ? 的形式化含义",
+        "消除直接/间接左递归：替换展开+重写规则",
+        "提取左公因子：if-else/while/for语句的公共前缀重构",
+        "FIRST集递归计算：终结符/ε/非终结符展开规则",
+        "FOLLOW集计算：起始符#、产生式右部后继、A→αBβ中β的FIRST推导",
+        "LL(1)冲突判定：同一非终结符行存在多列非空项",
+        "递归下降函数映射：每个非终结符对应一个parse_X()函数，调用关系与回溯控制",
+        "预测分析表查表逻辑：栈顶符号vs当前token查表跳转"
       ],
-      "expected_outcome": "掌握c语言·c语言 · 核心技能并能独立应用",
-      "practice_cards": [
-        {
-          "card_id": "leetcode_搜索核心技能_搜索核心技能",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「核心技能」",
-          "link": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "knowledge_point": "核心技能",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索核心技能_搜索核心技能",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「核心技能」",
-          "link": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "knowledge_point": "核心技能",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "leetcode_搜索练习_搜索练习",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「练习」",
-          "link": "https://leetcode.cn/problemset/?search=%E7%BB%83%E4%B9%A0",
-          "knowledge_point": "练习",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E7%BB%83%E4%B9%A0",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索练习_搜索练习",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「练习」",
-          "link": "https://www.nowcoder.com/search?query=%E7%BB%83%E4%B9%A0",
-          "knowledge_point": "练习",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E7%BB%83%E4%B9%A0",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        }
-      ]
+      "expected_outcome": "能将类C算术表达式、if/while语句文法改写为LL(1)兼容形式，手算FIRST/FOLLOW集并构造分析表；能用Python/C实现递归下降解析器，对合法/非法输入给出准确语法错误位置与类型。",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": []
     },
     {
       "stage": 3,
-      "title": "c语言 · 综合实战",
-      "description": "系统学习c语言的「c语言 · 综合实战」，配练习巩固",
+      "title": "抽象语法树构建与语法制导翻译",
+      "description": "在语法分析过程中同步构建AST节点，设计属性文法（综合/继承属性），实现简单语义检查（如变量声明先于使用）与中间表示生成。",
       "estimated_days": 20,
       "focus_points": [
-        "综合",
-        "实战"
+        "AST节点设计：BinOp/Num/VarDecl/IfStmt/WhileStmt等类的字段与构造逻辑",
+        "遍历策略：深度优先访问顺序与parent/child指针维护",
+        "语法制导定义（SDD）：L-属性文法中继承属性传递（如作用域嵌套）",
+        "符号表接口：insert(name, type, scope_level)、lookup(name, current_scope)",
+        "变量作用域规则：块级作用域、同名遮蔽、全局/局部区分",
+        "简单类型检查：赋值左右侧类型一致性（int←int）、数组下标整型校验",
+        "三地址码生成：x = y op z → t1 = y op z; x = t1，含临时变量命名与序号管理",
+        "错误恢复：语法错误后跳过至同步记号（; } else）并继续解析"
       ],
-      "expected_outcome": "掌握c语言·c语言 · 综合实战并能独立应用",
-      "practice_cards": [
+      "expected_outcome": "能扩展阶段2的解析器，在构建AST同时填充符号表、报告未声明变量/类型不匹配错误；能为赋值、算术表达式、if语句生成带临时变量的三地址码序列，并支持嵌套作用域查询。",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": []
+    },
+    {
+      "stage": 4,
+      "title": "中间代码优化与运行时环境",
+      "description": "实现基本块划分、控制流图（CFG）构建，应用局部优化（常量传播、死代码消除），设计过程调用约定与栈帧布局。",
+      "estimated_days": 24,
+      "focus_points": [
+        "基本块划分：入口/出口条件（跳转指令、标签、分支终点）",
+        "CFG边构建：基本块间跳转关系（if-then-else/while的边方向）",
+        "支配关系计算：dominators集合与立即支配者IDOM",
+        "活跃变量分析：in/out集合迭代求解与数据流方程",
+        "常量传播：基于def-use链的常量替换与赋值折叠",
+        "死代码消除：无use的赋值语句删除",
+        "栈帧结构：返回地址、旧基址、局部变量区、参数区、动态链接信息",
+        "调用约定：caller-saved/callee-saved寄存器约定、参数压栈/寄存器传参规则"
+      ],
+      "expected_outcome": "能将三地址码序列划分为基本块并绘制CFG；对给定函数执行活跃变量分析并标记冗余赋值；能为含嵌套函数调用的程序生成符合x86-64 System V ABI的栈帧操作伪指令（push/lea/mov/ret等）。",
+      "resources": [
         {
-          "card_id": "leetcode_搜索综合_搜索综合",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「综合」",
-          "link": "https://leetcode.cn/problemset/?search=%E7%BB%BC%E5%90%88",
-          "knowledge_point": "综合",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E7%BB%BC%E5%90%88",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索综合_搜索综合",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「综合」",
-          "link": "https://www.nowcoder.com/search?query=%E7%BB%BC%E5%90%88",
-          "knowledge_point": "综合",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E7%BB%BC%E5%90%88",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "leetcode_搜索实战_搜索实战",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「实战」",
-          "link": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E6%88%98",
-          "knowledge_point": "实战",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E6%88%98",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索实战_搜索实战",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「实战」",
-          "link": "https://www.nowcoder.com/search?query=%E5%AE%9E%E6%88%98",
-          "knowledge_point": "实战",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E5%AE%9E%E6%88%98",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
+          "platform": "练习网站",
+          "title": "牛客网刷题：中间代码优化与运行时环境",
+          "url": "https://www.nowcoder.com/search?query=%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E4%B8%8E%E8%BF%90%E8%A1%8C%E6%97%B6%E7%8E%AF%E5%A2%83"
         }
-      ]
+      ],
+      "_fallback": false,
+      "practice_cards": []
+    },
+    {
+      "stage": 5,
+      "title": "目标代码生成与简单寄存器分配",
+      "description": "将三地址码映射为x86-64汇编指令，实现线性扫描寄存器分配，处理指令选择、寻址模式与调用约定适配。",
+      "estimated_days": 16,
+      "focus_points": [
+        "指令选择：add/sub/mov/imul/idiv对应三地址码op的模板匹配",
+        "寻址模式：[rbp-8]（栈偏移）、[rax]（寄存器间接）、[rax+4]（基址+偏移）",
+        "寄存器命名：rax/rbx/rcx/rdx/rsi/rdi/rsp/rbp/r8~r15的用途约束",
+        "线性扫描分配：live interval构建、interval排序、active set管理与溢出到栈",
+        "函数序言/尾声：push rbp; mov rbp, rsp; sub rsp, N / leave; ret",
+        "参数传递：前6个参数用rdi/rsi/rdx/rcx/r8/r9，余者压栈",
+        "返回值处理：整数返回存rax，浮点存xmm0",
+        "汇编验证：用gcc -c生成.o后objdump -d反查指令正确性"
+      ],
+      "expected_outcome": "能将含算术表达式、if/while、函数调用的三地址码生成可汇编的x86-64 AT&T语法代码；通过线性扫描分配寄存器，对复杂表达式生成无冲突汇编；生成代码经gcc链接后能正确执行并输出预期结果。",
+      "resources": [
+        {
+          "platform": "练习网站",
+          "title": "牛客网刷题：目标代码生成与简单寄存器分配",
+          "url": "https://www.nowcoder.com/search?query=%E7%9B%AE%E6%A0%87%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E4%B8%8E%E7%AE%80%E5%8D%95%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%86%E9%85%8D"
+        }
+      ],
+      "_fallback": false,
+      "practice_cards": []
     }
   ],
   "nodes": [
     {
       "node_id": "step_01",
-      "title": "c语言 · 基础入门",
-      "description": "系统学习c语言的「c语言 · 基础入门」，配练习巩固",
-      "estimated_days": 20,
+      "title": "词法分析与正则文法建模",
+      "description": "从源码字符流出发，构建识别关键字、标识符、数字、运算符等基本记号的确定有限自动机（DFA），并用正则表达式精确描述词法规则。",
+      "estimated_days": 18,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
-      "reason": "掌握c语言·c语言 · 基础入门并能独立应用",
-      "daily_tasks": [
-        {
-          "day": 1,
-          "title": "c语言 · 基础入门 - 第1天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 2,
-          "title": "c语言 · 基础入门 - 第2天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 3,
-          "title": "c语言 · 基础入门 - 第3天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 4,
-          "title": "c语言 · 基础入门 - 第4天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 5,
-          "title": "c语言 · 基础入门 - 第5天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 6,
-          "title": "c语言 · 基础入门 - 第6天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 7,
-          "title": "c语言 · 基础入门 - 第7天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 8,
-          "title": "c语言 · 基础入门 - 第8天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 9,
-          "title": "c语言 · 基础入门 - 第9天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 10,
-          "title": "c语言 · 基础入门 - 第10天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 11,
-          "title": "c语言 · 基础入门 - 第11天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 12,
-          "title": "c语言 · 基础入门 - 第12天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 13,
-          "title": "c语言 · 基础入门 - 第13天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 14,
-          "title": "c语言 · 基础入门 - 第14天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 15,
-          "title": "c语言 · 基础入门 - 第15天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 16,
-          "title": "c语言 · 基础入门 - 第16天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 17,
-          "title": "c语言 · 基础入门 - 第17天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 18,
-          "title": "c语言 · 基础入门 - 第18天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 19,
-          "title": "c语言 · 基础入门 - 第19天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 20,
-          "title": "c语言 · 基础入门 - 第20天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        }
-      ]
+      "reason": "能手写C/Python版词法分析器，正确切分含注释、浮点数、十六进制整数、转义字符的C风格源码，并输出带行列号的token序列；能用Flex生成等效Lexer并调试冲突警告。",
+      "resources": [],
+      "daily_logs": []
     },
     {
       "node_id": "step_02",
-      "title": "c语言 · 核心技能",
-      "description": "系统学习c语言的「c语言 · 核心技能」，配练习巩固",
-      "estimated_days": 20,
+      "title": "上下文无关文法与LL(1)语法分析",
+      "description": "掌握BNF/EBNF文法表示，构建无左递归、无左公因子的文法，计算FIRST/FOLLOW集，构造LL(1)分析表，实现递归下降或表驱动预测分析。",
+      "estimated_days": 22,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
-      "reason": "掌握c语言·c语言 · 核心技能并能独立应用",
-      "daily_tasks": [
-        {
-          "day": 21,
-          "title": "c语言 · 核心技能 - 第1天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 22,
-          "title": "c语言 · 核心技能 - 第2天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 23,
-          "title": "c语言 · 核心技能 - 第3天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 24,
-          "title": "c语言 · 核心技能 - 第4天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 25,
-          "title": "c语言 · 核心技能 - 第5天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 26,
-          "title": "c语言 · 核心技能 - 第6天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 27,
-          "title": "c语言 · 核心技能 - 第7天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 28,
-          "title": "c语言 · 核心技能 - 第8天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 29,
-          "title": "c语言 · 核心技能 - 第9天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 30,
-          "title": "c语言 · 核心技能 - 第10天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 31,
-          "title": "c语言 · 核心技能 - 第11天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 32,
-          "title": "c语言 · 核心技能 - 第12天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 33,
-          "title": "c语言 · 核心技能 - 第13天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 34,
-          "title": "c语言 · 核心技能 - 第14天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 35,
-          "title": "c语言 · 核心技能 - 第15天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 36,
-          "title": "c语言 · 核心技能 - 第16天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 37,
-          "title": "c语言 · 核心技能 - 第17天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 38,
-          "title": "c语言 · 核心技能 - 第18天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 39,
-          "title": "c语言 · 核心技能 - 第19天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 40,
-          "title": "c语言 · 核心技能 - 第20天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        }
-      ]
+      "reason": "能将类C算术表达式、if/while语句文法改写为LL(1)兼容形式，手算FIRST/FOLLOW集并构造分析表；能用Python/C实现递归下降解析器，对合法/非法输入给出准确语法错误位置与类型。",
+      "resources": [],
+      "daily_logs": []
     },
     {
       "node_id": "step_03",
-      "title": "c语言 · 综合实战",
-      "description": "系统学习c语言的「c语言 · 综合实战」，配练习巩固",
+      "title": "抽象语法树构建与语法制导翻译",
+      "description": "在语法分析过程中同步构建AST节点，设计属性文法（综合/继承属性），实现简单语义检查（如变量声明先于使用）与中间表示生成。",
       "estimated_days": 20,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
-      "reason": "掌握c语言·c语言 · 综合实战并能独立应用",
-      "daily_tasks": [
-        {
-          "day": 41,
-          "title": "c语言 · 综合实战 - 第1天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 42,
-          "title": "c语言 · 综合实战 - 第2天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 43,
-          "title": "c语言 · 综合实战 - 第3天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 44,
-          "title": "c语言 · 综合实战 - 第4天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 45,
-          "title": "c语言 · 综合实战 - 第5天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 46,
-          "title": "c语言 · 综合实战 - 第6天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 47,
-          "title": "c语言 · 综合实战 - 第7天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 48,
-          "title": "c语言 · 综合实战 - 第8天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 49,
-          "title": "c语言 · 综合实战 - 第9天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 50,
-          "title": "c语言 · 综合实战 - 第10天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 51,
-          "title": "c语言 · 综合实战 - 第11天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 52,
-          "title": "c语言 · 综合实战 - 第12天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 53,
-          "title": "c语言 · 综合实战 - 第13天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 54,
-          "title": "c语言 · 综合实战 - 第14天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 55,
-          "title": "c语言 · 综合实战 - 第15天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 56,
-          "title": "c语言 · 综合实战 - 第16天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 57,
-          "title": "c语言 · 综合实战 - 第17天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 58,
-          "title": "c语言 · 综合实战 - 第18天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 59,
-          "title": "c语言 · 综合实战 - 第19天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 60,
-          "title": "c语言 · 综合实战 - 第20天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        }
-      ]
+      "reason": "能扩展阶段2的解析器，在构建AST同时填充符号表、报告未声明变量/类型不匹配错误；能为赋值、算术表达式、if语句生成带临时变量的三地址码序列，并支持嵌套作用域查询。",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_04",
+      "title": "中间代码优化与运行时环境",
+      "description": "实现基本块划分、控制流图（CFG）构建，应用局部优化（常量传播、死代码消除），设计过程调用约定与栈帧布局。",
+      "estimated_days": 24,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能将三地址码序列划分为基本块并绘制CFG；对给定函数执行活跃变量分析并标记冗余赋值；能为含嵌套函数调用的程序生成符合x86-64 System V ABI的栈帧操作伪指令（push/lea/mov/ret等）。",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_05",
+      "title": "目标代码生成与简单寄存器分配",
+      "description": "将三地址码映射为x86-64汇编指令，实现线性扫描寄存器分配，处理指令选择、寻址模式与调用约定适配。",
+      "estimated_days": 16,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能将含算术表达式、if/while、函数调用的三地址码生成可汇编的x86-64 AT&T语法代码；通过线性扫描分配寄存器，对复杂表达式生成无冲突汇编；生成代码经gcc链接后能正确执行并输出预期结果。",
+      "resources": [],
+      "daily_logs": []
     }
   ],
   "status": "draft",
   "version": 1,
-  "created_at": "2026-08-14T23:05:08"
+  "created_at": "2026-08-20T20:38:14",
+  "recommended_video": {
+    "platform": "视频",
+    "title": "编译原理—混子速成期末保过（168.2万播放·废物点心v）",
+    "url": "https://www.bilibili.com/video/BV1ft4y1X7p6"
+  }
 }

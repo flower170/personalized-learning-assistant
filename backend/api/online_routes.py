@@ -18,22 +18,33 @@ from __future__ import annotations
 
 import json
 import logging
+from datetime import datetime
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile, File, Form
+from fastapi.responses import FileResponse, StreamingResponse
 
 from core.models.schemas import (
-    WebPathStartRequest, WebPathAnswersRequest, WebPathConfirmRequest,
+    WebPathStartRequest, WebPathAnswersRequest, WebPathConfirmRequest, DraftStreamRequest, DraftResourceRequest,
     PracticeDeepSearchRequest, PracticeCardUpdate, PracticeCheckinRequest,
-    SaveAiExercisesRequest, RedoAiExerciseRequest,
+    SaveAiExercisesRequest, RedoAiExerciseRequest, WrongRemoveRequest,
     CreateCollectionRequest, AddToCollectionRequest, RedoCollectionQuestionRequest,
-    RemoveCollectionQuestionRequest, DeleteCollectionRequest, NodeStudyRequest,
-    SkillGapRequest,
+    RemoveCollectionQuestionRequest, DeleteCollectionRequest,
+    DeleteNoteRequest,
+    NodeStudyRequest, SkillGapRequest,
+    NodeResourceAddRequest, NodeResourceDeleteRequest, NodeResourceWatchRequest,
+    NodeSkipRequest, DailyExerciseRequest, VideoSearchRequest, TaskToggleRequest,
+    DailyLogAddRequest, DailyLogUpdateRequest, DailyLogDeleteRequest,
 )
 from core.capabilities.impl.web_path_plan_agent import web_path_plan_agent, WebPathPlanAgent
 from core.capabilities.impl.practice_search import practice_card_searcher
+from core.capabilities.impl.resource_agents import exercise_agent
 from core.models import practice_data
-from core.models.learning_path_data import load_path, calc_progress, mark_node_task_done
+from core.models.learning_path_data import (
+    load_path, calc_progress, mark_node_task_done, mark_first_incomplete_task_done,
+    skip_node, toggle_task_done,
+)
+from core.utils.video_cover import search_bilibili_videos
 
 logger = logging.getLogger(__name__)
 
@@ -46,7 +57,8 @@ router = APIRouter(prefix="/api", tags=["online-path", "practice", "skill-gap"])
 async def online_path_start(req: WebPathStartRequest):
     """Stage 1：画像起步 + 联网补充，返回需要补充的问题或直接出草案"""
     try:
-        return await web_path_plan_agent.start_conversation(req.student_id, req.topic)
+        return await web_path_plan_agent.start_conversation(
+            req.student_id, req.topic, daily_hours=req.daily_hours, cycle=req.cycle)
     except Exception as e:
         logger.exception("[online-path] start 失败")
         raise HTTPException(status_code=500, detail=f"路径规划初始化失败: {str(e)[:200]}")
@@ -91,6 +103,43 @@ async def online_path_confirm(req: WebPathConfirmRequest):
         raise HTTPException(status_code=500, detail=f"路径确认失败: {str(e)[:200]}")
 
 
+@router.post("/online-path/draft-stream")
+async def online_path_draft_stream(req: DraftStreamRequest):
+    """流式生成路径草案（SSE）：progress/chunk 进度事件 + 最终 complete（含 draft）"""
+    async def event_stream():
+        try:
+            async for evt in web_path_plan_agent.generate_draft_stream(
+                req.student_id, req.topic, req.collected or {}, req.draft_id or ""):
+                yield f"data: {json.dumps(evt, ensure_ascii=False)}\n\n"
+        except Exception as e:
+            logger.exception("[online-path] draft-stream 失败")
+            err = {"event": "error", "message": f"路径生成失败: {str(e)[:150]}"}
+            yield f"data: {json.dumps(err, ensure_ascii=False)}\n\n"
+        yield "data: [DONE]\n\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache, no-transform",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
+
+
+@router.post("/online-path/draft-resource")
+async def online_path_draft_resource(req: DraftResourceRequest):
+    """向导草案阶段：按规划给某个节点添加一条学习资源（B站/文档链接）"""
+    if not (req.title or "").strip() or not (req.url or "").strip():
+        return {"ok": False, "error": "标题和链接不能为空"}
+    draft = web_path_plan_agent.add_draft_resource(
+        req.student_id, req.draft_id, req.node_id, req.title.strip(), req.url.strip(), req.platform)
+    if draft is None:
+        return {"ok": False, "error": "草案不存在或节点不存在，请重新规划"}
+    return {"ok": True, "path": draft}
+
+
 @router.get("/online-path/{student_id}")
 async def online_path_get(student_id: str):
     """已确认路径 + 进度（练习卡回写到 nodes 方便前端聚合）"""
@@ -110,6 +159,12 @@ async def online_path_get(student_id: str):
     synced = practice_data.sync_cards_to_path(student_id, path)
     # 外部学习自评聚合回写 nodes（所有科目都挂，非编程科目没 OJ 卡时尤其有用）
     synced = practice_data.sync_studies_to_path(student_id, synced)
+    # 节点学习资源（B站/视频/文档链接 + 看完状态）合并回写 nodes
+    synced = practice_data.sync_resources_to_path(student_id, synced)
+    # 课程级资源（整套课视频，node_id == "__course__"）挂到 path 顶层 course_resources
+    synced = practice_data.sync_course_resources_to_path(student_id, synced)
+    # 用户日计划学习记录（每天学了什么+打钩）按节点回写 nodes
+    synced = practice_data.sync_daily_logs_to_path(student_id, synced)
     if is_non_programming:
         # 历史 practice_records 可能残留旧路径版本（如编程阶段）的卡，一并剥离
         for node in synced.get("nodes", []):
@@ -261,6 +316,20 @@ async def practice_redo_ai_exercise(req: RedoAiExerciseRequest):
             "progress": practice_data.calc_practice_progress(req.student_id)}
 
 
+@router.post("/practice/wrong-remove")
+async def practice_wrong_remove(req: WrongRemoveRequest):
+    """错题集移除：AI 错题删除记录；OJ 错题置为 done 移出错题集（保留练习卡）。"""
+    if req.kind == "ai":
+        ok = practice_data.remove_ai_exercise(req.student_id, req.target_id)
+        if not ok:
+            raise HTTPException(status_code=404, detail="错题不存在")
+    else:
+        card = practice_data.update_record(req.student_id, req.target_id, {"status": "done"})
+        if not card:
+            raise HTTPException(status_code=404, detail="练习卡不存在")
+    return {"ok": True}
+
+
 # ======================== 题目集（我的题目：命名收藏） ========================
 
 @router.get("/practice/collections")
@@ -313,6 +382,51 @@ async def practice_collections_delete(req: DeleteCollectionRequest):
     return {"ok": ok}
 
 
+# ======================== 我的笔记（保存的思维导图） ========================
+
+@router.get("/practice/notes")
+async def practice_notes(student_id: str):
+    """我的笔记：全部保存的思维导图图片笔记（updated_at 倒序）。"""
+    return {"ok": True, "notes": practice_data.list_notes(student_id)}
+
+
+@router.get("/practice/notes/image/{student_id}/{note_id}")
+async def practice_note_image(student_id: str, note_id: str):
+    """返回某条笔记的思维导图 PNG 图片。"""
+    note = next((n for n in practice_data.list_notes(student_id)
+                 if n.get("note_id") == note_id), None)
+    if not note:
+        raise HTTPException(status_code=404, detail="笔记不存在")
+    p = practice_data.note_image_file(student_id, note_id)
+    if not p:
+        raise HTTPException(status_code=404, detail="笔记图片不存在")
+    return FileResponse(p, media_type="image/png")
+
+
+@router.post("/practice/notes/add")
+async def practice_notes_add(student_id: str = Form(...),
+                             title: str = Form(...),
+                             topic: str = Form(""),
+                             image: UploadFile = File(...)):
+    """保存一条思维导图图片笔记（multipart：标题 + 可选主题 + PNG 图片）。"""
+    image_bytes = await image.read()
+    if len(image_bytes) > 8 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="图片过大（>8MB）")
+    if not title.strip() or not image_bytes:
+        raise HTTPException(status_code=400, detail="笔记标题和图片不能为空")
+    note = practice_data.add_note(student_id, title.strip(), topic, image_bytes)
+    if not note:
+        raise HTTPException(status_code=500, detail="笔记保存失败")
+    return {"ok": True, "note": note}
+
+
+@router.post("/practice/notes/delete")
+async def practice_notes_delete(req: DeleteNoteRequest):
+    """删除一条笔记（含图片文件）。"""
+    ok = practice_data.delete_note(req.student_id, req.note_id)
+    return {"ok": ok}
+
+
 # ======================== 外部平台学习打卡（自评，呼应路径） ========================
 
 @router.post("/practice/node-study")
@@ -327,6 +441,189 @@ async def practice_node_study(req: NodeStudyRequest):
     except Exception as e:
         logger.warning(f"[practice] mark_node_task_done 失败: {e}")
     return {"ok": True, "study": study, "task_marked": task_marked}
+
+
+# ======================== 节点学习资源（B站/视频/文档链接 + 看完自评） ========================
+
+@router.post("/practice/node-resources/add")
+async def practice_node_resources_add(req: NodeResourceAddRequest):
+    """给路径节点添加一条学习资源（如 B站课程链接），返回资源条目。"""
+    res = practice_data.add_node_resource(
+        req.student_id, req.node_id, req.title, req.url, req.platform or "")
+    if not res:
+        raise HTTPException(status_code=400, detail="标题和链接不能为空")
+    return {"ok": True, "resource": res}
+
+
+@router.post("/practice/node-resources/delete")
+async def practice_node_resources_delete(req: NodeResourceDeleteRequest):
+    """删除一条节点学习资源。"""
+    ok = practice_data.delete_node_resource(req.student_id, req.rid)
+    return {"ok": ok}
+
+
+@router.post("/practice/node-resources/watched")
+async def practice_node_resources_watched(req: NodeResourceWatchRequest):
+    """标记某条资源「看完了」+ 自评（学到了什么）→ 推动路径进度。
+
+    课程级资源（node_id == "__course__"，整套课视频）看完 → 推进第一个未完成任务；
+    节点级资源 → 推进该节点第一个未完成任务。"""
+    res = practice_data.mark_resource_watched(req.student_id, req.rid, req.watch_note or "")
+    if not res:
+        raise HTTPException(status_code=404, detail="资源不存在")
+    task_marked = False
+    try:
+        if res.get("node_id") == practice_data.COURSE_NODE_ID:
+            task_marked = mark_first_incomplete_task_done(req.student_id)
+        else:
+            task_marked = mark_node_task_done(req.student_id, res.get("node_id", ""))
+    except Exception as e:
+        logger.warning(f"[practice] 资源看完推进度失败: {e}")
+    return {"ok": True, "resource": res, "task_marked": task_marked}
+
+
+@router.post("/practice/node-skip")
+async def practice_node_skip(req: NodeSkipRequest):
+    """用户「这个知识点我会了」→ 跳过该节点全部日任务/学习记录，返回推进数。"""
+    marked = skip_node(req.student_id, req.node_id)
+    return {"ok": True, "marked": marked}
+
+
+# ======================== 日计划：用户记录每天学了什么 + 打钩 ========================
+
+@router.post("/practice/daily-log/add")
+async def practice_daily_log_add(req: DailyLogAddRequest):
+    """给某节点加一条「今天学了什么」记录（默认当天，未打钩）。"""
+    log = practice_data.add_daily_log(req.student_id, req.node_id, req.content, req.date)
+    if not log:
+        raise HTTPException(status_code=400, detail="学习内容不能为空")
+    return {"ok": True, "log": log}
+
+
+@router.post("/practice/daily-log/update")
+async def practice_daily_log_update(req: DailyLogUpdateRequest):
+    """编辑某条记录的内容 / 打钩状态。"""
+    log = practice_data.update_daily_log(req.student_id, req.log_id,
+                                         req.content, req.done)
+    if not log:
+        raise HTTPException(status_code=404, detail="记录不存在")
+    return {"ok": True, "log": log}
+
+
+@router.post("/practice/daily-log/delete")
+async def practice_daily_log_delete(req: DailyLogDeleteRequest):
+    """删除一条学习记录。"""
+    ok = practice_data.delete_daily_log(req.student_id, req.log_id)
+    if not ok:
+        raise HTTPException(status_code=404, detail="记录不存在")
+    return {"ok": True}
+
+
+# ======================== 今日练习（每天不同题目） ========================
+
+def _node_exercise_topic(path: dict, node_id: str, task_day: int | None = None) -> tuple[str, str]:
+    """取节点用于出题的知识点 + 节点/任务标题。node_id 为空时自动定位"今天该学的节点"。
+
+    task_day 给定 → 取该节点指定 day 的日任务作主题（从具体任务做题）；
+    否则取该节点第一个未完成任务；都没有则用节点 title。"""
+    nodes = path.get("nodes", []) or []
+    if not nodes:
+        return "", ""
+
+    target = None
+    if node_id:
+        target = next((n for n in nodes if n.get("node_id") == node_id), None)
+    if not target:
+        # 新口径优先：第一个有未打钩学习记录的节点
+        target = next((n for n in nodes
+                       if any(not l.get("done") for l in n.get("daily_logs", []))), None)
+    if not target:
+        # 旧口径：含今天 day 的节点 → 首个未完成任务节点
+        today = (datetime.now() - datetime.fromisoformat(
+            path.get("created_at", datetime.now().isoformat()))).days + 1
+        target = next((n for n in nodes
+                       if any(t.get("day") == today for t in n.get("daily_tasks", []))), None)
+    if not target:
+        target = next((n for n in nodes
+                       if any(not t.get("completed") for t in n.get("daily_tasks", []))), None)
+    if not target:
+        target = next((n for n in nodes if n.get("daily_logs")), None)
+    if not target:
+        target = nodes[0]
+
+    title = (target.get("title") or "").strip()
+    # 新口径主题：最近一条未打钩学习记录的内容（用户正在学的）
+    undone = [l for l in (target.get("daily_logs") or []) if not l.get("done")]
+    if undone:
+        topic = (undone[-1].get("content") or "").strip()
+        if topic:
+            return topic, target.get("node_id", "")
+    task = None
+    if task_day is not None:
+        task = next((t for t in target.get("daily_tasks", [])
+                     if t.get("day") == task_day), None)
+    if task is None:
+        task = next((t for t in target.get("daily_tasks", []) if not t.get("completed")), None)
+    task_title = (task.get("title") or title) if task else title
+    # 去掉「- 第X天」尾巴，用纯知识点做主题
+    import re as _re
+    clean = _re.sub(r"[-－—]\s*第\d+天$", "", task_title).strip() or title
+    return clean, target.get("node_id", "")
+
+
+@router.post("/practice/daily-exercises")
+async def practice_daily_exercises(req: DailyExerciseRequest):
+    """今日练习：按当前节点/知识点用 AI 出 count 道题（不落库，作答走 save-ai-exercises）。"""
+    path = load_path(req.student_id)
+    if not path:
+        return {"ok": True, "node_id": req.node_id, "exercises": [],
+                "message": "还没有学习路径，先去规划吧"}
+    topic, node_id = _node_exercise_topic(path, req.node_id, req.task_day)
+    if not topic:
+        return {"ok": True, "node_id": node_id, "exercises": [],
+                "message": "暂时没有可练习的知识点"}
+    count = max(1, min(10, req.count or 3))
+    demand = (
+        f"这是「今日练习」：围绕知识点「{topic}」生成 {count} 道题目，"
+        f"题型混合选择/填空/判断，难度基础到进阶。请严格按照数量生成 {count} 道，不要多也不要少。"
+    )
+    try:
+        chunks: list[str] = []
+        async for chunk in exercise_agent.generate_exercises(
+                topic, student_id=req.student_id, user_demand=demand):
+            chunks.append(chunk or "")
+        text = "".join(chunks)
+        exercises = exercise_agent.extract_exercise_json(text) or []
+        exercises = exercises[:count]
+        return {"ok": True, "node_id": node_id, "topic": topic, "exercises": exercises}
+    except Exception as e:
+        logger.exception("[practice] daily-exercises 失败")
+        raise HTTPException(status_code=500, detail=f"出题失败: {str(e)[:200]}")
+
+
+@router.post("/practice/video-search")
+async def practice_video_search(req: VideoSearchRequest):
+    """搜索 B站热门视频（按播放量/点赞降序），供用户选择加入节点资源。"""
+    keyword = (req.keyword or "").strip()
+    if not keyword:
+        raise HTTPException(status_code=400, detail="请输入搜索关键词")
+    videos = await search_bilibili_videos(keyword, max(1, req.page))
+    return {
+        "ok": True,
+        "videos": videos,
+        "message": "没搜到，试试别的关键词或自定义添加" if not videos else "",
+    }
+
+
+@router.post("/practice/task-toggle")
+async def practice_task_toggle(req: TaskToggleRequest):
+    """逐小任务打√（可逆）：切换某节点某天任务的完成状态。"""
+    task = toggle_task_done(req.student_id, req.node_id, req.day)
+    if task is None:
+        raise HTTPException(status_code=404, detail="任务不存在")
+    path = load_path(req.student_id)
+    progress = calc_progress(path) if path else None
+    return {"ok": True, "task": task, "progress": progress}
 
 
 # ======================== 技能差距 ========================

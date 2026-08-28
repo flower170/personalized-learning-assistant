@@ -9,6 +9,8 @@ from datetime import datetime, date
 from pathlib import Path
 from typing import Optional
 
+from core.models import practice_data
+
 logger = logging.getLogger(__name__)
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data" / "learning_paths"
@@ -43,10 +45,18 @@ def save_path(student_id: str, data: dict):
 
 
 def calc_progress(data: dict) -> dict:
-    """计算进度统计"""
+    """计算进度统计
+
+    口径：优先节点上的 daily_logs（用户自由记录+打钩）；节点没有日志（旧路径）
+    才回退 daily_tasks 的 completed 口径。"""
     total_tasks = 0
     completed_tasks = 0
     for node in data.get("nodes", []):
+        logs = node.get("daily_logs")
+        if logs:
+            total_tasks += len(logs)
+            completed_tasks += sum(1 for log in logs if log.get("done"))
+            continue
         for task in node.get("daily_tasks", []):
             total_tasks += 1
             if task.get("completed"):
@@ -76,9 +86,31 @@ def calc_progress(data: dict) -> dict:
     }
 
 
+def _tick_first_undone_log(student_id: str, node_id: Optional[str] = None) -> bool:
+    """把用户 daily_logs 里第一个未打钩的记录标为打钩（路径进度前移）。
+    node_id 为空则跨节点取第一个未打钩记录。没有可打钩记录返回 False。"""
+    rec = practice_data.load_records(student_id)
+    logs = rec.get("daily_logs", [])
+    now = datetime.now().isoformat(timespec="seconds")
+    for log in logs:
+        if node_id and log.get("node_id") != node_id:
+            continue
+        if log.get("done"):
+            continue
+        log["done"] = True
+        log["updated_at"] = now
+        practice_data.save_records(student_id, rec)
+        return True
+    return False
+
+
 def mark_node_task_done(student_id: str, node_id: str) -> bool:
-    """把指定节点第一个未完成的日任务标为已完成（外部学习上报 → 路径进度前移）。
-    找不到节点 / 该节点任务已全部完成返回 False。"""
+    """把指定节点第一个未完成的「学习记录」/「日任务」标为已完成（外部学习上报 → 路径进度前移）。
+
+    优先打钩该节点用户 daily_logs 里第一条未打钩记录（新口径）；节点没有日志
+    回退旧路径 daily_tasks。都没有返回 False。"""
+    if _tick_first_undone_log(student_id, node_id):
+        return True
     data = load_path(student_id)
     if not data:
         return False
@@ -92,6 +124,86 @@ def mark_node_task_done(student_id: str, node_id: str) -> bool:
                 save_path(student_id, data)
                 return True
     return False
+
+
+def mark_first_incomplete_task_done(student_id: str) -> bool:
+    """把整条路径第一个未完成的「学习记录」/「日任务」标为已完成（课程级视频「看完了」→ 推进当前最该学的任务）。
+    全部完成返回 False。"""
+    if _tick_first_undone_log(student_id):
+        return True
+    data = load_path(student_id)
+    if not data:
+        return False
+    for node in data.get("nodes", []):
+        for task in node.get("daily_tasks", []):
+            if not task.get("completed"):
+                task["completed"] = True
+                task["checkin_date"] = date.today().isoformat()
+                save_path(student_id, data)
+                return True
+    return False
+
+
+def skip_node(student_id: str, node_id: str) -> int:
+    """用户「这个知识点我会了」→ 把该节点全部「学习记录」/「日任务」标完成，返回推进的数量。
+    找不到节点 / 无可推进返回 0。"""
+    # 新口径：先把该节点所有未打钩的 daily_logs 打钩
+    rec = practice_data.load_records(student_id)
+    logs = rec.get("daily_logs", [])
+    now = datetime.now().isoformat(timespec="seconds")
+    marked = 0
+    for log in logs:
+        if log.get("node_id") != node_id or log.get("done"):
+            continue
+        log["done"] = True
+        log["updated_at"] = now
+        marked += 1
+    if marked:
+        practice_data.save_records(student_id, rec)
+        return marked
+    # 旧口径：把路径里该节点全部日任务标完成
+    data = load_path(student_id)
+    if not data:
+        return 0
+    for node in data.get("nodes", []):
+        if node.get("node_id") != node_id:
+            continue
+        marked = 0
+        today = date.today().isoformat()
+        for task in node.get("daily_tasks", []):
+            if not task.get("completed"):
+                task["completed"] = True
+                task["checkin_date"] = task.get("checkin_date") or today
+                marked += 1
+        if marked:
+            save_path(student_id, data)
+        return marked
+    return 0
+
+
+def toggle_task_done(student_id: str, node_id: str, day: int) -> Optional[dict]:
+    """逐小任务打√（可逆）：把某节点指定 day 的日任务在完成/未完成之间切换。
+
+    标完成 → 写 checkin_date；取消 → 清空 checkin_date。返回更新后的 task。
+    节点或该 day 任务不存在返回 None。"""
+    data = load_path(student_id)
+    if not data:
+        return None
+    for node in data.get("nodes", []):
+        if node.get("node_id") != node_id:
+            continue
+        for task in node.get("daily_tasks", []):
+            if task.get("day") != day:
+                continue
+            if task.get("completed"):
+                task["completed"] = False
+                task["checkin_date"] = None
+            else:
+                task["completed"] = True
+                task["checkin_date"] = date.today().isoformat()
+            save_path(student_id, data)
+            return task
+    return None
 
 
 def split_daily_tasks(nodes: list[dict], total_days: int, daily_minutes: int) -> list[dict]:

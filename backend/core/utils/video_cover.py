@@ -23,10 +23,73 @@ YOUTUBE_RE = re.compile(
 
 # Bilibili API
 BILIBILI_VIDEO_INFO_API = "https://api.bilibili.com/x/web-interface/view"
+BILIBILI_SEARCH_API = "https://api.bilibili.com/x/web-interface/search/type"
 BILIBILI_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     "Referer": "https://www.bilibili.com/",
 }
+# 搜索接口需要 buvid 指纹 cookie,否则返回 HTML 反爬页面(实测)
+BILIBILI_BUVID_COOKIE = (
+    "buvid3=1E5D9F9E-8B3C-4C4D-9B1E-7C8D9E0F1A2Binfoc; "
+    "buvid4=1E5D9F9E-8B3C-4C4D-9B1E-7C8D9E0F1A2B1-0200000000000000000000000000"
+)
+
+
+async def search_bilibili_videos(
+    keyword: str, page: int = 1, max_results: int = 20
+) -> list[dict]:
+    """直接调用 Bilibili 搜索 API 检索视频(按播放量降序)。
+
+    返回每条:
+    {bvid, title(去 <em> 高亮标签), url, cover(高清), duration, play, like, author}
+    失败/异常 → 返回 [] 并打日志,不抛出。
+    """
+    if not keyword or not keyword.strip():
+        return []
+    headers = dict(BILIBILI_HEADERS)
+    headers["Cookie"] = BILIBILI_BUVID_COOKIE
+    try:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(8.0)) as client:
+            resp = await client.get(
+                BILIBILI_SEARCH_API,
+                params={"search_type": "video", "keyword": keyword.strip(), "page": page},
+                headers=headers,
+            )
+            if resp.status_code != 200:
+                logger.warning(f"[B站搜索] HTTP {resp.status_code}")
+                return []
+            data = resp.json()
+            if data.get("code") != 0:
+                logger.warning(f"[B站搜索] API 错误: {data.get('message')}")
+                return []
+            results = []
+            for item in (data.get("data", {}).get("result", []) or []):
+                bvid = item.get("bvid", "")
+                if not bvid:
+                    continue
+                title = item.get("title", "")
+                # 去掉 B站返回的 <em class="keyword"> 高亮标签
+                title = title.replace('<em class="keyword">', "").replace("</em>", "")
+                pic = item.get("pic", "")
+                results.append({
+                    "bvid": bvid,
+                    "title": title,
+                    "url": f"https://www.bilibili.com/video/{bvid}",
+                    "cover": f"{pic}@672w_378h_1c" if pic else "",
+                    "duration": item.get("duration", ""),
+                    "play": item.get("play", 0),
+                    "like": item.get("like", 0),
+                    "author": item.get("author", ""),
+                })
+            # 按播放量降序(播放量相同再按点赞)
+            results.sort(key=lambda v: (v.get("play", 0), v.get("like", 0)), reverse=True)
+            return results[:max_results]
+    except httpx.TimeoutException:
+        logger.warning(f"[B站搜索] 超时: {keyword[:30]}")
+        return []
+    except Exception as e:
+        logger.warning(f"[B站搜索] 失败: {e}")
+        return []
 
 
 async def extract_bilibili_bvid(url: str) -> Optional[str]:

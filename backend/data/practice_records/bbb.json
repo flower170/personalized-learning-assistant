@@ -20,42 +20,6 @@
         "updated_at": "2026-08-14T12:33:07",
         "solved_at": "2026-08-14T12:33:07",
         "_fallback": true
-      },
-      {
-        "card_id": "牛客_搜索子查询_搜索子查询",
-        "node_id": "step_01",
-        "platform": "牛客",
-        "problem_no": "",
-        "title": "搜索「子查询」",
-        "link": "https://www.nowcoder.com/search?query=%E5%AD%90%E6%9F%A5%E8%AF%A2",
-        "knowledge_point": "子查询",
-        "difficulty": "简单",
-        "status": "undone",
-        "my_answer": "",
-        "note": "",
-        "search_url": "https://www.nowcoder.com/search?query=%E5%AD%90%E6%9F%A5%E8%AF%A2",
-        "created_at": "2026-08-14T12:30:41",
-        "updated_at": "2026-08-14T12:30:41",
-        "solved_at": null,
-        "_fallback": true
-      },
-      {
-        "card_id": "洛谷_搜索子查询_搜索子查询",
-        "node_id": "step_01",
-        "platform": "洛谷",
-        "problem_no": "",
-        "title": "搜索「子查询」",
-        "link": "https://www.luogu.com.cn/problem/list?keyword=%E5%AD%90%E6%9F%A5%E8%AF%A2",
-        "knowledge_point": "子查询",
-        "difficulty": "简单",
-        "status": "undone",
-        "my_answer": "",
-        "note": "",
-        "search_url": "https://www.luogu.com.cn/problem/list?keyword=%E5%AD%90%E6%9F%A5%E8%AF%A2",
-        "created_at": "2026-08-14T12:30:41",
-        "updated_at": "2026-08-14T12:30:41",
-        "solved_at": null,
-        "_fallback": true
       }
     ]
   },
@@ -273,8 +237,208 @@
       "attempts": 1,
       "created_at": "2026-08-14T12:36:27",
       "updated_at": "2026-08-14T12:36:27"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_fd82cb33df1338e8",
+      "topic": "给我几道SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "查询所有工资高于其所在部门平均工资的员工姓名和工资。以下哪条 SQL 语句能够正确实现该逻辑？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT name, salary FROM Employee WHERE salary > (SELECT AVG(salary) FROM Employee GROUP BY department_id);"
+        },
+        {
+          "label": "B",
+          "text": "SELECT name, salary FROM Employee WHERE salary > (SELECT AVG(salary) FROM Employee);"
+        },
+        {
+          "label": "C",
+          "text": "SELECT name, salary FROM Employee WHERE salary > (SELECT MAX(salary) FROM Employee);"
+        },
+        {
+          "label": "D",
+          "text": "SELECT name, salary FROM Employee WHERE salary > (SELECT MIN(salary) FROM Employee);"
+        }
+      ],
+      "answer": "B",
+      "explanation": "子查询需要返回该员工所在部门的平均工资，因此必须包含 GROUP BY department_id。",
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-16T10:24:32",
+      "updated_at": "2026-08-16T10:24:32"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_576564427a3c0d41",
+      "topic": "给我几道SQL的题目",
+      "type": "choice",
+      "difficulty": "advanced",
+      "question": "查询与 '张三' 同部门但工资不同的员工信息。以下哪个 SQL 语句最合适？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT * FROM Employee WHERE department_id = (SELECT department_id FROM Employee WHERE name = '张三') AND salary != (SELECT salary FROM Employee WHERE name = '张三');"
+        },
+        {
+          "label": "B",
+          "text": "SELECT * FROM Employee WHERE name = '张三';"
+        },
+        {
+          "label": "C",
+          "text": "SELECT * FROM Employee WHERE salary > (SELECT salary FROM Employee WHERE name = '张三');"
+        },
+        {
+          "label": "D",
+          "text": "SELECT * FROM Employee WHERE department_id = (SELECT department_id FROM Employee WHERE name = '张三') AND salary != (SELECT AVG(salary) FROM Employee WHERE name = '张三');"
+        }
+      ],
+      "answer": "A",
+      "explanation": "使用子查询分别获取 '张三' 的部门 ID 和工资，然后在主查询中用 != 进行比较，可以准确找出同部门但工资不同的员工。",
+      "user_answer": "A",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-16T10:24:32",
+      "updated_at": "2026-08-16T10:24:32"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_481a289f21e61425",
+      "topic": "给我几道SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "使用窗口函数 `RANK()` 为员工表按部门 ID 升序、工资降序进行排名。如果有相同工资，排名是否相同且跳过下一个序号？",
+      "options": [
+        {
+          "label": "A",
+          "text": "是，RANK() 是连续的排名（例如 1, 1, 3）"
+        },
+        {
+          "label": "B",
+          "text": "否，RANK() 是连续的排名（例如 1, 2, 3）"
+        },
+        {
+          "label": "C",
+          "text": "是，RANK() 是不连续的排名（例如 1, 2, 3）"
+        },
+        {
+          "label": "D",
+          "text": "否，RANK() 是不连续的排名（例如 1, 1, 2）"
+        }
+      ],
+      "answer": "A",
+      "explanation": "RANK() 函数在遇到并列时会赋予相同的排名，并跳过后续的序号，而 DENSE_RANK() 才是赋予相同排名后不跳号。",
+      "user_answer": "B",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-16T10:24:32",
+      "updated_at": "2026-08-16T10:24:32"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_6e68ed11fa43e432",
+      "topic": "给我几道SQL的题目",
+      "type": "choice",
+      "difficulty": "advanced",
+      "question": "计算每个部门的员工工资累计总和（即滚动求和），要求按入职日期升序排列。应使用哪个窗口函数？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SUM() OVER()"
+        },
+        {
+          "label": "B",
+          "text": "RANK() OVER()"
+        },
+        {
+          "label": "C",
+          "text": "LAG() OVER()"
+        },
+        {
+          "label": "D",
+          "text": "ROW_NUMBER() OVER()"
+        }
+      ],
+      "answer": "A",
+      "explanation": "SUM() OVER() 配合 PARTITION BY（分组）和 ORDER BY（排序）可以实现在分组内按指定顺序累计求和。",
+      "user_answer": "C",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-16T10:24:32",
+      "updated_at": "2026-08-16T10:24:32"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_a4483958b147fcfe",
+      "topic": "给我几道SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "使用窗口函数 `LEAD()` 获取每个员工的下一个月薪（假设每月工资增长 100）。如果当前员工是最后一名，则显示 NULL。应如何写？",
+      "options": [
+        {
+          "label": "A",
+          "text": "LEAD(salary, 1) OVER(PARTITION BY department_id ORDER BY hire_date)"
+        },
+        {
+          "label": "B",
+          "text": "LAG(salary, 1) OVER(PARTITION BY department_id ORDER BY hire_date)"
+        },
+        {
+          "label": "C",
+          "text": "LEAD(salary, -1) OVER(PARTITION BY department_id ORDER BY hire_date)"
+        },
+        {
+          "label": "D",
+          "text": "LEAD(salary, 2) OVER(PARTITION BY department_id ORDER BY hire_date)"
+        }
+      ],
+      "answer": "A",
+      "explanation": "LEAD() 函数用于访问当前行之后的第 1 行（参数 1），即下一个月薪。",
+      "user_answer": "A",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-16T10:24:32",
+      "updated_at": "2026-08-16T10:24:32"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_9f2e1b530c9f3a5b",
+      "topic": "给我几道SQL的题目",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "查询选修了所有课程的学生的姓名。以下哪个 SQL 语句是正确的？",
+      "options": [
+        {
+          "label": "A",
+          "text": "SELECT name FROM Student JOIN SC ON Student.id = SC.student_id GROUP BY name HAVING COUNT(course_id) = (SELECT COUNT(*) FROM Course);"
+        },
+        {
+          "label": "B",
+          "text": "SELECT name FROM Student WHERE name IN (SELECT name FROM SC);"
+        },
+        {
+          "label": "C",
+          "text": "SELECT name FROM Student WHERE COUNT(course_id) = (SELECT COUNT(*) FROM Course);"
+        },
+        {
+          "label": "D",
+          "text": "SELECT name FROM Student WHERE course_id IS NULL;"
+        }
+      ],
+      "answer": "A",
+      "explanation": "使用 GROUP BY 分组统计每个学生的选课数量，再通过 HAVING 子句筛选出数量等于总课程数的记录。",
+      "user_answer": "B",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-16T10:24:32",
+      "updated_at": "2026-08-16T10:24:32"
     }
   ],
+  "collections": [],
+  "node_studies": [],
   "checkins": [],
   "streak": {
     "current": 0,
@@ -282,5 +446,5 @@
     "last_checkin": null
   },
   "created_at": "2026-08-14T12:30:41",
-  "updated_at": "2026-08-14T12:36:27"
+  "updated_at": "2026-08-16T10:24:32"
 }

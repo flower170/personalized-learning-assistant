@@ -58,7 +58,7 @@ class PathPlanAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="PathPlanAgent",
-            model_name="spark-4.0-ultra",
+            model_name="qwen-plus",
             system_prompt=PATH_PLAN_SYSTEM_PROMPT,
             temperature=0.4,
         )

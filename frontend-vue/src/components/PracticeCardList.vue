@@ -2,7 +2,7 @@
   <div class="practice-cards">
     <div v-if="cards.length === 0 && !loading" class="pc-empty">
       <template v-if="canSearch">还没有练习卡。点击「去官方找题」按当前知识点搜索官方 OJ 题目～</template>
-      <template v-else>该科目没有对应的官方 OJ 题库，直接用课本/真题练习就好。</template>
+      <template v-else>还没有练习卡。</template>
     </div>
 
     <div v-for="card in cards" :key="card.card_id" class="pc-card">
@@ -14,7 +14,13 @@
         <span class="pc-diff" :class="`diff-${card.difficulty}`">{{ card.difficulty }}</span>
       </div>
 
-      <div class="pc-title">{{ card.title }}</div>
+      <a
+        class="pc-title"
+        :href="card.link"
+        target="_blank"
+        rel="noopener"
+        :title="card.link"
+      >{{ card.title }}<span class="pc-ext">↗</span></a>
       <div v-if="card.knowledge_point" class="pc-kp">📌 {{ card.knowledge_point }}</div>
 
       <div class="pc-body">
@@ -143,10 +149,22 @@ async function saveNote(card, note) {
 .diff-中等 { background: #fef3c7; color: #92400e; }
 .diff-困难 { background: #fee2e2; color: #b91c1c; }
 .pc-title {
+  display: inline-block;
   font-size: 13.5px;
   font-weight: 600;
   color: var(--text-primary, #1f2937);
+  text-decoration: none;
+  cursor: pointer;
   margin-bottom: 2px;
+}
+.pc-title:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+.pc-ext {
+  font-size: 11px;
+  margin-left: 2px;
+  color: #9ca3af;
 }
 .pc-kp {
   font-size: 12px;

@@ -32,8 +32,7 @@ class McpToolClient:
         self._server_script = self._backend_root / "mcp_server.py"
         # 运行时状态
         self._lock = asyncio.Lock()
-        self._stdio_session = None  # ClientSession
-        self._stdio_proc_ctx = None  # asyncgenerator context
+        self._server_ctxs: dict[str, Any] = {}  # server_id -> 传输上下文管理器 (stdio/sse/http)
         self._tool_to_server: dict[str, str] = {}  # tool_name -> server_id
         self._server_sessions: dict[str, Any] = {}  # server_id -> ClientSession
         self._initialized = False
@@ -66,13 +65,14 @@ class McpToolClient:
                 cwd=str(self._backend_root),
             )
             ctx = stdio_client(params)
-            read, write = await ctx.__anext__()
-            self._stdio_proc_ctx = ctx
+            # SDK >= 1.0 返回 _AsyncGeneratorContextManager，用 __aenter__ 取流
+            read, write = await ctx.__aenter__()
+            self._server_ctxs["local"] = ctx
             session = ClientSession(read, write)
+            await session.__aenter__()  # SDK >= 1.0: 需先进入会话启动 dispatcher
+            self._server_sessions["local"] = session
             await session.initialize()
             await self._index_session_tools("local", session)
-            self._stdio_session = session
-            self._server_sessions["local"] = session
             logger.info(f"本地 stdio MCP Server 会话已建立，工具数: {len([k for k,v in self._tool_to_server.items() if v=='local'])}")
         except Exception as e:
             logger.exception(f"启动本地 stdio MCP Server 失败: {e}")
@@ -103,13 +103,18 @@ class McpToolClient:
         from mcp import ClientSession
         if transport == "sse":
             from mcp.client.sse import sse_client
-            read, write = await sse_client(url).__anext__()
+            ctx = sse_client(url)
+            read, write = await ctx.__aenter__()
         elif transport in ("http", "streamable_http"):
             from mcp.client.streamable_http import streamable_http_client
-            read, write = await streamable_http_client(url).__anext__()
+            ctx = streamable_http_client(url)
+            read, write = await ctx.__aenter__()
         else:
             raise ValueError(f"未知 transport: {transport}")
+        self._server_ctxs[sid] = ctx
         session = ClientSession(read, write)
+        await session.__aenter__()  # SDK >= 1.0: 需先进入会话启动 dispatcher
+        self._server_sessions[sid] = session
         await session.initialize()
         return session
 
@@ -176,17 +181,18 @@ class McpToolClient:
             content = getattr(raw, "content", None) or []
             if not content:
                 return None
+            # SDK >= 1.0: 错误标志在 CallToolResult 顶层 is_error
+            is_err = bool(getattr(raw, "is_error", False))
             # 拼接所有 text 片段
             texts: list[str] = []
             for c in content:
                 ctype = getattr(c, "type", "")
-                is_err = getattr(c, "isError", False)
                 if ctype == "text":
                     t = getattr(c, "text", "")
-                    if is_err:
-                        logger.warning(f"[MCP][{tool_name}] 返回错误: {t[:200]}")
                     texts.append(t)
             combined = "\n".join(texts).strip()
+            if is_err and combined:
+                logger.warning(f"[MCP][{tool_name}] 返回错误: {combined[:200]}")
             if not combined:
                 return None
             # 尝试 JSON 解析
@@ -204,18 +210,18 @@ class McpToolClient:
         """关闭所有会话和子进程"""
         for sid, session in list(self._server_sessions.items()):
             try:
-                await session.close()
+                await session.__aexit__(None, None, None)  # SDK >= 1.0: 退出会话停掉 dispatcher
             except Exception:
                 pass
         self._server_sessions.clear()
         self._tool_to_server.clear()
-        self._stdio_session = None
-        if self._stdio_proc_ctx is not None:
+        # 退出所有传输上下文管理器（stdio / sse / http），释放子进程与连接
+        for sid, ctx in list(self._server_ctxs.items()):
             try:
-                await self._stdio_proc_ctx.aclose()
+                await ctx.__aexit__(None, None, None)
             except Exception:
                 pass
-            self._stdio_proc_ctx = None
+        self._server_ctxs.clear()
         self._initialized = False
         logger.info("MCP Client 已关闭")
 

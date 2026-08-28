@@ -28,6 +28,13 @@
         @skip="chatStore.skipOnboarding"
         @skip-all="onSkipAll"
       />
+
+      <!-- 路径规划弹窗：先问科目 + 每天时间 + 期望周期，再交给聊天内向导 -->
+      <PathStartDialog
+        v-model="showPathStart"
+        :pre-topic="pathPreTopic"
+        @start="onPathStartConfirm"
+      />
     </div>
   </div>
 </template>
@@ -35,17 +42,19 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessageBox } from 'element-plus'
 import { useChatStore } from '@/stores/chat'
 import ChatHeader from '@/components/ChatHeader.vue'
 import ChatMessages from '@/components/ChatMessages.vue'
 import ChatInput from '@/components/ChatInput.vue'
 import OnboardingDialog from '@/components/OnboardingDialog.vue'
+import PathStartDialog from '@/components/PathStartDialog.vue'
 
 const router = useRouter()
 const chatStore = useChatStore()
 const chatInputRef = ref(null)
 const showOnboarding = ref(false)
+const showPathStart = ref(false)
+const pathPreTopic = ref('')
 
 function onQuickSend(text, type) {
   chatStore.sendMessage(text, type)
@@ -55,31 +64,20 @@ function onQuickSend(text, type) {
  *  叠加触发会弹两个窗。已有弹窗打开时忽略一切重复触发，保证只弹一次。 */
 let pathPopupOpening = false
 
-/** 学习路径入口：直接在聊天里发起向导（画像起步 → 提问补充 → 草案确认） */
-async function openPathWizard(preTopic = '') {
-  if (pathPopupOpening) return // 弹窗打开中，忽略重复触发（含带 topic 的直接发起）
-  let topic = (preTopic || '').trim()
-  if (!topic) {
-    pathPopupOpening = true
-    try {
-      const { value } = await ElMessageBox.prompt(
-        '你想完成哪些科目？我会根据你的学习情况来制定学习计划。',
-        '学习路径规划',
-        {
-          inputPlaceholder: '如：SQL / Python数据分析 / 统计学 / C语言 / 数学…',
-          confirmButtonText: '开始规划',
-          cancelButtonText: '取消',
-        }
-      )
-      topic = (value || '').trim()
-    } catch {
-      return // 用户取消
-    } finally {
-      pathPopupOpening = false
-    }
-  }
+/** 学习路径入口：打开 PathStartDialog（先问科目 + 每天时间 + 期望周期）→ 拿到结果交给聊天内向导 */
+function openPathWizard(preTopic = '') {
+  if (pathPopupOpening) return
+  pathPopupOpening = true
+  pathPreTopic.value = (preTopic || '').trim()
+  showPathStart.value = true
+  // 弹窗关闭（确认/取消）后放锁，避免 v-model 关闭时序抢锁
+  setTimeout(() => { pathPopupOpening = false }, 300)
+}
+
+/** PathStartDialog 确认：带上时间投入发起路径规划 */
+function onPathStartConfirm({ topic, dailyHours, cycle }) {
   if (!topic) return
-  chatStore.pathStart(topic)
+  chatStore.pathStart(topic, { dailyHours, cycle })
 }
 
 function openSkillGap() {

@@ -1,0 +1,611 @@
+{
+  "draft_id": "draft_4ff15909",
+  "student_id": "lucy",
+  "topic": "sql",
+  "collected": {
+    "topic": "sql",
+    "profile": {
+      "mastered": [
+        "基础知识"
+      ],
+      "weak": [
+        "面向对象"
+      ],
+      "interests": [],
+      "cognitive_style": "",
+      "preferred_pace": "",
+      "daily_hours": 0,
+      "long_term_goal": "",
+      "short_term_goal": "学习Python",
+      "goal_attribute": "就业"
+    },
+    "market": [],
+    "resources": [],
+    "daily_hours": 1.0,
+    "foundation": "入门",
+    "subject": "sql",
+    "long_term_goal": "sql"
+  },
+  "path_name": "sql学习路径",
+  "overall_goal": "系统掌握sql",
+  "goal": "系统掌握sql",
+  "market_demand": "",
+  "total_duration_days": 60,
+  "daily_minutes": 60,
+  "stages": [
+    {
+      "stage": 1,
+      "title": "数据库基础与建表",
+      "description": "系统学习sql的「数据库基础与建表」，配练习巩固",
+      "estimated_days": 10,
+      "focus_points": [
+        "数据库与表的概念",
+        "主键/外键/唯一约束",
+        "CREATE TABLE 建表",
+        "INSERT/UPDATE/DELETE",
+        "数据类型 INT/VARCHAR/DECIMAL",
+        "NOT NULL/DEFAULT 默认值",
+        "ALTER TABLE 改表结构",
+        "DROP/TRUNCATE",
+        "DISTINCT 去重",
+        "LIKE/IN/BETWEEN 条件",
+        "日期函数 NOW/DATE_FORMAT"
+      ],
+      "expected_outcome": "掌握sql·数据库基础与建表并能独立应用",
+      "resources": [
+        {
+          "platform": "练习网站",
+          "title": "牛客网刷题：数据库基础与建表",
+          "url": "https://www.nowcoder.com/search?query=%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%BB%BA%E8%A1%A8"
+        }
+      ],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索数据库与表的概念_搜索数据库与表的概念",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「数据库与表的概念」",
+          "link": "https://leetcode.cn/problemset/?search=%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5",
+          "knowledge_point": "数据库与表的概念",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E8%A1%A8%E7%9A%84%E6%A6%82%E5%BF%B5",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索主键外键唯一约束_搜索主键外键唯一约束",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「主键/外键/唯一约束」",
+          "link": "https://leetcode.cn/problemset/?search=%E4%B8%BB%E9%94%AE/%E5%A4%96%E9%94%AE/%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F",
+          "knowledge_point": "主键/外键/唯一约束",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E4%B8%BB%E9%94%AE/%E5%A4%96%E9%94%AE/%E5%94%AF%E4%B8%80%E7%BA%A6%E6%9D%9F",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索createtabl_搜索createtabl",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「CREATE TABLE 建表」",
+          "link": "https://leetcode.cn/problemset/?search=CREATE%20TABLE%20%E5%BB%BA%E8%A1%A8",
+          "knowledge_point": "CREATE TABLE 建表",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=CREATE%20TABLE%20%E5%BB%BA%E8%A1%A8",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "单表查询与过滤",
+      "description": "系统学习sql的「单表查询与过滤」，配练习巩固",
+      "estimated_days": 10,
+      "focus_points": [
+        "SELECT 基础列/别名",
+        "WHERE 比较与逻辑运算",
+        "ORDER BY 排序",
+        "LIMIT 分页",
+        "IN/NOT IN",
+        "LIKE 通配符 %/_",
+        "IS NULL / IS NOT NULL",
+        "CASE WHEN 条件分支",
+        "字符串 CONCAT/SUBSTR/REPLACE",
+        "数值 ROUND/ABS"
+      ],
+      "expected_outcome": "掌握sql·单表查询与过滤并能独立应用",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索select基础列别_搜索select基础列别",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「SELECT 基础列/别名」",
+          "link": "https://leetcode.cn/problemset/?search=SELECT%20%E5%9F%BA%E7%A1%80%E5%88%97/%E5%88%AB%E5%90%8D",
+          "knowledge_point": "SELECT 基础列/别名",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=SELECT%20%E5%9F%BA%E7%A1%80%E5%88%97/%E5%88%AB%E5%90%8D",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索where比较与逻辑_搜索where比较与逻辑",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「WHERE 比较与逻辑运算」",
+          "link": "https://leetcode.cn/problemset/?search=WHERE%20%E6%AF%94%E8%BE%83%E4%B8%8E%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97",
+          "knowledge_point": "WHERE 比较与逻辑运算",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=WHERE%20%E6%AF%94%E8%BE%83%E4%B8%8E%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索orderby排序_搜索orderby排序",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「ORDER BY 排序」",
+          "link": "https://leetcode.cn/problemset/?search=ORDER%20BY%20%E6%8E%92%E5%BA%8F",
+          "knowledge_point": "ORDER BY 排序",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=ORDER%20BY%20%E6%8E%92%E5%BA%8F",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "多表连接查询",
+      "description": "系统学习sql的「多表连接查询」，配练习巩固",
+      "estimated_days": 10,
+      "focus_points": [
+        "INNER JOIN 内连接",
+        "LEFT JOIN 左连接",
+        "RIGHT JOIN 右连接",
+        "FULL/OUTER JOIN 全连接",
+        "USING / ON 关联条件",
+        "多表连接顺序与效率",
+        "自连接",
+        "UNION/UNION ALL",
+        "去重聚合前的连接陷阱",
+        "连接与子查询选择"
+      ],
+      "expected_outcome": "掌握sql·多表连接查询并能独立应用",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索innerjoin内_搜索innerjoin内",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「INNER JOIN 内连接」",
+          "link": "https://leetcode.cn/problemset/?search=INNER%20JOIN%20%E5%86%85%E8%BF%9E%E6%8E%A5",
+          "knowledge_point": "INNER JOIN 内连接",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=INNER%20JOIN%20%E5%86%85%E8%BF%9E%E6%8E%A5",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索leftjoin左连_搜索leftjoin左连",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「LEFT JOIN 左连接」",
+          "link": "https://leetcode.cn/problemset/?search=LEFT%20JOIN%20%E5%B7%A6%E8%BF%9E%E6%8E%A5",
+          "knowledge_point": "LEFT JOIN 左连接",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=LEFT%20JOIN%20%E5%B7%A6%E8%BF%9E%E6%8E%A5",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索rightjoin右_搜索rightjoin右",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「RIGHT JOIN 右连接」",
+          "link": "https://leetcode.cn/problemset/?search=RIGHT%20JOIN%20%E5%8F%B3%E8%BF%9E%E6%8E%A5",
+          "knowledge_point": "RIGHT JOIN 右连接",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=RIGHT%20JOIN%20%E5%8F%B3%E8%BF%9E%E6%8E%A5",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "分组聚合",
+      "description": "系统学习sql的「分组聚合」，配练习巩固",
+      "estimated_days": 10,
+      "focus_points": [
+        "GROUP BY 分组",
+        "聚合函数 COUNT/SUM/AVG",
+        "MIN/MAX",
+        "HAVING 过滤分组",
+        "GROUP BY + WHERE 顺序",
+        "多列分组",
+        "聚合去重 COUNT(DISTINCT)",
+        "GROUP_CONCAT",
+        "ROLLUP 小计",
+        "聚合结果与 JOIN 结合"
+      ],
+      "expected_outcome": "掌握sql·分组聚合并能独立应用",
+      "resources": [
+        {
+          "platform": "练习网站",
+          "title": "牛客网刷题：分组聚合",
+          "url": "https://www.nowcoder.com/search?query=%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"
+        }
+      ],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索groupby分组_搜索groupby分组",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「GROUP BY 分组」",
+          "link": "https://leetcode.cn/problemset/?search=GROUP%20BY%20%E5%88%86%E7%BB%84",
+          "knowledge_point": "GROUP BY 分组",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=GROUP%20BY%20%E5%88%86%E7%BB%84",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索聚合函数counts_搜索聚合函数counts",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「聚合函数 COUNT/SUM/AVG」",
+          "link": "https://leetcode.cn/problemset/?search=%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%20COUNT/SUM/AVG",
+          "knowledge_point": "聚合函数 COUNT/SUM/AVG",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%20COUNT/SUM/AVG",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索minmax_搜索minmax",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「MIN/MAX」",
+          "link": "https://leetcode.cn/problemset/?search=MIN/MAX",
+          "knowledge_point": "MIN/MAX",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=MIN/MAX",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "窗口函数与高级查询",
+      "description": "系统学习sql的「窗口函数与高级查询」，配练习巩固",
+      "estimated_days": 10,
+      "focus_points": [
+        "ROW_NUMBER 排名",
+        "RANK/DENSE_RANK",
+        "LAG/LEAD 前后行",
+        "SUM OVER 累计",
+        "PARTITION BY 分组窗口",
+        "CTE WITH 子句",
+        "子查询标量/行/表",
+        "EXISTS / NOT EXISTS",
+        "索引概念与执行计划",
+        "SQL 优化：避免全表扫描"
+      ],
+      "expected_outcome": "掌握sql·窗口函数与高级查询并能独立应用",
+      "resources": [
+        {
+          "platform": "练习网站",
+          "title": "牛客网刷题：窗口函数与高级查询",
+          "url": "https://www.nowcoder.com/search?query=%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0%E4%B8%8E%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2"
+        }
+      ],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索rownumber排_搜索rownumber排",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「ROW_NUMBER 排名」",
+          "link": "https://leetcode.cn/problemset/?search=ROW_NUMBER%20%E6%8E%92%E5%90%8D",
+          "knowledge_point": "ROW_NUMBER 排名",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=ROW_NUMBER%20%E6%8E%92%E5%90%8D",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索rankdenser_搜索rankdenser",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「RANK/DENSE_RANK」",
+          "link": "https://leetcode.cn/problemset/?search=RANK/DENSE_RANK",
+          "knowledge_point": "RANK/DENSE_RANK",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=RANK/DENSE_RANK",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索laglead前后行_搜索laglead前后行",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「LAG/LEAD 前后行」",
+          "link": "https://leetcode.cn/problemset/?search=LAG/LEAD%20%E5%89%8D%E5%90%8E%E8%A1%8C",
+          "knowledge_point": "LAG/LEAD 前后行",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=LAG/LEAD%20%E5%89%8D%E5%90%8E%E8%A1%8C",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "综合实战",
+      "description": "系统学习sql的「综合实战」，配练习巩固",
+      "estimated_days": 10,
+      "focus_points": [
+        "业务指标口径定义",
+        "留存/转化率 SQL",
+        "排行榜与 TopN",
+        "同比/环比计算",
+        "多表业务分析题",
+        "索引设计与慢查询排查",
+        "牛客 SQL 题库刷题",
+        "真题综合查询练习",
+        "SQL 与数据分析报告结合"
+      ],
+      "expected_outcome": "掌握sql·综合实战并能独立应用",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索业务指标口径定义_搜索业务指标口径定义",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「业务指标口径定义」",
+          "link": "https://leetcode.cn/problemset/?search=%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E5%8F%A3%E5%BE%84%E5%AE%9A%E4%B9%89",
+          "knowledge_point": "业务指标口径定义",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E4%B8%9A%E5%8A%A1%E6%8C%87%E6%A0%87%E5%8F%A3%E5%BE%84%E5%AE%9A%E4%B9%89",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索留存转化率sql_搜索留存转化率sql",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「留存/转化率 SQL」",
+          "link": "https://leetcode.cn/problemset/?search=%E7%95%99%E5%AD%98/%E8%BD%AC%E5%8C%96%E7%8E%87%20SQL",
+          "knowledge_point": "留存/转化率 SQL",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E7%95%99%E5%AD%98/%E8%BD%AC%E5%8C%96%E7%8E%87%20SQL",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索排行榜与topn_搜索排行榜与topn",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「排行榜与 TopN」",
+          "link": "https://leetcode.cn/problemset/?search=%E6%8E%92%E8%A1%8C%E6%A6%9C%E4%B8%8E%20TopN",
+          "knowledge_point": "排行榜与 TopN",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E6%8E%92%E8%A1%8C%E6%A6%9C%E4%B8%8E%20TopN",
+          "created_at": "2026-08-18T18:15:43",
+          "updated_at": "2026-08-18T18:15:43",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "step_01",
+      "title": "数据库基础与建表",
+      "description": "系统学习sql的「数据库基础与建表」，配练习巩固",
+      "estimated_days": 10,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握sql·数据库基础与建表并能独立应用",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_02",
+      "title": "单表查询与过滤",
+      "description": "系统学习sql的「单表查询与过滤」，配练习巩固",
+      "estimated_days": 10,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握sql·单表查询与过滤并能独立应用",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_03",
+      "title": "多表连接查询",
+      "description": "系统学习sql的「多表连接查询」，配练习巩固",
+      "estimated_days": 10,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握sql·多表连接查询并能独立应用",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_04",
+      "title": "分组聚合",
+      "description": "系统学习sql的「分组聚合」，配练习巩固",
+      "estimated_days": 10,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握sql·分组聚合并能独立应用",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_05",
+      "title": "窗口函数与高级查询",
+      "description": "系统学习sql的「窗口函数与高级查询」，配练习巩固",
+      "estimated_days": 10,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握sql·窗口函数与高级查询并能独立应用",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_06",
+      "title": "综合实战",
+      "description": "系统学习sql的「综合实战」，配练习巩固",
+      "estimated_days": 10,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握sql·综合实战并能独立应用",
+      "resources": [],
+      "daily_logs": []
+    }
+  ],
+  "status": "draft",
+  "version": 1,
+  "created_at": "2026-08-18T18:15:42",
+  "recommended_video": {
+    "platform": "视频",
+    "title": "黑马程序员 MySQL数据库入门到精通，从mysql安…（1316.8万播放·黑马程序员）",
+    "url": "https://www.bilibili.com/video/BV1Kr4y1i7ru"
+  }
+}

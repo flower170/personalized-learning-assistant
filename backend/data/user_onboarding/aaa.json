@@ -1,0 +1,8 @@
+{
+  "student_id": "aaa",
+  "skips": {
+    "profile": true,
+    "path": true
+  },
+  "updated_at": "2026-08-18T18:03:08"
+}

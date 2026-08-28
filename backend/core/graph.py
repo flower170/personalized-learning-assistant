@@ -98,7 +98,7 @@ class IntentRouter(BaseAgent):
     def __init__(self):
         super().__init__(
             name="IntentRouter",
-            model_name="spark-4.0-ultra",
+            model_name="qwen-plus",
             system_prompt=INTENT_ROUTER_PROMPT,
             temperature=0.1,
         )
@@ -377,7 +377,7 @@ class ResourceTypeDetectAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="ResourceTypeDetect",
-            model_name="spark-4.0-ultra",
+            model_name="qwen-plus",
             system_prompt=RESOURCE_TYPE_DETECT_PROMPT,
             temperature=0.2,
         )
@@ -436,6 +436,41 @@ async def resource_node(state: AgentState) -> dict:
         return {
             "resource_topic": topic,
             "resource_types": existing_types,
+            "resource_detected": True,
+            "current_biz_mode": "resource",
+        }
+
+    # 用户说"学习资料/所有资料"等泛指 → 直接生成全部5类，不追问类型（像豆包一样直接给）
+    user_msg = state.get("user_message", "")
+    ALL_RESOURCE_KEYWORDS = [
+        "学习资料", "生成资料", "所有资料", "全部资料", "学习资源",
+        "所有资源", "全套", "全部", "给我生成", "帮我生成资料",
+    ]
+    # 具体类型关键词 → 直接映射到类型，不依赖 LLM。
+    # 原因：LLM 主模型 spark-4.0-ultra 可能未授权(AppIdNoAuthError)而降级，弱模型容易把
+    # "给我生成几道练习题"这类明确诉求误判。顺序即优先级（视频/导图/习题/代码/阅读/讲解）。
+    SPECIFIC_TYPE_MAP = [
+        (["视频", "b站", "bilibili", "哔哩哔哩"], "video"),
+        (["思维导图", "脑图", "导图", "知识结构", "知识点梳理"], "mindmap"),
+        (["练习题", "习题", "出题", "做题", "试卷", "测试题", "考试题", "几道题"], "exercise"),
+        (["代码", "编程", "实操", "实战"], "code"),
+        (["阅读", "书籍", "拓展", "延伸阅读"], "reading"),
+        (["讲解", "教程", "课件", "教案", "讲义"], "lecture"),
+    ]
+    for _kws, _rtype in SPECIFIC_TYPE_MAP:
+        if any(kw in user_msg for kw in _kws):
+            logger.info(f"[资源节点] 关键词识别具体类型: {_rtype}（{topic}）")
+            return {
+                "resource_topic": topic,
+                "resource_types": [_rtype],
+                "resource_detected": True,
+                "current_biz_mode": "resource",
+            }
+    if any(kw in user_msg for kw in ALL_RESOURCE_KEYWORDS):
+        logger.info(f"[资源节点] 泛指学习资料，直接生成全部5类: {topic}")
+        return {
+            "resource_topic": topic,
+            "resource_types": ["lecture", "mindmap", "exercise", "reading", "code"],
             "resource_detected": True,
             "current_biz_mode": "resource",
         }
@@ -539,8 +574,38 @@ async def tutor_node(state: AgentState) -> dict:
 
 
 async def unknown_handler_node(state: AgentState) -> dict:
-    """未知意图处理"""
-    return {"sse_buffer": ["好的，请告诉我你需要什么帮助"]}
+    """未知意图处理：不再返回固定引导语，交给大模型（tutor）自然回复。
+
+    覆盖两类场景：
+    1. 闲聊/寒暄/自我介绍等非学习类问题 → 大模型正常对话回复；
+    2. 意图识别 LLM 调用失败兜底到 unknown → 由 tutor 再调一次 LLM，
+       失败时返回明确错误提示，不用固定话术伪装成正常回复。
+    """
+    question = state.get("user_message", "")
+    student_id = state.get("user_id", "")
+    language = state.get("language", "")
+
+    from core.capabilities.impl.tutor_agent import tutor_agent
+    try:
+        content_parts = []
+        async for chunk in tutor_agent.answer(
+            question, student_id,
+            conversation_history=state.get("context_history") or None,
+            language=language,
+            context_summary=state.get("context_summary", ""),
+        ):
+            content_parts.append(chunk)
+        reply = "".join(content_parts).strip()
+        if not reply or reply.startswith("\n\n[生成中断"):
+            reply = "好的，请告诉我你需要什么帮助"
+        return {"tutor_reply": reply, "intent": "tutor", "current_biz_mode": "tutor"}
+    except Exception as e:
+        logger.exception(f"[未知意图] tutor 兜底失败: {e}")
+        return {
+            "tutor_reply": f"抱歉，我这边暂时处理不了你的消息（{str(e)[:80]}），请稍后重试或换个说法。",
+            "intent": "tutor",
+            "current_biz_mode": "tutor",
+        }
 
 
 async def result_aggregator_node(state: AgentState) -> dict:
@@ -569,7 +634,7 @@ async def result_aggregator_node(state: AgentState) -> dict:
         return {"sse_buffer": [f"✅ 已规划 {len(stages)} 个学习阶段"]}
     if intent == "tutor":
         reply = state.get("tutor_reply", "")
-        return {"sse_buffer": [reply[:100] + "..."] if len(reply) > 100 else {"sse_buffer": [reply]}}
+        return {"sse_buffer": [reply[:100] + "..."] if len(reply) > 100 else [reply]}
     return {"sse_buffer": ["好的，请告诉我你需要什么帮助"]}
 
 

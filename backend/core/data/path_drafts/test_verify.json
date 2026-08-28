@@ -1,0 +1,883 @@
+{
+  "draft_id": "draft_747a0a8c",
+  "student_id": "test_verify",
+  "topic": "SQL",
+  "collected": {
+    "topic": "SQL",
+    "subject": "SQL",
+    "daily_hours": 1.5,
+    "cycle": "1个月",
+    "profile": {},
+    "foundation": "入门"
+  },
+  "path_name": "SQL学习路径",
+  "overall_goal": "系统掌握SQL",
+  "goal": "系统掌握SQL",
+  "market_demand": "",
+  "total_duration_days": 30,
+  "daily_minutes": 90,
+  "stages": [
+    {
+      "stage": 1,
+      "title": "数据库基础与建表",
+      "description": "系统学习SQL的「数据库基础与建表」，配练习巩固",
+      "estimated_days": 5,
+      "focus_points": [
+        "SQL 语法",
+        "CREATE/INSERT",
+        "数据类型"
+      ],
+      "expected_outcome": "掌握SQL·数据库基础与建表并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索sql语法_搜索sql语法",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「SQL 语法」",
+          "link": "https://leetcode.cn/problemset/?search=SQL%20%E8%AF%AD%E6%B3%95",
+          "knowledge_point": "SQL 语法",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=SQL%20%E8%AF%AD%E6%B3%95",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索sql语法_搜索sql语法",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「SQL 语法」",
+          "link": "https://www.nowcoder.com/search?query=SQL%20%E8%AF%AD%E6%B3%95",
+          "knowledge_point": "SQL 语法",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=SQL%20%E8%AF%AD%E6%B3%95",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索createinse_搜索createinse",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「CREATE/INSERT」",
+          "link": "https://leetcode.cn/problemset/?search=CREATE/INSERT",
+          "knowledge_point": "CREATE/INSERT",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=CREATE/INSERT",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索createinse_搜索createinse",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「CREATE/INSERT」",
+          "link": "https://www.nowcoder.com/search?query=CREATE/INSERT",
+          "knowledge_point": "CREATE/INSERT",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=CREATE/INSERT",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "单表查询与过滤",
+      "description": "系统学习SQL的「单表查询与过滤」，配练习巩固",
+      "estimated_days": 5,
+      "focus_points": [
+        "SELECT",
+        "WHERE",
+        "ORDER BY/LIMIT"
+      ],
+      "expected_outcome": "掌握SQL·单表查询与过滤并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索select_搜索select",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「SELECT」",
+          "link": "https://leetcode.cn/problemset/?search=SELECT",
+          "knowledge_point": "SELECT",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=SELECT",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索select_搜索select",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「SELECT」",
+          "link": "https://www.nowcoder.com/search?query=SELECT",
+          "knowledge_point": "SELECT",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=SELECT",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索where_搜索where",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「WHERE」",
+          "link": "https://leetcode.cn/problemset/?search=WHERE",
+          "knowledge_point": "WHERE",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=WHERE",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索where_搜索where",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「WHERE」",
+          "link": "https://www.nowcoder.com/search?query=WHERE",
+          "knowledge_point": "WHERE",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=WHERE",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "多表连接查询",
+      "description": "系统学习SQL的「多表连接查询」，配练习巩固",
+      "estimated_days": 5,
+      "focus_points": [
+        "JOIN",
+        "LEFT/RIGHT JOIN",
+        "关联条件"
+      ],
+      "expected_outcome": "掌握SQL·多表连接查询并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索join_搜索join",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「JOIN」",
+          "link": "https://leetcode.cn/problemset/?search=JOIN",
+          "knowledge_point": "JOIN",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=JOIN",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索join_搜索join",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「JOIN」",
+          "link": "https://www.nowcoder.com/search?query=JOIN",
+          "knowledge_point": "JOIN",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=JOIN",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索leftrightj_搜索leftrightj",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「LEFT/RIGHT JOIN」",
+          "link": "https://leetcode.cn/problemset/?search=LEFT/RIGHT%20JOIN",
+          "knowledge_point": "LEFT/RIGHT JOIN",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=LEFT/RIGHT%20JOIN",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索leftrightj_搜索leftrightj",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「LEFT/RIGHT JOIN」",
+          "link": "https://www.nowcoder.com/search?query=LEFT/RIGHT%20JOIN",
+          "knowledge_point": "LEFT/RIGHT JOIN",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=LEFT/RIGHT%20JOIN",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "分组聚合",
+      "description": "系统学习SQL的「分组聚合」，配练习巩固",
+      "estimated_days": 5,
+      "focus_points": [
+        "GROUP BY",
+        "HAVING",
+        "聚合函数"
+      ],
+      "expected_outcome": "掌握SQL·分组聚合并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索groupby_搜索groupby",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「GROUP BY」",
+          "link": "https://leetcode.cn/problemset/?search=GROUP%20BY",
+          "knowledge_point": "GROUP BY",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=GROUP%20BY",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索groupby_搜索groupby",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「GROUP BY」",
+          "link": "https://www.nowcoder.com/search?query=GROUP%20BY",
+          "knowledge_point": "GROUP BY",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=GROUP%20BY",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索having_搜索having",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「HAVING」",
+          "link": "https://leetcode.cn/problemset/?search=HAVING",
+          "knowledge_point": "HAVING",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=HAVING",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索having_搜索having",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「HAVING」",
+          "link": "https://www.nowcoder.com/search?query=HAVING",
+          "knowledge_point": "HAVING",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=HAVING",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "窗口函数与高级查询",
+      "description": "系统学习SQL的「窗口函数与高级查询」，配练习巩固",
+      "estimated_days": 5,
+      "focus_points": [
+        "ROW_NUMBER",
+        "LAG/LEAD",
+        "CTE"
+      ],
+      "expected_outcome": "掌握SQL·窗口函数与高级查询并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索rownumber_搜索rownumber",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「ROW_NUMBER」",
+          "link": "https://leetcode.cn/problemset/?search=ROW_NUMBER",
+          "knowledge_point": "ROW_NUMBER",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=ROW_NUMBER",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索rownumber_搜索rownumber",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「ROW_NUMBER」",
+          "link": "https://www.nowcoder.com/search?query=ROW_NUMBER",
+          "knowledge_point": "ROW_NUMBER",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=ROW_NUMBER",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索laglead_搜索laglead",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「LAG/LEAD」",
+          "link": "https://leetcode.cn/problemset/?search=LAG/LEAD",
+          "knowledge_point": "LAG/LEAD",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=LAG/LEAD",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索laglead_搜索laglead",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「LAG/LEAD」",
+          "link": "https://www.nowcoder.com/search?query=LAG/LEAD",
+          "knowledge_point": "LAG/LEAD",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=LAG/LEAD",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "综合实战",
+      "description": "系统学习SQL的「综合实战」，配练习巩固",
+      "estimated_days": 5,
+      "focus_points": [
+        "业务查询",
+        "性能优化",
+        "索引"
+      ],
+      "expected_outcome": "掌握SQL·综合实战并能独立应用",
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索业务查询_搜索业务查询",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「业务查询」",
+          "link": "https://leetcode.cn/problemset/?search=%E4%B8%9A%E5%8A%A1%E6%9F%A5%E8%AF%A2",
+          "knowledge_point": "业务查询",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E4%B8%9A%E5%8A%A1%E6%9F%A5%E8%AF%A2",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索业务查询_搜索业务查询",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「业务查询」",
+          "link": "https://www.nowcoder.com/search?query=%E4%B8%9A%E5%8A%A1%E6%9F%A5%E8%AF%A2",
+          "knowledge_point": "业务查询",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E4%B8%9A%E5%8A%A1%E6%9F%A5%E8%AF%A2",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索性能优化_搜索性能优化",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「性能优化」",
+          "link": "https://leetcode.cn/problemset/?search=%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96",
+          "knowledge_point": "性能优化",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "牛客_搜索性能优化_搜索性能优化",
+          "node_id": "",
+          "platform": "牛客",
+          "problem_no": "",
+          "title": "搜索「性能优化」",
+          "link": "https://www.nowcoder.com/search?query=%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96",
+          "knowledge_point": "性能优化",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://www.nowcoder.com/search?query=%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96",
+          "created_at": "2026-08-16T20:48:21",
+          "updated_at": "2026-08-16T20:48:21",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "step_01",
+      "title": "数据库基础与建表",
+      "description": "系统学习SQL的「数据库基础与建表」，配练习巩固",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握SQL·数据库基础与建表并能独立应用",
+      "resources": [
+        {
+          "rid": "res_d9190c3692c6",
+          "node_id": "step_01",
+          "title": "B站《SQL基础》第1集",
+          "url": "https://www.bilibili.com/video/BV1DR",
+          "platform": "B站",
+          "watched": false,
+          "watch_note": "",
+          "created_at": "2026-08-16T20:48:27"
+        }
+      ],
+      "daily_tasks": [
+        {
+          "day": 1,
+          "title": "数据库基础与建表 - 第1天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 2,
+          "title": "数据库基础与建表 - 第2天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 3,
+          "title": "数据库基础与建表 - 第3天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 4,
+          "title": "数据库基础与建表 - 第4天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 5,
+          "title": "数据库基础与建表 - 第5天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_02",
+      "title": "单表查询与过滤",
+      "description": "系统学习SQL的「单表查询与过滤」，配练习巩固",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握SQL·单表查询与过滤并能独立应用",
+      "resources": [],
+      "daily_tasks": [
+        {
+          "day": 6,
+          "title": "单表查询与过滤 - 第1天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 7,
+          "title": "单表查询与过滤 - 第2天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 8,
+          "title": "单表查询与过滤 - 第3天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 9,
+          "title": "单表查询与过滤 - 第4天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 10,
+          "title": "单表查询与过滤 - 第5天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_03",
+      "title": "多表连接查询",
+      "description": "系统学习SQL的「多表连接查询」，配练习巩固",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握SQL·多表连接查询并能独立应用",
+      "resources": [],
+      "daily_tasks": [
+        {
+          "day": 11,
+          "title": "多表连接查询 - 第1天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 12,
+          "title": "多表连接查询 - 第2天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 13,
+          "title": "多表连接查询 - 第3天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 14,
+          "title": "多表连接查询 - 第4天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 15,
+          "title": "多表连接查询 - 第5天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_04",
+      "title": "分组聚合",
+      "description": "系统学习SQL的「分组聚合」，配练习巩固",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握SQL·分组聚合并能独立应用",
+      "resources": [],
+      "daily_tasks": [
+        {
+          "day": 16,
+          "title": "分组聚合 - 第1天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 17,
+          "title": "分组聚合 - 第2天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 18,
+          "title": "分组聚合 - 第3天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 19,
+          "title": "分组聚合 - 第4天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 20,
+          "title": "分组聚合 - 第5天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_05",
+      "title": "窗口函数与高级查询",
+      "description": "系统学习SQL的「窗口函数与高级查询」，配练习巩固",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握SQL·窗口函数与高级查询并能独立应用",
+      "resources": [],
+      "daily_tasks": [
+        {
+          "day": 21,
+          "title": "窗口函数与高级查询 - 第1天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 22,
+          "title": "窗口函数与高级查询 - 第2天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 23,
+          "title": "窗口函数与高级查询 - 第3天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 24,
+          "title": "窗口函数与高级查询 - 第4天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 25,
+          "title": "窗口函数与高级查询 - 第5天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    },
+    {
+      "node_id": "step_06",
+      "title": "综合实战",
+      "description": "系统学习SQL的「综合实战」，配练习巩固",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "掌握SQL·综合实战并能独立应用",
+      "resources": [],
+      "daily_tasks": [
+        {
+          "day": 26,
+          "title": "综合实战 - 第1天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 27,
+          "title": "综合实战 - 第2天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 28,
+          "title": "综合实战 - 第3天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 29,
+          "title": "综合实战 - 第4天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        },
+        {
+          "day": 30,
+          "title": "综合实战 - 第5天",
+          "description": "学习时长: 90分钟",
+          "completed": false,
+          "checkin_date": null,
+          "checkin_notes": ""
+        }
+      ]
+    }
+  ],
+  "status": "draft",
+  "version": 1,
+  "created_at": "2026-08-16T20:48:21"
+}

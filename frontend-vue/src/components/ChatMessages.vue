@@ -34,20 +34,18 @@
     <!-- 【删减】移除流式输出气泡（ChatBubble），避免生成过程中渲染标题卡片/朗读按钮等冗余内容 -->
     <!-- 改为统一由下方加载提示框展示生成状态 -->
 
-    <!-- 生成中占位（统一替代原流式输出气泡 + 加载提示） -->
-    <div v-if="chatStore.loading || chatStore.streamingText" class="loading-indicator">
+    <!-- 生成中占位：思考圈 / 真实流式内容；资源内容已在气泡流式显示时整个隐藏 -->
+    <div v-if="(chatStore.loading || chatStore.streamingText) && (isRealContent || showThinking)" class="loading-indicator">
       <div class="msg-row assistant">
         <!-- 如果 streamingText 包含实际内容（非状态提示），直接展示内容 -->
         <div v-if="isRealContent" class="msg-bubble streaming-content">
           <div class="msg-content" v-html="renderedStreaming"></div>
           <span class="cursor-blink">|</span>
         </div>
-        <!-- 否则显示加载动画 -->
-        <div v-else class="msg-bubble generating">
-          <span class="generating-text">
-            <span v-for="(char, i) in generatingChars" :key="i" class="bounce-char" :style="{ animationDelay: (i * 0.08) + 's' }">{{ char }}</span>
-          </span>
-          <span class="cursor-blink">|</span>
+        <!-- 否则显示思考圈：资源还没开始输出时显示，内容一开始流式就交给消息气泡 -->
+        <div v-else-if="showThinking" class="msg-bubble generating">
+          <el-icon class="is-loading thinking-spin" :size="16"><Loading /></el-icon>
+          <span class="generating-text">正在思考</span>
         </div>
       </div>
     </div>
@@ -59,9 +57,9 @@
 <script setup>
 import { ref, computed, watch, nextTick } from 'vue'
 import { useChatStore } from '@/stores/chat'
-import { marked } from 'marked'
+import { renderMarkdown } from '@/utils/markdown'
 import ChatBubble from './ChatBubble.vue'
-import { User, Reading, MapLocation, EditPen, DataAnalysis } from '@element-plus/icons-vue'
+import { User, Reading, MapLocation, EditPen, DataAnalysis, Loading } from '@element-plus/icons-vue'
 
 const emit = defineEmits(['send', 'open-path-wizard', 'open-skill-gap'])
 
@@ -94,9 +92,6 @@ function handleTipClick(tip) {
   emit('send', tip.text, tip.explicitType)
 }
 
-/** 加载动画文字拆分为逐字数组 */
-const generatingChars = '正在生成内容中'.split('')
-
 /** 判断 streamingText 是否为实际内容（而非状态提示） */
 const isRealContent = computed(() => {
   const text = chatStore.streamingText
@@ -112,10 +107,25 @@ const renderedStreaming = computed(() => {
   const text = chatStore.streamingText
   if (!text) return ''
   try {
-    return marked(text)
+    return renderMarkdown(text)
   } catch {
     return text
   }
+})
+
+/**
+ * 是否显示「正在思考」圈：
+ * 有任务在跑（loading / streamingText）且最后一条消息还没有内容时才显示。
+ * 资源/批改等一旦开始输出（消息气泡出现），就隐藏思考圈，交给气泡流式展示。
+ */
+const showThinking = computed(() => {
+  if (isRealContent.value) return false
+  const busy = chatStore.loading || !!chatStore.streamingText
+  if (!busy) return false
+  const msgs = chatStore.messages
+  const last = msgs[msgs.length - 1]
+  if (last && last.role === 'assistant' && (last.content || last.mindmapOutline !== undefined)) return false
+  return true
 })
 
 /** 处理练习相关操作 */
@@ -228,7 +238,7 @@ watch(() => chatStore.streamingText, () => nextTick(scrollToBottom))
   margin-left: 1px;
 }
 
-/* 生成中气泡 — 保留原有消息气泡圆角、浅底色样式 */
+/* 思考中气泡 — 圈圈 + 正在思考 */
 .msg-bubble.generating {
   background: #f5f7fa;
   color: #374151;
@@ -237,23 +247,16 @@ watch(() => chatStore.streamingText, () => nextTick(scrollToBottom))
   padding: 12px 20px;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 8px;
   border: 1px solid #eef0f4;
 }
+.thinking-spin {
+  color: #6366f1;
+  flex-shrink: 0;
+}
 .generating-text {
-  display: inline-flex;
-  gap: 1px;
-}
-.bounce-char {
-  display: inline-block;
-  animation: charBounce 1.4s ease-in-out infinite;
-}
-.bounce-char:nth-child(7) { /* "中" 字节奏微调 */
-  animation-delay: 0.48s !important;
-}
-@keyframes charBounce {
-  0%, 40%, 100% { transform: translateY(0); }
-  20% { transform: translateY(-4px); }
+  color: #6b7280;
+  font-size: 14px;
 }
 
 /* 光标闪烁 */

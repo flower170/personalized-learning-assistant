@@ -1,0 +1,494 @@
+{
+  "draft_id": "draft_27447540",
+  "student_id": "t_dl_4688a4c0",
+  "topic": "数据分析",
+  "collected": {
+    "daily_hours": null,
+    "cycle": null,
+    "target": null
+  },
+  "path_name": "数据分析 90 天精细化学习路径（零基础｜求职导向）",
+  "overall_goal": "简历拥有实战项目，能够投递数据分析师、数据运营岗位；能独立完成数据清洗、指标计算、SQL 取数、Python 分析与可视化，并产出业务分析报告",
+  "goal": "系统掌握数据分析",
+  "market_demand": "数据分析/数据运营岗位：SQL 取数与业务查询是硬性要求，Python 数据处理与可视化是核心加分项，Power BI 看板与实战项目是面试重点",
+  "total_duration_days": 90,
+  "daily_minutes": 120,
+  "stages": [
+    {
+      "stage": 1,
+      "title": "Excel 数据分析",
+      "description": "熟练清洗数据、计算指标、制作报表",
+      "estimated_days": 20,
+      "focus_points": [
+        "单元格操作：合并、边框、数据验证、条件格式",
+        "基础函数：SUM/AVERAGE/IF/COUNTIF/SUMIF",
+        "引用与名称管理：相对引用/绝对引用/混合引用",
+        "查找函数：VLOOKUP/XLOOKUP、INDEX+MATCH",
+        "条件统计：SUMIFS/COUNTIFS/AVERAGEIFS",
+        "数据透视表：分组、筛选、值字段、计算字段、切片器",
+        "图表制作：柱状/折线/饼图/组合图、图表美化",
+        "动态图表与迷你图",
+        "Power Query：去重、填充缺失值、拆分文本、逆透视",
+        "数据清洗流程：格式统一、异常值处理、规范化"
+      ],
+      "expected_outcome": "拿到一份杂乱表格，可以独立完成清洗 + 多维度汇总报表",
+      "resources": [
+        {
+          "platform": "数据集",
+          "title": "Kaggle 公开电商销售数据集",
+          "url": "https://www.kaggle.com/search?q=ecommerce+sales"
+        },
+        {
+          "platform": "数据集",
+          "title": "阿里云公开样本数据",
+          "url": "https://tianchi.aliyun.com/dataset"
+        },
+        {
+          "platform": "练习平台",
+          "title": "Excel 自学网",
+          "url": "http://www.excelhome.net/"
+        }
+      ],
+      "_fallback": false
+    },
+    {
+      "stage": 2,
+      "title": "SQL 数据库",
+      "description": "重中之重：熟练掌握 SQL 查询，能独立完成业务取数（第 21~45 天，25 天）",
+      "estimated_days": 25,
+      "focus_points": [
+        "基础语法：SELECT/WHERE/ORDER BY/LIMIT/DISTINCT",
+        "聚合函数：SUM/COUNT/AVG/MAX/MIN",
+        "分组查询：GROUP BY、HAVING 过滤",
+        "多表连接：INNER JOIN / LEFT JOIN / RIGHT JOIN / FULL JOIN",
+        "CASE WHEN 条件表达式",
+        "子查询与派生表",
+        "CTE 公共表表达式",
+        "窗口函数：ROW_NUMBER/RANK/DENSE_RANK/LAG/LEAD",
+        "日期与字符串函数",
+        "业务 SQL：留存计算、连续签到、转化漏斗、TopN 取数"
+      ],
+      "expected_outcome": "熟悉完整 SQL 查询链路：单表→多表→窗口函数→业务场景，能独立完成日常取数与业务分析",
+      "resources": [
+        {
+          "platform": "练习网站",
+          "title": "牛客网 SQL 题库",
+          "url": "https://www.nowcoder.com/ta/sql"
+        },
+        {
+          "platform": "练习网站",
+          "title": "SQLZoo",
+          "url": "https://sqlzoo.net/"
+        },
+        {
+          "platform": "练习网站",
+          "title": "LeetCode 数据库专区",
+          "url": "https://leetcode.cn/problemset/database/"
+        },
+        {
+          "platform": "本地环境",
+          "title": "MySQL 8.0 安装包",
+          "url": "https://dev.mysql.com/downloads/installer/"
+        },
+        {
+          "platform": "数据集",
+          "title": "经典 employees 样本库",
+          "url": "https://github.com/datacharmer/test_db"
+        }
+      ],
+      "_fallback": false
+    },
+    {
+      "stage": 3,
+      "title": "Python 数据分析基础",
+      "description": "Python 语法 + Numpy + Pandas，能自己处理真实数据（第 46~65 天，20 天）",
+      "estimated_days": 20,
+      "focus_points": [
+        "基础语法：变量、数据类型、运算符",
+        "流程控制：if/for/while",
+        "数据结构：列表/字典/元组/集合",
+        "函数定义与模块导入",
+        "文件读写：txt/csv 读取与写入",
+        "NumPy：数组创建、切片、索引、向量化运算",
+        "NumPy：缺失值处理、随机数生成",
+        "Pandas：Series/DataFrame 创建与文件读取",
+        "Pandas：筛选、去重、缺失值填充、类型转换",
+        "Pandas：concat/merge 合并、groupby 分组聚合、透视表",
+        "时间序列处理与日期索引"
+      ],
+      "expected_outcome": "能用 Python + Pandas 独立完成数据的读取、清洗、分组聚合与透视分析",
+      "resources": [
+        {
+          "platform": "运行环境",
+          "title": "Anaconda（自带 Jupyter Notebook）",
+          "url": "https://www.anaconda.com/download"
+        },
+        {
+          "platform": "学习资料",
+          "title": "《利用 Python 进行数据分析》官方仓库",
+          "url": "https://github.com/wesm/pydata-book"
+        },
+        {
+          "platform": "数据集",
+          "title": "Kaggle 公开数据集",
+          "url": "https://www.kaggle.com/datasets"
+        },
+        {
+          "platform": "练习网站",
+          "title": "牛客网刷题：Python 数据分析基础",
+          "url": "https://www.nowcoder.com/search?query=Python%20%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80"
+        }
+      ],
+      "_fallback": false
+    },
+    {
+      "stage": 4,
+      "title": "统计学 + 数据可视化",
+      "description": "统计基础 + Python 可视化 + BI 看板，学会用数据讲结论（第 66~78 天，13 天）",
+      "estimated_days": 13,
+      "focus_points": [
+        "描述统计：均值/中位数/四分位数/方差/标准差",
+        "相关性分析：皮尔逊/斯皮尔曼相关系数",
+        "概率基础：随机变量、期望、方差",
+        "常见分布：正态分布/二项分布/泊松分布",
+        "假设检验：t 检验/卡方检验、p 值、两类错误",
+        "A/B 测试原理与样本量估计",
+        "Matplotlib：基础绘图、子图、样式设置",
+        "Seaborn：分布图/热力图/关系图",
+        "图表配色与解读规范",
+        "Power BI：导入数据、建模、度量值、交互式看板"
+      ],
+      "expected_outcome": "能计算关键统计指标、用 Matplotlib/Seaborn 绘图，并用 Power BI 搭建交互式看板",
+      "resources": [
+        {
+          "platform": "学习资料",
+          "title": "《深入浅出统计学》（拒绝复杂公式）",
+          "url": "https://book.douban.com/subject/10445952/"
+        },
+        {
+          "platform": "可视化参考",
+          "title": "Tableau Public 优秀案例",
+          "url": "https://public.tableau.com/"
+        }
+      ],
+      "_fallback": false
+    },
+    {
+      "stage": 5,
+      "title": "业务分析思维 + 实战项目",
+      "description": "简历核心：不要只跑代码，重点：提出问题→清洗数据→分析→得出结论→撰写分析报告（第 79~90 天，12 天）",
+      "estimated_days": 12,
+      "focus_points": [
+        "业务分析思维：问题定义→指标选取→假设→验证",
+        "转化漏斗分析与流失环节定位",
+        "RFM 用户分层与运营策略",
+        "复购率/留存率分析",
+        "数据清洗与特征工程（针对项目数据）",
+        "对比分析与归因分析",
+        "分析报告结构：结论先行、图表辅助、建议落地",
+        "业务建议的表达与可执行性",
+        "面试项目讲解与话术准备"
+      ],
+      "expected_outcome": "产出两份完整项目文档（代码 + 分析报告 + 可视化图表），简历可直接投递",
+      "resources": [
+        {
+          "platform": "数据集",
+          "title": "Kaggle E-commerce Dataset",
+          "url": "https://www.kaggle.com/search?q=ecommerce"
+        },
+        {
+          "platform": "数据集",
+          "title": "阿里天池公开数据集",
+          "url": "https://tianchi.aliyun.com/dataset"
+        },
+        {
+          "platform": "数据集",
+          "title": "国家统计局公开数据（宏观分析）",
+          "url": "https://data.stats.gov.cn/"
+        },
+        {
+          "platform": "报告模板",
+          "title": "标准数据分析报告结构参考",
+          "url": "https://search.bilibili.com/all?keyword=数据分析报告模板"
+        }
+      ],
+      "_fallback": false
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "step_01_01",
+      "title": "Excel 基础：单元格操作、数据录入、基础函数（SUM、AVERAGE、IF）",
+      "description": "自制销售表，完成基础营收统计",
+      "estimated_days": 4,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "自制销售表，完成基础营收统计",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_01_02",
+      "title": "核心查找函数：VLOOKUP/XLOOKUP、INDEX+MATCH、SUMIF/SUMIFS、COUNTIFS",
+      "description": "多维度统计客户订单、按条件汇总销售额",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "多维度统计客户订单、按条件汇总销售额",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_01_03",
+      "title": "数据透视表：分组、筛选、值字段设置、计算字段",
+      "description": "使用电商订单数据，统计月度、品类销量",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "使用电商订单数据，统计月度、品类销量",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_01_04",
+      "title": "图表制作：折线、柱状、漏斗、组合图，图表美化",
+      "description": "根据透视表结果绘制趋势分析图表",
+      "estimated_days": 3,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "根据透视表结果绘制趋势分析图表",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_01_05",
+      "title": "Power Query、数据清洗：去重、填充缺失值、拆分文本",
+      "description": "杂乱原始日志数据清洗，标准化格式",
+      "estimated_days": 3,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "杂乱原始日志数据清洗，标准化格式",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_02_01",
+      "title": "SQL 基础：SELECT、WHERE、ORDER BY、LIMIT、DISTINCT、聚合函数 SUM/COUNT",
+      "description": "单表查询，筛选用户、订单数据",
+      "estimated_days": 6,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "单表查询，筛选用户、订单数据",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_02_02",
+      "title": "多表关联：INNER JOIN、LEFT JOIN、RIGHT JOIN；CASE WHEN、GROUP BY",
+      "description": "用户表 + 订单表联查，统计每个用户消费总额",
+      "estimated_days": 7,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "用户表 + 订单表联查，统计每个用户消费总额",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_02_03",
+      "title": "进阶核心：子查询、CTE 临时表、窗口函数 ROW_NUMBER、RANK、DENSE_RANK",
+      "description": "找出每个品类销量 TOP3 商品、用户首次下单标记",
+      "estimated_days": 7,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "找出每个品类销量 TOP3 商品、用户首次下单标记",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_02_04",
+      "title": "综合刷题、常见业务 SQL 场景：留存计算、连续签到、转化漏斗",
+      "description": "完成 20 道业务类 SQL 真题",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "完成 20 道业务类 SQL 真题",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_03_01",
+      "title": "Python 基础：变量、循环、判断、列表、字典、函数、文件读写",
+      "description": "txt/csv 文件读取处理",
+      "estimated_days": 6,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "txt/csv 文件读取处理",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_03_02",
+      "title": "Numpy：数组创建、切片、数值运算、缺失值处理",
+      "description": "批量数值计算",
+      "estimated_days": 6,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "批量数值计算",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_03_03",
+      "title": "Pandas 核心：Series、DataFrame，筛选、去重、缺失值填充、合并表",
+      "description": "使用 Pandas 复现 Excel 透视表功能",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "使用 Pandas 复现 Excel 透视表功能",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_03_04",
+      "title": "Pandas 进阶：分组聚合、透视表、时间处理",
+      "description": "按日期统计用户流量、订单指标",
+      "estimated_days": 3,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "按日期统计用户流量、订单指标",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_04_01",
+      "title": "描述统计、均值/中位数/四分位数、方差、相关性；概率基础；假设检验、A/B 测试原理",
+      "description": "计算用户消费分布，分析指标相关性",
+      "estimated_days": 6,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "计算用户消费分布，分析指标相关性",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_04_02",
+      "title": "Python 可视化：Matplotlib、Seaborn 基础绘图",
+      "description": "绘制分布图、趋势图、对比柱状图",
+      "estimated_days": 4,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "绘制分布图、趋势图、对比柱状图",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_04_03",
+      "title": "BI 工具（Power BI 优先）：导入数据、建模、度量值、交互式看板制作",
+      "description": "搭建简易销售数据看板",
+      "estimated_days": 3,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "搭建简易销售数据看板",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_05_01",
+      "title": "项目一：电商用户行为数据分析（Python+Pandas+可视化）——转化漏斗、RFM 用户分层、复购分析",
+      "description": "产出完整分析报告 + 业务建议",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "产出完整分析报告 + 业务建议",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_05_02",
+      "title": "项目二：物流理赔风险数据分析（可选，差异化简历项目）——理赔特征、风险因素识别",
+      "description": "产出分析报告 + 业务建议",
+      "estimated_days": 4,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "产出分析报告 + 业务建议",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_05_03",
+      "title": "整理两份项目完整文档：代码 + 分析报告 + 可视化图表；梳理面试话术",
+      "description": "简历项目 + 面试准备",
+      "estimated_days": 3,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "简历项目 + 面试准备",
+      "resources": [],
+      "daily_logs": []
+    }
+  ],
+  "status": "draft",
+  "version": 1,
+  "created_at": "2026-08-17T01:17:16",
+  "recommended_video": {
+    "platform": "视频",
+    "title": "Python数据分析教程，零基础学会numpy+pan…（215.9万播放·尚硅谷）",
+    "url": "https://www.bilibili.com/video/BV1D9GLzyEL6"
+  }
+}

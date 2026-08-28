@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch, reactive } from 'vue'
+import { ElMessage } from 'element-plus'
 import { chatApi, profileApi, onlinePathApi, practiceApi, onboardingApi } from '@/api'
 import { messages as localeMessages } from '@/locales/index.js'
 
@@ -273,8 +274,9 @@ export const useChatStore = defineStore('chat', () => {
       singleResourceType = 'video'
     }
 
-    // 画像多轮对话：如果上一轮是 profile 模式且有 session，自动延续
-    if (!explicitType && currentIntent.value === 'profile' && sessionId.value) {
+    // 画像多轮对话：仅在消息明显不是"生成资料/出题"等其他意图时才延续 profile
+    const looksLikeResource = /生成|资料|出题|题目|导图|课件|文档|教程|视频|路径|规划|推荐/.test(text)
+    if (!explicitType && currentIntent.value === 'profile' && sessionId.value && !looksLikeResource) {
       explicitType = 'profile'
     }
 
@@ -358,9 +360,12 @@ export const useChatStore = defineStore('chat', () => {
         return
       }
 
-      // ✅ 后端返回的是 resource_types 数组，兼容处理
+      // ✅ 后端返回的是 resource_types 数组 → 直接生成
       if (res.resource_types && res.resource_types.length > 0) {
-        await sendResourceStream(text, res.resource_types[0])
+        // 多种类型（如5类全量）→ 传空类型，让 sendResourceStream 生成全部
+        const single = res.resource_types.length === 1 ? res.resource_types[0] : ''
+        const topic = res.resource_topic || text
+        await sendResourceStream(topic, single)
         currentIntent.value = ''
         return
       }
@@ -614,25 +619,26 @@ export const useChatStore = defineStore('chat', () => {
   }
 
   async function sendResourceStream(topic, singleType) {
-    if (!singleType) {
-      console.error('[sendResourceStream] 必须指定单一资源类型')
-      return
+    // 消息懒创建：思考阶段（画像分析 / RAG 检索）不出现组件，首个内容块到达时才创建并随内容一起流式显示
+    let msgIdx = -1
+    function ensureMsg() {
+      if (msgIdx !== -1) return
+      msgIdx = messages.value.length
+      messages.value.push({
+        role: 'assistant',
+        content: '',
+        timestamp: Date.now(),
+        intent: 'resource',
+        sections: [],
+        imageUrls: {},
+      })
     }
-    const msgIdx = messages.value.length
-    messages.value.push({
-      role: 'assistant',
-      content: '',
-      timestamp: Date.now(),
-      intent: 'resource',
-      sections: [],
-      imageUrls: {},
-    })
 
-    streamingText.value = '正在生成学习资源...'
+    streamingText.value = '正在思考'
     agentNodeMap.value = {}
 
     try {
-      const types = [singleType]
+      const types = singleType ? [singleType] : ['lecture', 'mindmap', 'exercise', 'reading', 'code']
       const body = JSON.stringify({
         student_id: userId.value,
         topic: topic,
@@ -672,6 +678,7 @@ export const useChatStore = defineStore('chat', () => {
 
       let currentType = ''
       let currentSection = ''
+      let pendingHeader = ''  // start 事件只暂存资源标题，首个内容块到达时才创建消息（避免空框闪现）
       let typeImages = {}
       let videoCovers = {}  // url → cover_url 映射
 
@@ -748,24 +755,33 @@ export const useChatStore = defineStore('chat', () => {
       await parseSSEStream(response, (event) => {
         _trackNode(event)
         if (event.event === 'error') {
+          ensureMsg()
           messages.value[msgIdx].content += `\n\n❌ ${event.message}`
           return
         }
 
-        if (event.event === 'start' || event.type) {
-          if (event.event === 'start') {
-            currentType = event.type || ''
-            currentSection = ''
-            // 添加类型标题
-            const label = RESOURCE_LABELS[currentType] || currentType
-            const separator = messages.value[msgIdx].content ? '\n\n---\n\n' : ''
-            messages.value[msgIdx].content += `${separator}## ${label}\n\n`
-          }
+        if (event.event === 'start') {
+          currentType = event.type || ''
+          currentSection = ''
+          // 懒创建：只暂存标题，不创建消息、不设空大纲。等首个 chunk 到达时再创建消息，
+          // 让思维导图组件和内容一起出现并流式渲染，避免思考阶段先闪现一个空的思维导图框
+          pendingHeader = `## ${RESOURCE_LABELS[currentType] || currentType}\n\n`
         }
 
         // 内容块
         if (event.event === 'chunk' && event.data) {
+          ensureMsg()
+          // 首个内容块到达时补上资源标题（start 事件只暂存了标题）
+          if (pendingHeader) {
+            const separator = messages.value[msgIdx].content ? '\n\n---\n\n' : ''
+            messages.value[msgIdx].content += `${separator}${pendingHeader}`
+            pendingHeader = ''
+          }
           messages.value[msgIdx].content += event.data
+          // 思维导图：流式累积大纲，导图渐进渲染（不提前显示全部文字）
+          if (currentType === 'mindmap') {
+            messages.value[msgIdx].mindmapOutline = (messages.value[msgIdx].mindmapOutline || '') + event.data
+          }
           // 练习类型：流式中只展示中文正文，不预显 JSON（答题卡在流式结束后再出）
           if (currentType === 'exercise') {
             messages.value[msgIdx].displayContent = exerciseTail(messages.value[msgIdx].content)
@@ -776,6 +792,13 @@ export const useChatStore = defineStore('chat', () => {
 
         // 资源类型完成
         if (event.event === 'end') {
+          ensureMsg()
+          // 兜底：若全程没有 chunk（异常/空内容），此时才创建消息并补上标题
+          if (pendingHeader) {
+            const separator = messages.value[msgIdx].content ? '\n\n---\n\n' : ''
+            messages.value[msgIdx].content += `${separator}${pendingHeader}`
+            pendingHeader = ''
+          }
           // 如果有思维导图图片，追加图片
           if (event.image_url) {
             const imgMarkdown = `\n\n![思维导图](${event.image_url})`
@@ -784,6 +807,10 @@ export const useChatStore = defineStore('chat', () => {
           }
           if (event.raw_mermaid) {
             messages.value[msgIdx].content += `\n\n\`\`\`mermaid\n${event.raw_mermaid}\n\`\`\``
+          }
+          // 思维导图：后端直接输出 Markdown 大纲，保存供前端 markmap 渲染
+          if (currentType === 'mindmap' && event.content) {
+            messages.value[msgIdx].mindmapOutline = event.content
           }
           // 视频封面
           if (event.video_covers) {
@@ -794,6 +821,7 @@ export const useChatStore = defineStore('chat', () => {
 
         // 全部完成
         if (event.event === 'complete') {
+          ensureMsg()
           streamingText.value = ''
           // 流式结束：清掉展示用切片，正文回落到完整 content（由 ChatBubble 剥 JSON 显示）
           delete messages.value[msgIdx].displayContent
@@ -807,10 +835,11 @@ export const useChatStore = defineStore('chat', () => {
         }
       })
 
-      if (!messages.value[msgIdx].content) {
+      if (msgIdx !== -1 && !messages.value[msgIdx].content) {
         messages.value[msgIdx].content = '✅ 学习资源生成完成！请在右侧查看。'
       }
     } catch (err) {
+      ensureMsg()
       messages.value[msgIdx].content = `❌ 资源生成失败: ${err.message}`
     }
   }
@@ -941,8 +970,9 @@ export const useChatStore = defineStore('chat', () => {
   }
 
   // ========== 学习路径向导（聊天内交互：画像起步 → 提问补充 → 草案确认） ==========
-  /** 发起点 → 推一条向导助手消息（intent:'path'）并调 start；向导状态随对话原地更新 */
-  function pathStart(topic) {
+  /** 发起点 → 推一条向导助手消息（intent:'path'）并调 start；向导状态随对话原地更新。
+   *  opts = { dailyHours, cycle }：PathStartDialog 已问的时间投入，随请求带给后端。 */
+  function pathStart(topic, opts = {}) {
     const t = (topic || '').trim()
     if (!t) return
     // 按钮发起时补一条自然用户消息；打字发起时最后一条已是用户消息，不重复
@@ -954,32 +984,75 @@ export const useChatStore = defineStore('chat', () => {
       role: 'assistant',
       intent: 'path',
       content: '',
-      pathWizard: { status: 'loading', topic: t },
+      pathWizard: { status: 'loading', topic: t, startOpts: opts },
       timestamp: Date.now(),
     })
     messages.value.push(wm)
     // 向导卡自带内联 loading，不走全局 loading（避免出现重复的生成中气泡）
-    onlinePathApi.start(userId.value, t)
+    onlinePathApi.start(userId.value, t, opts)
       .then(res => applyPathRes(wm, res))
-      .catch(err => { wm.pathWizard = { status: 'error', topic: t, error: err.message } })
+      .catch(err => { wm.pathWizard = { status: 'error', topic: t, startOpts: opts, error: err.message } })
   }
 
-  /** 统一把后端返回落到向导卡状态：need_info → ask；带 path → draft；否则 → error */
+  /** 统一把后端返回落到向导卡状态：need_info → ask；ready_to_generate → 流式生成；带 path → draft；否则 → error */
   function applyPathRes(wm, res) {
     const topic = wm.pathWizard?.topic || ''
+    const startOpts = wm.pathWizard?.startOpts || {}
     if (res && res.need_info) {
       wm.pathWizard = {
         status: 'ask',
         topic,
+        startOpts,
         questions: res.questions || [],
         missingKeys: res.missing_keys || [],
         collected: res.collected || {},
         confirmSubject: res.confirm_subject || '',
       }
+    } else if (res && res.ready_to_generate) {
+      // 信息已够 → 走流式生成草案（后台执行，向导卡显示进度）
+      pathGenerateStream(wm, res.topic || topic, res.collected || {}, '')
     } else if (res && res.path) {
-      wm.pathWizard = { status: 'draft', topic, draft: res.path, draftId: res.draft_id || '' }
+      wm.pathWizard = { status: 'draft', topic, startOpts, draft: res.path, draftId: res.draft_id || '' }
     } else {
-      wm.pathWizard = { status: 'error', topic, error: res?.error || '路径规划失败，请稍后再试' }
+      wm.pathWizard = { status: 'error', topic, startOpts, error: res?.error || '路径规划失败，请稍后再试' }
+    }
+  }
+
+  /** 流式生成路径草案：消费 SSE 进度事件，完成后原地替换成草案 */
+  async function pathGenerateStream(wm, topic, collected, draftId = '') {
+    const prev = { ...wm.pathWizard }
+    wm.pathWizard = {
+      ...prev,
+      status: 'generating',
+      topic,
+      progress: '正在生成学习路径草案…',
+    }
+    try {
+      const response = await onlinePathApi.draftStream(userId.value, topic, collected, draftId)
+      await parseSSEStream(response, (evt) => {
+        if (evt.event === 'progress') {
+          wm.pathWizard = { ...wm.pathWizard, progress: evt.message }
+        } else if (evt.event === 'complete') {
+          const draft = evt.path || {}
+          if (draftId && collected?.feedback) draft.revision_reason = collected.feedback
+          wm.pathWizard = {
+            status: 'draft',
+            topic,
+            startOpts: prev.startOpts || {},
+            draft,
+            draftId: evt.draft_id || draftId,
+            revised: !!draftId,
+          }
+        } else if (evt.event === 'error') {
+          wm.pathWizard = { ...prev, status: 'error', error: evt.message }
+        }
+      })
+      // 流结束但没收到 complete → 兜底报错
+      if (wm.pathWizard.status === 'generating') {
+        wm.pathWizard = { ...prev, status: 'error', error: '路径生成失败，请重试' }
+      }
+    } catch (err) {
+      wm.pathWizard = { ...prev, status: 'error', error: err.message }
     }
   }
 
@@ -1023,6 +1096,25 @@ export const useChatStore = defineStore('chat', () => {
     }
   }
 
+  /** 向导草案阶段：给某个节点加一条学习资源（返回的新草案节点原地合入，不触发重新生成） */
+  async function pathAddDraftResource(wm, nodeId, title, url, platform = '') {
+    if (!wm?.pathWizard) return false
+    const prev = { ...wm.pathWizard }
+    try {
+      const res = await onlinePathApi.addDraftResource(
+        userId.value, prev.draftId, nodeId, title.trim(), url.trim(), platform)
+      if (res && res.ok && res.path) {
+        wm.pathWizard = { ...prev, draft: res.path, status: 'draft' }
+        return true
+      }
+      ElMessage.warning(res?.error || '添加资源失败，请重试')
+      return false
+    } catch (err) {
+      ElMessage.warning(err.message || '添加资源失败')
+      return false
+    }
+  }
+
   /** 修改草案 → 带 feedback 重新生成 */
   async function pathRevise(wm, feedback) {
     if (!wm?.pathWizard) return
@@ -1031,7 +1123,10 @@ export const useChatStore = defineStore('chat', () => {
     wm.pathWizard = { ...prev, status: 'loading' }
     try {
       const res = await onlinePathApi.confirm(userId.value, prev.draftId, feedback)
-      if (res && res.ok && res.revised) {
+      if (res && res.ready_to_generate) {
+        // 流式重新生成
+        await pathGenerateStream(wm, res.topic || prev.topic, res.collected || {}, res.draft_id || prev.draftId)
+      } else if (res && res.ok && res.revised && res.path) {
         wm.pathWizard = {
           status: 'draft',
           topic: prev.topic,
@@ -1166,6 +1261,8 @@ export const useChatStore = defineStore('chat', () => {
     saveMessages()
     messages.value = []
     sessionId.value = 'sess_' + Date.now()
+    // 新对话/切换用户 → 解绑上传文档，避免仍基于文档回答
+    tempFileId.value = ''
     profile.value = null
     radarData.value = []
     resourceProgress.value = {}
@@ -1318,6 +1415,6 @@ export const useChatStore = defineStore('chat', () => {
     setTheme, setLanguage, setSpeechLanguage,
     changePassword, deleteAccount,
     login, quickLogin, logout,
-    pathStart, pathAnswer, pathConfirm, pathRevise,
+    pathStart, pathAnswer, pathConfirm, pathRevise, pathAddDraftResource,
   }
 })

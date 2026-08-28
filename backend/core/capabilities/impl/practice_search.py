@@ -193,6 +193,21 @@ class PracticeCardSearcher:
 
     # ---------------- 结构化 ----------------
 
+    def _single_platform(self, candidates: list[dict], default: str = "LeetCode") -> tuple[list[dict], str]:
+        """每知识点只保留一个平台：取命中候选最多的平台（平手优先平台顺序靠前），无命中用 default。"""
+        if not candidates:
+            return [], default
+        order = list(PLATFORM_CONFIG.keys())
+        counts: dict[str, int] = {}
+        for c in candidates:
+            p = c.get("platform")
+            if p and p in PLATFORM_CONFIG:
+                counts[p] = counts.get(p, 0) + 1
+        if not counts:
+            return [], default
+        best = max(counts, key=lambda p: (counts[p], -order.index(p)))
+        return [c for c in candidates if c.get("platform") == best], best
+
     async def structure_cards(
         self,
         candidates: list[dict],
@@ -205,13 +220,17 @@ class PracticeCardSearcher:
         1) 有候选 → LLM 从中挑 count 道，补 title/knowledge_point/difficulty
         2) 候选不足/为空 → 用平台官方 search_url 兜底生成（链接永远可点）
         3) 每张卡过 normalize_card 硬性校验
-        """
+
+        单平台约束：每个知识点只保留一个平台（命中候选最多的平台，无命中默认 LeetCode），
+        避免同一知识点在 LeetCode / 牛客 / 洛谷 等平台重复出卡；同平台兜底卡再按 card_id 去重。"""
+        # 每知识点只保留一个平台，避免跨平台重复出卡
+        candidates, platform = self._single_platform(candidates)
         cards: list[dict] = []
         used: list[dict] = list(candidates)
 
         if used:
             cards = await self._llm_pick_cards(used, topic, knowledge_points, count)
-            # LLM 失败则直接用原始候选
+            # LLM 失败则直接用原始候选（已限定单平台）
             if not cards:
                 cards = [
                     {"platform": c["platform"], "problem_no": c["problem_no"],
@@ -221,12 +240,21 @@ class PracticeCardSearcher:
                     for c in used[:count]
                 ]
 
-        # 数量不足 → search_url 兜底补
+        # 数量不足 → 同一平台的 search_url 兜底补
         if len(cards) < count:
-            fallback = self._fallback_cards(topic, knowledge_points, count - len(cards))
+            fallback = self._fallback_cards(topic, knowledge_points, count - len(cards), platform=platform)
             cards.extend(fallback)
 
-        return [self.normalize_card(c) for c in cards[:count]]
+        normalized = [self.normalize_card(c) for c in cards[:count]]
+        # 同平台兜底卡完全相同 → 按 card_id 去重，一个知识点只留一张
+        seen: set[str] = set()
+        deduped: list[dict] = []
+        for c in normalized:
+            if c["card_id"] in seen:
+                continue
+            seen.add(c["card_id"])
+            deduped.append(c)
+        return deduped
 
     async def _llm_pick_cards(
         self,
@@ -248,7 +276,7 @@ class PracticeCardSearcher:
                 f"主题：{topic}\n知识点：{kp_text}\n需要选 {count} 道。\n\n候选题目：\n{cand_text}\n\n"
                 f'输出 JSON 数组：[{{"platform":"平台名","problem_no":"题号","link":"原链接","title":"题目名","knowledge_point":"所属知识点","difficulty":"入门|简单|中等|困难"}}]'
             )
-            resp = await llm.simple_chat(system, user, model="glm-4.5-flash", temperature=0.2)
+            resp = await llm.simple_chat(system, user, model="qwen-plus", temperature=0.2)
             if not resp:
                 return []
             import json as _json
@@ -271,16 +299,17 @@ class PracticeCardSearcher:
             logger.warning(f"[PracticeSearch] LLM 挑题失败: {e}")
             return []
 
-    def _fallback_cards(self, topic: str, knowledge_points: Optional[list[str]], count: int) -> list[dict]:
+    def _fallback_cards(self, topic: str, knowledge_points: Optional[list[str]], count: int, platform: str = "LeetCode") -> list[dict]:
         """候选不足时的官方搜索页兜底 — 链接永远可点（用户在官方搜索页自己挑题）。
-        标题明确标成「搜索「知识点」」，让用户知道点开是平台的搜索页，不是伪装成一道具体题。"""
-        cards = []
-        platforms = list(PLATFORM_CONFIG.keys())
+        标题明确标成「搜索「知识点」」，让用户知道点开是平台的搜索页，不是伪装成一道具体题。
+        每知识点只用一个平台（默认 LeetCode，可被单平台选择覆盖），避免同一知识点
+        在 LeetCode / 牛客 等平台重复出卡。"""
+        if platform not in PLATFORM_CONFIG:
+            platform = "LeetCode"
+        cfg = PLATFORM_CONFIG[platform]
         kp = (knowledge_points or [topic])[0]
-        for i in range(count):
-            platform = platforms[i % len(platforms)]
-            cfg = PLATFORM_CONFIG[platform]
-            cards.append({
+        return [
+            {
                 "platform": platform,
                 "problem_no": "",
                 "link": cfg["search_url"](kp),
@@ -288,8 +317,9 @@ class PracticeCardSearcher:
                 "knowledge_point": kp,
                 "difficulty": "简单",
                 "_fallback": True,
-            })
-        return cards
+            }
+            for _ in range(count)
+        ]
 
     # ---------------- 校验 ----------------
 

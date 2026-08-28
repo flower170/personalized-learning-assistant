@@ -13,7 +13,7 @@
           </el-button>
         </div>
       </div>
-      <p class="prv-sub">把学过的知识点，去官方 OJ 刷题巩固。记录进度、打卡、见证连续学习天数。</p>
+      <p class="prv-sub">记录每天学了什么推进路径，收藏题目与笔记、回顾错题，见证连续学习天数。</p>
     </div>
 
     <div v-loading="pathLoading" class="prv-body">
@@ -26,6 +26,25 @@
       </div>
 
       <template v-else-if="path">
+        <!-- 内容快捷入口：点开在右侧开大框展示（错题集 / 我的题目 / 我的笔记） -->
+        <div class="prv-quick-entry">
+          <div class="prv-entry" @click="openDrawer('wrong')">
+            <span class="prv-entry-ico">📕</span>
+            <span class="prv-entry-name">错题集</span>
+            <span class="prv-entry-count">{{ wrongTotal }} 道</span>
+          </div>
+          <div class="prv-entry" @click="openDrawer('collections')">
+            <span class="prv-entry-ico">📂</span>
+            <span class="prv-entry-name">我的题目</span>
+            <span class="prv-entry-count">{{ collectionTotal }} 题</span>
+          </div>
+          <div class="prv-entry" @click="openDrawer('notes')">
+            <span class="prv-entry-ico">🗒️</span>
+            <span class="prv-entry-name">我的笔记</span>
+            <span class="prv-entry-count">{{ notes.length }} 条</span>
+          </div>
+        </div>
+
         <!-- ═══════ 顶部：已确认的学习路径 ═══════ -->
         <div class="prv-card">
           <div class="prv-card-head">
@@ -34,6 +53,22 @@
               <div v-if="path.goal" class="prv-path-goal">{{ path.goal }}</div>
             </div>
             <el-tag :type="pathProgressTag" effect="light">{{ pathStatusText }}</el-tag>
+          </div>
+
+          <!-- 路径级推荐视频（规划时按科目 B站播放量最高，整个路径只推一个，点击直达） -->
+          <div v-if="path.recommended_video" class="prv-rec-video">
+            <span class="prv-rec-label">推荐视频</span>
+            <a
+              :href="path.recommended_video.url"
+              target="_blank"
+              rel="noopener"
+              class="prv-stage-res-link"
+              :title="path.recommended_video.url"
+            >
+              <span class="prv-stage-res-plat">{{ path.recommended_video.platform }}</span>
+              <span class="prv-stage-res-title">{{ path.recommended_video.title }}</span>
+              <span class="prv-stage-res-ext">↗</span>
+            </a>
           </div>
 
           <!-- 路径进度条 -->
@@ -65,6 +100,22 @@
                   <div v-if="st.focus_points?.length" class="prv-tags">
                     <el-tag v-for="f in st.focus_points" :key="f" size="small" effect="plain">{{ f }}</el-tag>
                   </div>
+                  <!-- 阶段配套资源（标准模板：视频/练习网站/数据集，点击直达） -->
+                  <div v-if="st.resources?.length" class="prv-stage-res">
+                    <a
+                      v-for="r in st.resources"
+                      :key="r.url + r.title"
+                      :href="r.url"
+                      target="_blank"
+                      rel="noopener"
+                      class="prv-stage-res-link"
+                      :title="r.url"
+                    >
+                      <span class="prv-stage-res-plat">{{ r.platform }}</span>
+                      <span class="prv-stage-res-title">{{ r.title }}</span>
+                      <span class="prv-stage-res-ext">↗</span>
+                    </a>
+                  </div>
                   <div v-if="st.practice_cards?.length" class="prv-stage-cards">
                     <a
                       v-for="c in st.practice_cards"
@@ -83,9 +134,13 @@
             </div>
           </div>
 
-          <!-- 节点（微观：日计划）+ 练习卡 -->
+          <!-- 非编程科目：没有官方 OJ 题库，只提示一次（不再每个节点重复） -->
+          <div v-if="!isProgramming && path.nodes?.length" class="prv-no-oj-tip">
+            本科目没有官方 OJ 题库，直接用课本/真题练习即可。
+          </div>
+
+          <!-- 节点（学习路径各阶段的学习记录） -->
           <div v-if="path.nodes?.length" class="prv-nodes">
-            <div class="prv-sec-label">日计划 &amp; 练习</div>
             <div v-for="node in path.nodes" :key="node.node_id" class="prv-node">
               <div class="prv-node-head">
                 <div class="prv-node-title">
@@ -96,55 +151,307 @@
               </div>
               <div v-if="node.description" class="prv-node-desc">{{ node.description }}</div>
 
-              <!-- 日任务 -->
-              <div v-if="node.daily_tasks?.length" class="prv-tasks">
-                <el-tooltip
-                  v-for="task in node.daily_tasks.slice(0, 4)"
-                  :key="task.day"
-                  :content="`第${task.day}天：${task.title}${task.completed ? ' ✓ 已完成' : ''}`"
-                  placement="top"
-                >
-                  <span class="prv-task-chip" :class="{ done: task.completed }">
-                    D{{ task.day }}
+              <!-- 学习记录：用户每天写下学了什么，打钩完成（对应学习路径节点） -->
+              <div class="prv-daily-log">
+                <div class="prv-daily-log-head">
+                  <span class="prv-daily-log-label">学习记录</span>
+                  <span v-if="node.daily_logs?.length" class="prv-daily-log-count">
+                    已打钩 {{ node.daily_logs.filter(l => l.done).length }} / {{ node.daily_logs.length }}
                   </span>
-                </el-tooltip>
-                <span v-if="node.daily_tasks.length > 4" class="prv-task-more">
-                  +{{ node.daily_tasks.length - 4 }}
-                </span>
-              </div>
-
-              <!-- 练习卡（按节点） -->
-              <div class="prv-node-cards">
-                <PracticeCardList
-                  :student-id="chatStore.userId"
-                  :node-id="node.node_id"
-                  :cards="node.practice_cards || []"
-                  :loading="node._loading"
-                  :can-search="isProgramming"
-                  @find="findCards(node)"
-                  @updated="refresh"
-                />
-              </div>
-
-              <!-- 外部平台学习（自评，呼应路径进度） -->
-              <div class="prv-node-study">
-                <div v-if="node.node_study" class="prv-node-study-summary">
-                  <span>{{ node.node_study.platform || '外部平台' }}</span>
-                  <span>累计 {{ node.node_study.total_hours }}h</span>
-                  <span>{{ node.node_study.total_problems }} 题</span>
-                  <span class="prv-mastery">{{ masteryStars(node.node_study.mastery) }}</span>
-                  <span v-if="node.node_study.latest_note" class="prv-node-study-note">· {{ node.node_study.latest_note }}</span>
+                  <el-button size="small" text type="primary" @click="openAddLog(node)">+ 记录今天</el-button>
                 </div>
-                <el-button size="small" plain class="prv-node-study-btn" @click="openStudyDialog(node)">
-                  ✍️ 外部学习打卡
+
+                <!-- 行内新增记录 -->
+                <div v-if="addingLogNode?.node_id === node.node_id" class="prv-log-add">
+                  <el-date-picker
+                    v-model="newLogDate"
+                    type="date"
+                    value-format="YYYY-MM-DD"
+                    placeholder="今天"
+                    class="prv-log-date"
+                  />
+                  <el-input
+                    v-model="newLogContent"
+                    size="small"
+                    placeholder="今天学了什么？如：掌握了 VLOOKUP 精确匹配…"
+                    @keyup.enter="doAddLog(node)"
+                  />
+                  <el-button size="small" type="primary" :loading="savingLog" @click="doAddLog(node)">保存</el-button>
+                  <el-button size="small" text @click="closeAddLog">取消</el-button>
+                </div>
+
+                <div v-if="node.daily_logs?.length" class="prv-log-list">
+                  <div v-for="log in node.daily_logs" :key="log.id" class="prv-log-item" :class="{ done: log.done }">
+                    <span class="prv-log-date">{{ fmtDate(log.date) }}</span>
+                    <span class="prv-log-content">{{ log.content }}</span>
+                    <el-button
+                      size="small"
+                      text
+                      :type="log.done ? 'success' : 'primary'"
+                      class="prv-log-toggle"
+                      @click="toggleLog(node, log)"
+                    >{{ log.done ? '✓ 已学' : '打钩' }}</el-button>
+                    <el-button size="small" text type="danger" class="prv-log-del" @click="deleteLog(node, log)">×</el-button>
+                  </div>
+                </div>
+                <div v-else-if="addingLogNode?.node_id !== node.node_id" class="prv-log-empty">
+                  还没有记录，点「+ 记录今天」写下今天学了什么吧
+                </div>
+              </div>
+
+              <!-- 学习资源：B站/文档链接，点开即跳转；看完推进当日学习记录打钩 -->
+              <div class="prv-node-res">
+                <div class="prv-node-res-head">
+                  <span class="prv-node-res-label">学习资源</span>
+                  <el-button size="small" text type="primary" @click="openAddRes(node)">+ 添加</el-button>
+                </div>
+                <div v-if="node.resources?.length" class="prv-res-list">
+                  <div v-for="r in node.resources" :key="r.rid" class="prv-res-item" :class="{ watched: r.watched }">
+                    <a class="prv-res-link" :href="r.url" target="_blank" rel="noopener" :title="r.url">
+                      <span v-if="r.platform" class="prv-res-plat">{{ r.platform }}</span>
+                      <span class="prv-res-title">{{ r.title }}</span>
+                    </a>
+                    <span v-if="r.watched" class="prv-res-watched">✓ 已看完</span>
+                    <el-button v-else size="small" text type="success" class="prv-res-watch-btn" @click="openWatch(r)">看完了</el-button>
+                    <el-button size="small" text type="danger" class="prv-res-del" @click="onDeleteRes(r)">×</el-button>
+                  </div>
+                </div>
+                <div v-else class="prv-res-empty">这个知识点还没有学习资源，点「+ 添加」挂一个 B站课程/文档链接，下次直接点开学。</div>
+              </div>
+
+              <!-- 跳过：这个节点我会了 -->
+              <div class="prv-node-study">
+                <el-button size="small" plain class="prv-node-skip-btn" @click="onSkipNode(node)">
+                  ⏭ 这个我会了，跳过
                 </el-button>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ═══════ 我的题目：命名题目集（收藏 AI 出的题） ═══════ -->
-        <div class="prv-card prv-collections">
+        <!-- ═══════ 中部：进度追踪 + 激励 ═══════ -->
+        <div class="prv-grid">
+          <!-- 统计卡片 -->
+          <div class="prv-card prv-stats">
+            <div class="prv-sec-label">进度追踪</div>
+            <div class="prv-stats-row">
+              <div class="prv-stat">
+                <el-progress
+                  type="circle"
+                  :percentage="progress?.progress_percent || 0"
+                  :width="92"
+                  :color="'#6366f1'"
+                >
+                  <template #default>
+                    <div class="prv-stat-big">{{ progress?.progress_percent || 0 }}%</div>
+                  </template>
+                </el-progress>
+                <div class="prv-stat-label">练习完成</div>
+                <div class="prv-stat-sub">{{ progress?.done || 0 }}/{{ progress?.total_cards || 0 }} 题</div>
+              </div>
+              <div class="prv-stat">
+                <div class="prv-stat-num" :class="{ warn: (progress?.total_accuracy_percent || 0) < 60 }">
+                  {{ progress?.total_accuracy_percent || 0 }}%
+                </div>
+                <div class="prv-stat-label">正确率 <span class="prv-stat-mini">OJ+AI</span></div>
+                <div class="prv-stat-sub">
+                  {{ progress?.total_correct || 0 }} 对 / {{ progress?.total_answered || 0 }} 答
+                </div>
+              </div>
+              <div class="prv-stat">
+                <div class="prv-stat-num hot">🔥 {{ progress?.streak?.current || 0 }}</div>
+                <div class="prv-stat-label">连续打卡</div>
+                <div class="prv-stat-sub">最长 {{ progress?.streak?.longest || 0 }} 天</div>
+              </div>
+              <div class="prv-stat">
+                <div class="prv-stat-num">{{ progress?.total_checkins || 0 }}</div>
+                <div class="prv-stat-label">累计打卡</div>
+                <div class="prv-stat-sub">今天要打卡吗？</div>
+              </div>
+            </div>
+            <div class="prv-checkin-row">
+              <el-button type="primary" round :disabled="checkedToday" @click="openCheckin">
+                <el-icon><Calendar /></el-icon>
+                {{ checkedToday ? '今日已打卡 ✓' : '今日打卡' }}
+              </el-button>
+              <el-button v-if="wrongTotal > 0" round type="warning" plain @click="openDrawer('wrong')">
+                <el-icon><Warning /></el-icon> {{ wrongTotal }} 道错题待回顾
+              </el-button>
+            </div>
+            <!-- AI 出题练习统计（任何科目都有效，非编程科目 OJ 卡被清零但 AI 统计存活） -->
+            <div v-if="(progress?.ai_total || 0) > 0" class="prv-ai-bar">
+              🧠 AI 练习：共 {{ progress.ai_total }} 题 · 对 {{ progress.ai_correct }} · 错 {{ progress.ai_wrong }} · 正确率 {{ progress.ai_accuracy_percent }}%
+            </div>
+          </div>
+
+          <!-- 最近打卡 -->
+          <div class="prv-card">
+            <div class="prv-sec-label">打卡记录</div>
+            <div v-if="progress?.checkins?.length" class="prv-checkin-list">
+              <div v-for="c in recentCheckins" :key="c.date" class="prv-checkin-item">
+                <span class="prv-checkin-date">{{ c.date }}</span>
+                <span class="prv-checkin-node">{{ nodeTitle(c.node_id) }}</span>
+                <span v-if="c.note" class="prv-checkin-note">{{ c.note }}</span>
+              </div>
+            </div>
+            <div v-else class="prv-empty-small">还没有打卡记录，学完今天的内容就打个卡吧！</div>
+          </div>
+        </div>
+
+        <!-- ═══════ 下部：最近练习回顾 ═══════ -->
+        <div class="prv-card">
+          <div class="prv-sec-label">最近练习</div>
+          <div v-if="progress?.recent?.length" class="prv-recent-list">
+            <div v-for="r in progress.recent.slice(0, 10)" :key="r.card_id" class="prv-recent-item">
+              <span class="prv-recent-status" :class="'st-' + r.status">{{ statusText(r.status) }}</span>
+              <span class="prv-recent-title">{{ r.title }}</span>
+              <span class="prv-recent-time">{{ shortTime(r.updated_at) }}</span>
+            </div>
+          </div>
+          <div v-else class="prv-empty-small">还没有练习记录，做完题后（如聊天里答题、收藏题目）会出现在这里。</div>
+        </div>
+      </template>
+    </div>
+
+    <!-- 新建题目集弹窗 -->
+    <el-dialog v-model="createCollectionVisible" title="📁 新建题目集" width="380px" append-to-body>
+      <el-input v-model="newColName" placeholder="题目集名称，如：SQL 错题" maxlength="30" @keyup.enter="onCreateCol" />
+      <template #footer>
+        <el-button @click="createCollectionVisible = false">取消</el-button>
+        <el-button type="primary" :disabled="!newColName.trim()" :loading="savingCol" @click="onCreateCol">创建</el-button>
+      </template>
+    </el-dialog>
+
+    <!-- 资源「看完了」自评弹窗 -->
+    <el-dialog v-model="watchDialogVisible" title="✓ 标记看完了" width="420px" append-to-body>
+      <div class="prv-dialog-tip">
+        在 <b>{{ watchRes?.platform || '平台' }}</b> 看完了「{{ watchRes?.title || '' }}」？
+        写一句学到了什么，路径进度会随之前移（我只能记录你点开的是哪个链接 + 你的自评，追踪不到视频具体哪一集）。
+      </div>
+      <el-input
+        v-model="watchNote"
+        type="textarea"
+        :rows="3"
+        placeholder="学到了什么？比如：掌握了 SQL 的 GROUP BY…"
+      />
+      <template #footer>
+        <el-button @click="watchDialogVisible = false">取消</el-button>
+        <el-button type="primary" :loading="savingWatch" @click="doWatch">确认看完</el-button>
+      </template>
+    </el-dialog>
+
+    <!-- 添加学习资源弹窗 -->
+    <el-dialog v-model="addResDialogVisible" title="➕ 添加学习资源" width="460px" append-to-body>
+      <div class="prv-dialog-tip">给「{{ addResNode?.title || '' }}」挂一个学习资源（B站课程、博客、文档等），下次点链接直接跳转：</div>
+      <div class="prv-addres-search">
+        <el-button size="small" plain type="primary" @click="openVideoSearch">搜B站热门</el-button>
+        <span class="prv-addres-search-tip">搜播放量/点赞最高的视频自动填入，或直接自定义填写</span>
+      </div>
+      <el-form label-width="64px" class="prv-study-form">
+        <el-form-item label="平台">
+          <el-select v-model="addResForm.platform" style="width:100%">
+            <el-option v-for="p in RES_PLATFORMS" :key="p" :label="p" :value="p" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="标题">
+          <el-input v-model="addResForm.title" placeholder="如：B站《SQL入门到进阶》第1-5集" />
+        </el-form-item>
+        <el-form-item label="链接">
+          <el-input v-model="addResForm.url" placeholder="https://www.bilibili.com/video/…" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="addResDialogVisible = false">取消</el-button>
+        <el-button type="primary" :loading="savingRes" @click="doAddRes">添加</el-button>
+      </template>
+    </el-dialog>
+
+    <!-- 打卡弹窗 -->
+    <el-dialog v-model="checkinVisible" title="🔥 今日打卡" width="420px" append-to-body>
+      <div class="prv-dialog-tip">选择今天完成学习的节点（可留空），写一句学习心得吧</div>
+      <el-select v-model="checkinNode" placeholder="选择节点（可选）" clearable style="width:100%;margin-bottom:10px">
+        <el-option v-for="n in path?.nodes || []" :key="n.node_id" :label="n.title" :value="n.node_id" />
+      </el-select>
+      <el-input
+        v-model="checkinNote"
+        type="textarea"
+        :rows="3"
+        placeholder="今天学到了什么？比如：掌握了前缀和…"
+      />
+      <template #footer>
+        <el-button @click="checkinVisible = false">取消</el-button>
+        <el-button type="primary" :loading="checking" @click="doCheckin">确认打卡</el-button>
+      </template>
+    </el-dialog>
+
+    <!-- 搜B站热门视频（选用后回填资源表单） -->
+    <VideoSearchDialog
+      v-model="videoSearchVisible"
+      :initial-keyword="addResNode?.title || ''"
+      @select="onVideoSelected"
+    />
+
+    <!-- 右侧大框展示：错题集 / 我的题目 / 我的笔记（点击顶部快捷入口打开，左边栏不动） -->
+    <el-drawer
+      v-model="drawerVisible"
+      :title="drawerTitle"
+      size="72%"
+      append-to-body
+      class="prv-drawer"
+    >
+      <div class="prv-drawer-body">
+        <!-- 错题集（OJ 错题 + AI 错题，全量不截断） -->
+        <template v-if="drawerType === 'wrong'">
+          <div v-if="!wrongOj.length && !wrongAi.length" class="prv-empty-small">太棒了，目前没有错题</div>
+
+          <!-- OJ 错题：跳官方平台重做 -->
+          <div v-if="wrongOj.length" class="prv-sub-sec">
+            <div class="prv-sub-label">OJ 错题 <span class="prv-stat-mini">({{ wrongOj.length }} 道)</span></div>
+            <div class="prv-mistake-list">
+              <div v-for="c in wrongOj" :key="c.card_id" class="prv-mistake-item" :id="'wrong-' + c.card_id">
+                <div class="prv-mistake-head">
+                  <span class="pc-platform" :style="{ color: platformColor(c.platform) }">{{ c.platform }}</span>
+                  <span v-if="c.problem_no" class="prv-mistake-no">{{ c.problem_no }}</span>
+                  <a v-if="c.link" :href="c.link" target="_blank" rel="noopener" class="prv-mistake-link">重做 →</a>
+                  <el-button size="small" text type="danger" class="prv-mistake-remove" @click="onRemoveWrong('oj', c.card_id)">移除</el-button>
+                </div>
+                <div class="prv-mistake-title">{{ c.title }}</div>
+                <div v-if="c.knowledge_point" class="prv-mistake-note">知识点：{{ c.knowledge_point }}</div>
+                <div v-if="c.note" class="prv-mistake-note">{{ c.note }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI 错题：页内重做（做对即移出错题集） -->
+          <div v-if="wrongAi.length" class="prv-sub-sec">
+            <div class="prv-sub-label">AI 错题 <span class="prv-stat-mini">({{ wrongAi.length }} 道，页内重做)</span></div>
+            <div class="prv-ai-wrong-list">
+              <div v-for="rec in wrongAi" :key="rec.exercise_id + '-' + rec.updated_at" class="prv-ai-wrong-item">
+                <div class="prv-ai-wrong-topic">{{ rec.topic || 'AI 练习' }}</div>
+                <ExerciseCard
+                  :exercise="aiToCard(rec)"
+                  :current-index="0"
+                  :total-exercises="1"
+                  standalone
+                  @answer="(e) => onRedoAi(rec, e)"
+                />
+                <div class="prv-ai-wrong-ops">
+                  <el-button size="small" text type="primary" @click="toggleAiAns(rec)">
+                    {{ showAiAns[rec.exercise_id] ? '收起解析' : '查看解析' }}
+                  </el-button>
+                  <el-button size="small" text type="danger" @click="onRemoveWrong('ai', rec.exercise_id)">移除</el-button>
+                </div>
+                <div v-if="showAiAns[rec.exercise_id]" class="prv-ai-wrong-ans">
+                  <div class="prv-ai-wrong-ans-line"><b>正确答案：</b>{{ rec.answer }}</div>
+                  <div v-if="rec.explanation" class="prv-ai-wrong-ans-line"><b>解析：</b>{{ rec.explanation }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <!-- 我的题目：命名题目集（收藏 AI 出的题） -->
+        <template v-else-if="drawerType === 'collections'">
           <div class="prv-collections-head">
             <div class="prv-collections-title">📂 我的题目 <span class="prv-stat-mini">({{ collectionTotal }} 题)</span></div>
             <el-button size="small" type="primary" plain @click="openCreateCol">
@@ -203,194 +510,31 @@
               </div>
             </div>
           </div>
-        </div>
+        </template>
 
-        <!-- ═══════ 中部：进度追踪 + 激励 ═══════ -->
-        <div class="prv-grid">
-          <!-- 统计卡片 -->
-          <div class="prv-card prv-stats">
-            <div class="prv-sec-label">进度追踪</div>
-            <div class="prv-stats-row">
-              <div class="prv-stat">
-                <el-progress
-                  type="circle"
-                  :percentage="progress?.progress_percent || 0"
-                  :width="92"
-                  :color="'#6366f1'"
-                >
-                  <template #default>
-                    <div class="prv-stat-big">{{ progress?.progress_percent || 0 }}%</div>
-                  </template>
-                </el-progress>
-                <div class="prv-stat-label">练习完成</div>
-                <div class="prv-stat-sub">{{ progress?.done || 0 }}/{{ progress?.total_cards || 0 }} 题</div>
-              </div>
-              <div class="prv-stat">
-                <div class="prv-stat-num" :class="{ warn: (progress?.total_accuracy_percent || 0) < 60 }">
-                  {{ progress?.total_accuracy_percent || 0 }}%
-                </div>
-                <div class="prv-stat-label">正确率 <span class="prv-stat-mini">OJ+AI</span></div>
-                <div class="prv-stat-sub">
-                  {{ progress?.total_correct || 0 }} 对 / {{ progress?.total_answered || 0 }} 答
-                </div>
-              </div>
-              <div class="prv-stat">
-                <div class="prv-stat-num hot">🔥 {{ progress?.streak?.current || 0 }}</div>
-                <div class="prv-stat-label">连续打卡</div>
-                <div class="prv-stat-sub">最长 {{ progress?.streak?.longest || 0 }} 天</div>
-              </div>
-              <div class="prv-stat">
-                <div class="prv-stat-num">{{ progress?.total_checkins || 0 }}</div>
-                <div class="prv-stat-label">累计打卡</div>
-                <div class="prv-stat-sub">今天要打卡吗？</div>
-              </div>
-            </div>
-            <div class="prv-checkin-row">
-              <el-button type="primary" round :disabled="checkedToday" @click="openCheckin">
-                <el-icon><Calendar /></el-icon>
-                {{ checkedToday ? '今日已打卡 ✓' : '今日打卡' }}
-              </el-button>
-              <el-button v-if="wrongTotal > 0" round type="warning" plain @click="scrollToWrong">
-                <el-icon><Warning /></el-icon> {{ wrongTotal }} 道错题待回顾
-              </el-button>
-            </div>
-            <!-- AI 出题练习统计（任何科目都有效，非编程科目 OJ 卡被清零但 AI 统计存活） -->
-            <div v-if="(progress?.ai_total || 0) > 0" class="prv-ai-bar">
-              🧠 AI 练习：共 {{ progress.ai_total }} 题 · 对 {{ progress.ai_correct }} · 错 {{ progress.ai_wrong }} · 正确率 {{ progress.ai_accuracy_percent }}%
-            </div>
+        <!-- 我的笔记：保存的思维导图图片 -->
+        <template v-else-if="drawerType === 'notes'">
+          <div class="prv-notes-head">
+            <div class="prv-notes-title">🗒️ 我的笔记 <span class="prv-stat-mini">({{ notes.length }})</span></div>
           </div>
 
-          <!-- 最近打卡 -->
-          <div class="prv-card">
-            <div class="prv-sec-label">打卡记录</div>
-            <div v-if="progress?.checkins?.length" class="prv-checkin-list">
-              <div v-for="c in recentCheckins" :key="c.date" class="prv-checkin-item">
-                <span class="prv-checkin-date">{{ c.date }}</span>
-                <span class="prv-checkin-node">{{ nodeTitle(c.node_id) }}</span>
-                <span v-if="c.note" class="prv-checkin-note">{{ c.note }}</span>
-              </div>
-            </div>
-            <div v-else class="prv-empty-small">还没有打卡记录，学完今天的内容就打个卡吧！</div>
-          </div>
-        </div>
+          <div v-if="!notes.length" class="prv-empty-small">还没有保存笔记。在资源查看页生成思维导图后点「保存」，就会归到这里。</div>
 
-        <!-- ═══════ 下部：练习回顾 ═══════ -->
-        <div class="prv-grid">
-          <!-- 错题集（OJ 错题 + AI 错题，全量不截断） -->
-          <div class="prv-card">
-            <div class="prv-sec-label">错题集</div>
-
-            <!-- OJ 错题：跳官方平台重做 -->
-            <div v-if="wrongOj.length" class="prv-sub-sec">
-              <div class="prv-sub-label">OJ 错题 <span class="prv-stat-mini">({{ wrongOj.length }} 道)</span></div>
-              <div class="prv-mistake-list">
-                <div v-for="c in wrongOj" :key="c.card_id" class="prv-mistake-item" :id="'wrong-' + c.card_id">
-                  <div class="prv-mistake-head">
-                    <span class="pc-platform" :style="{ color: platformColor(c.platform) }">{{ c.platform }}</span>
-                    <span v-if="c.problem_no" class="prv-mistake-no">{{ c.problem_no }}</span>
-                    <a v-if="c.link" :href="c.link" target="_blank" rel="noopener" class="prv-mistake-link">重做 →</a>
-                  </div>
-                  <div class="prv-mistake-title">{{ c.title }}</div>
-                  <div v-if="c.note" class="prv-mistake-note">{{ c.note }}</div>
+          <div v-else class="prv-note-grid">
+            <div v-for="n in notes" :key="n.note_id" class="prv-note">
+              <el-image :src="noteImg(n)" :preview-src-list="[noteImg(n)]" fit="contain" lazy class="prv-note-img" />
+              <div class="prv-note-info">
+                <div class="prv-note-title">{{ n.title }}</div>
+                <div class="prv-note-ops">
+                  <a :href="noteImg(n)" target="_blank" rel="noopener" class="prv-note-download">下载</a>
+                  <el-button size="small" text type="danger" @click="onDeleteNote(n)">删除</el-button>
                 </div>
               </div>
             </div>
-
-            <!-- AI 错题：页内重做（做对即移出错题集） -->
-            <div v-if="wrongAi.length" class="prv-sub-sec">
-              <div class="prv-sub-label">AI 错题 <span class="prv-stat-mini">({{ wrongAi.length }} 道，页内重做)</span></div>
-              <div class="prv-ai-wrong-list">
-                <div v-for="rec in wrongAi" :key="rec.exercise_id + '-' + rec.updated_at" class="prv-ai-wrong-item">
-                  <div class="prv-ai-wrong-topic">{{ rec.topic || 'AI 练习' }}</div>
-                  <ExerciseCard
-                    :exercise="aiToCard(rec)"
-                    :current-index="0"
-                    :total-exercises="1"
-                    standalone
-                    @answer="(e) => onRedoAi(rec, e)"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div v-if="!wrongOj.length && !wrongAi.length" class="prv-empty-small">太棒了，目前没有错题</div>
           </div>
-
-          <!-- 最近练习记录 -->
-          <div class="prv-card">
-            <div class="prv-sec-label">最近练习</div>
-            <div v-if="progress?.recent?.length" class="prv-recent-list">
-              <div v-for="r in progress.recent.slice(0, 10)" :key="r.card_id" class="prv-recent-item">
-                <span class="prv-recent-status" :class="'st-' + r.status">{{ statusText(r.status) }}</span>
-                <span class="prv-recent-title">{{ r.title }}</span>
-                <span class="prv-recent-time">{{ shortTime(r.updated_at) }}</span>
-              </div>
-            </div>
-            <div v-else class="prv-empty-small">
-              <template v-if="isProgramming">还没有练习记录，从上面任意节点的「去官方找题」开始吧！</template>
-              <template v-else>该科目没有对应的官方 OJ 题库，直接用课本/真题练习并打卡即可。</template>
-            </div>
-          </div>
-        </div>
-      </template>
-    </div>
-
-    <!-- 新建题目集弹窗 -->
-    <el-dialog v-model="createCollectionVisible" title="📁 新建题目集" width="380px" append-to-body>
-      <el-input v-model="newColName" placeholder="题目集名称，如：SQL 错题" maxlength="30" @keyup.enter="onCreateCol" />
-      <template #footer>
-        <el-button @click="createCollectionVisible = false">取消</el-button>
-        <el-button type="primary" :disabled="!newColName.trim()" :loading="savingCol" @click="onCreateCol">创建</el-button>
-      </template>
-    </el-dialog>
-
-    <!-- 外部学习打卡弹窗 -->
-    <el-dialog v-model="studyDialogVisible" title="✍️ 外部学习打卡" width="440px" append-to-body>
-      <div class="prv-dialog-tip">在牛客/力扣等平台学完，回来填一下，让路径记录你的进度：</div>
-      <el-form label-width="80px" class="prv-study-form">
-        <el-form-item label="平台">
-          <el-select v-model="studyForm.platform" style="width:100%">
-            <el-option v-for="p in STUDY_PLATFORMS" :key="p" :label="p" :value="p" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="学习时长">
-          <el-input-number v-model="studyForm.hours" :min="0" :max="24" :step="0.5" />
-          <span class="prv-form-unit">小时</span>
-        </el-form-item>
-        <el-form-item label="完成题数">
-          <el-input-number v-model="studyForm.problems" :min="0" :max="500" :step="1" />
-          <span class="prv-form-unit">题</span>
-        </el-form-item>
-        <el-form-item label="掌握度">
-          <el-rate v-model="studyForm.mastery" :max="5" show-text />
-        </el-form-item>
-        <el-form-item label="心得">
-          <el-input v-model="studyForm.note" type="textarea" :rows="2" placeholder="学到了什么？比如：掌握了前缀和…" />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <el-button @click="studyDialogVisible = false">取消</el-button>
-        <el-button type="primary" :loading="savingStudy" @click="doNodeStudy">提交</el-button>
-      </template>
-    </el-dialog>
-
-    <!-- 打卡弹窗 -->
-    <el-dialog v-model="checkinVisible" title="🔥 今日打卡" width="420px" append-to-body>
-      <div class="prv-dialog-tip">选择今天完成学习的节点（可留空），写一句学习心得吧</div>
-      <el-select v-model="checkinNode" placeholder="选择节点（可选）" clearable style="width:100%;margin-bottom:10px">
-        <el-option v-for="n in path?.nodes || []" :key="n.node_id" :label="n.title" :value="n.node_id" />
-      </el-select>
-      <el-input
-        v-model="checkinNote"
-        type="textarea"
-        :rows="3"
-        placeholder="今天学到了什么？比如：掌握了前缀和…"
-      />
-      <template #footer>
-        <el-button @click="checkinVisible = false">取消</el-button>
-        <el-button type="primary" :loading="checking" @click="doCheckin">确认打卡</el-button>
-      </template>
-    </el-dialog>
+        </template>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -399,8 +543,8 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useChatStore } from '@/stores/chat'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import PracticeCardList from '@/components/PracticeCardList.vue'
 import ExerciseCard from '@/components/ExerciseCard.vue'
+import VideoSearchDialog from '@/components/VideoSearchDialog.vue'
 import { Notebook, Refresh, Back, Calendar, Warning, Plus, MoreFilled } from '@element-plus/icons-vue'
 import { onlinePathApi, practiceApi } from '@/api'
 
@@ -422,12 +566,25 @@ const expandedCol = ref('')
 const createCollectionVisible = ref(false)
 const newColName = ref('')
 const savingCol = ref(false)
-// 外部平台学习打卡
-const STUDY_PLATFORMS = ['牛客网', 'LeetCode', '洛谷', '蓝桥杯', '中国大学MOOC', '课本', '真题', '其他']
-const studyDialogVisible = ref(false)
-const studyNode = ref(null)
-const studyForm = ref({ platform: '牛客网', hours: 1, problems: 5, mastery: 3, note: '' })
-const savingStudy = ref(false)
+// 我的笔记（保存的思维导图图片）
+const notes = ref([])
+// 右侧大框展示（抽屉）：错题集 / 我的题目 / 我的笔记
+const drawerVisible = ref(false)
+const drawerType = ref('wrong')
+const drawerTitle = computed(() => ({
+  wrong: '错题集',
+  collections: '我的题目',
+  notes: '我的笔记',
+}[drawerType.value] || ''))
+function openDrawer(type) {
+  drawerType.value = type
+  drawerVisible.value = true
+}
+// 学习记录（日计划）：用户自由记录每天学了什么 + 打钩
+const addingLogNode = ref(null)
+const newLogDate = ref('')
+const newLogContent = ref('')
+const savingLog = ref(false)
 
 let pathProgress = ref(null)
 
@@ -479,6 +636,38 @@ async function onRedoAi(rec, e) {
   } catch (err) {
     ElMessage.error(`重做保存失败: ${err.message}`)
   }
+}
+
+// ==================== 错题集：解析 / 移除 ====================
+
+/** 哪些 AI 错题展开了解析（key: exercise_id） */
+const showAiAns = ref({})
+
+function toggleAiAns(rec) {
+  showAiAns.value = { ...showAiAns.value, [rec.exercise_id]: !showAiAns.value[rec.exercise_id] }
+}
+
+/** 只刷新错题集（OJ + AI） */
+async function loadWrong() {
+  try {
+    const res = await practiceApi.wrongQuestions(chatStore.userId)
+    wrongOj.value = res?.oj || []
+    wrongAi.value = res?.ai || []
+  } catch (e) {
+    console.error('加载错题集失败', e)
+  }
+}
+
+/** 错题集移除：AI 删记录 / OJ 置 done 移出错题集 */
+async function onRemoveWrong(kind, targetId) {
+  try {
+    await ElMessageBox.confirm('确定从错题集移除这道题吗？', '移除错题', { type: 'warning' })
+    const res = await practiceApi.wrongRemove(chatStore.userId, kind, targetId)
+    if (res.ok) {
+      ElMessage.success('已移出错题集')
+      await loadWrong()
+    }
+  } catch (e) { /* 取消 */ }
 }
 
 // ==================== 我的题目（命名题目集） ====================
@@ -586,39 +775,93 @@ async function onRedoCol(col, q, e) {
   }
 }
 
-// ==================== 外部平台学习打卡（自评，呼应路径） ====================
+// ==================== 我的笔记（保存的思维导图图片） ====================
 
-function masteryStars(n) {
-  const v = Math.max(0, Math.min(5, n || 0))
-  return '★'.repeat(v) + '☆'.repeat(5 - v)
+function noteImg(n) {
+  return practiceApi.noteImageUrl(chatStore.userId, n.note_id)
 }
 
-function openStudyDialog(node) {
-  studyNode.value = node
-  studyForm.value = {
-    platform: node?.node_study?.platform || '牛客网',
-    hours: 1,
-    problems: 0,
-    mastery: node?.node_study?.mastery || 3,
-    note: '',
-  }
-  studyDialogVisible.value = true
-}
-
-async function doNodeStudy() {
-  savingStudy.value = true
+async function loadNotes() {
   try {
-    const res = await practiceApi.nodeStudy(chatStore.userId, studyNode.value.node_id, studyForm.value)
+    const res = await practiceApi.listNotes(chatStore.userId)
+    notes.value = res?.notes || []
+  } catch (e) {
+    console.error('加载笔记失败', e)
+  }
+}
+
+async function onDeleteNote(n) {
+  try {
+    await ElMessageBox.confirm(`确定删除笔记「${n.title}」吗？图片也会一并删除。`, '删除笔记', { type: 'warning' })
+    const res = await practiceApi.deleteNote(chatStore.userId, n.note_id)
     if (res.ok) {
-      ElMessage.success(res.task_marked ? '已记录，路径进度已更新 ✅' : '已记录 ✅')
-      studyDialogVisible.value = false
+      ElMessage.success('已删除')
+      await loadNotes()
+    }
+  } catch (e) { /* 取消 */ }
+}
+
+// ==================== 学习记录（日计划）：记录 + 打钩 ====================
+
+function fmtDate(d) {
+  if (!d) return '未填日期'
+  const m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/)
+  if (m) return `${Number(m[2])}/${Number(m[3])}`
+  return String(d)
+}
+
+function openAddLog(node) {
+  addingLogNode.value = node
+  const d = new Date()
+  const pad = n => String(n).padStart(2, '0')
+  newLogDate.value = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
+  newLogContent.value = ''
+}
+
+function closeAddLog() {
+  addingLogNode.value = null
+  newLogDate.value = ''
+  newLogContent.value = ''
+}
+
+async function doAddLog(node) {
+  if (!newLogContent.value.trim()) {
+    ElMessage.warning('写一下今天学了什么吧')
+    return
+  }
+  savingLog.value = true
+  try {
+    const res = await practiceApi.dailyLogAdd(chatStore.userId, node.node_id, newLogContent.value.trim(), newLogDate.value)
+    if (res.ok) {
+      ElMessage.success('已记录，记得学完打钩')
+      closeAddLog()
       await refresh(true)
     }
   } catch (err) {
     ElMessage.error(`保存失败: ${err.message}`)
   } finally {
-    savingStudy.value = false
+    savingLog.value = false
   }
+}
+
+async function toggleLog(node, log) {
+  try {
+    await practiceApi.dailyLogUpdate(chatStore.userId, log.id, { done: !log.done })
+    await refresh(true)
+  } catch (err) {
+    ElMessage.error(`操作失败: ${err.message}`)
+  }
+}
+
+async function deleteLog(node, log) {
+  try {
+    await ElMessageBox.confirm(`确定删除「${log.content.slice(0, 20)}…」这条记录吗？`, '删除记录', { type: 'warning' })
+    const res = await practiceApi.dailyLogDelete(chatStore.userId, log.id)
+    if (res.ok) {
+      ElMessage.success('已删除')
+      await refresh(true)
+    }
+  } catch (e) { /* 取消 */ }
 }
 
 function platformColor(p) {
@@ -633,28 +876,6 @@ function shortTime(iso) {
 }
 function nodeTitle(nodeId) {
   return path.value?.nodes?.find(n => n.node_id === nodeId)?.title || nodeId
-}
-
-// 卡片搜索（深入练习触发）
-async function findCards(node) {
-  if (!isProgramming.value) {
-    ElMessage.info('该科目没有对应的官方 OJ 题库')
-    return
-  }
-  node._loading = true
-  try {
-    const res = await practiceApi.deepSearch(chatStore.userId, node.node_id, node.title, node.title, { count: 3 })
-    if (res.ok) {
-      node.practice_cards = res.cards
-      ElMessage.success(res.message || `已找到 ${res.cards?.length} 道练习`)
-      await refresh(true)
-    }
-  } catch (err) {
-    console.error('deep-search 失败:', err)
-    ElMessage.error('官方题库搜索失败，请稍后重试')
-  } finally {
-    node._loading = false
-  }
 }
 
 // 打卡
@@ -686,11 +907,12 @@ async function doCheckin() {
 
 async function refresh(silent = false) {
   if (!silent) refreshing.value = true
-  const [pRes, prRes, wRes, cRes] = await Promise.allSettled([
+  const [pRes, prRes, wRes, cRes, nRes] = await Promise.allSettled([
     onlinePathApi.get(chatStore.userId),
     practiceApi.progress(chatStore.userId),
     practiceApi.wrongQuestions(chatStore.userId),
     practiceApi.listCollections(chatStore.userId),
+    practiceApi.listNotes(chatStore.userId),
   ])
   if (pRes.status === 'fulfilled') {
     path.value = pRes.value?.ok ? pRes.value.path : null
@@ -705,15 +927,117 @@ async function refresh(silent = false) {
     wrongAi.value = wRes.value?.ai || []
   }
   if (cRes.status === 'fulfilled') collections.value = cRes.value?.collections || []
+  if (nRes.status === 'fulfilled') notes.value = nRes.value?.notes || []
   if (!silent) {
     pathLoading.value = false
     refreshing.value = false
   }
 }
 
-function scrollToWrong() {
-  const el = document.querySelector('.prv-mistake-item')
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+// ==================== 节点学习资源（添加 / 看完自评 / 删除）+ 跳过节点 ====================
+
+const RES_PLATFORMS = ['B站', 'YouTube', '中国大学MOOC', '知乎', '博客', '文档', '其他']
+const watchDialogVisible = ref(false)
+const watchRes = ref(null)
+const watchNote = ref('')
+const savingWatch = ref(false)
+const addResDialogVisible = ref(false)
+const addResNode = ref(null)
+const addResForm = ref({ platform: 'B站', title: '', url: '' })
+const savingRes = ref(false)
+
+function openWatch(r) {
+  watchRes.value = r
+  watchNote.value = ''
+  watchDialogVisible.value = true
+}
+
+async function doWatch() {
+  savingWatch.value = true
+  try {
+    const res = await practiceApi.markResourceWatched(chatStore.userId, watchRes.value.rid, watchNote.value.trim())
+    watchDialogVisible.value = false
+    ElMessage.success(res.task_marked ? '已记录「看完了」，路径进度已前移 ✅' : '已记录「看完了」 ✅')
+    await refresh(true)
+  } catch (err) {
+    ElMessage.error(`保存失败: ${err.message}`)
+  } finally {
+    savingWatch.value = false
+  }
+}
+
+function openAddRes(node) {
+  addResNode.value = node
+  addResForm.value = { platform: 'B站', title: '', url: '' }
+  addResDialogVisible.value = true
+}
+
+async function doAddRes() {
+  if (!addResForm.value.title.trim() || !addResForm.value.url.trim()) {
+    ElMessage.info('请填写资源标题和链接')
+    return
+  }
+  savingRes.value = true
+  try {
+    const res = await practiceApi.addNodeResource(
+      chatStore.userId, addResNode.value.node_id,
+      addResForm.value.title, addResForm.value.url, addResForm.value.platform)
+    if (res.ok) {
+      addResDialogVisible.value = false
+      ElMessage.success('已添加学习资源，确认后下次点链接直接跳转')
+      await refresh(true)
+    } else {
+      ElMessage.warning(res.error || '添加失败，请重试')
+    }
+  } catch (err) {
+    ElMessage.error(`添加失败: ${err.message}`)
+  } finally {
+    savingRes.value = false
+  }
+}
+
+async function onDeleteRes(r) {
+  try {
+    await ElMessageBox.confirm('确定删除这条学习资源吗？', '删除资源', { type: 'warning' })
+    const res = await practiceApi.deleteNodeResource(chatStore.userId, r.rid)
+    if (res.ok) {
+      ElMessage.success('已删除')
+      await refresh(true)
+    }
+  } catch (e) { /* 取消 */ }
+}
+
+async function onSkipNode(node) {
+  try {
+    await ElMessageBox.confirm(
+      `「${node.title}」这个知识点你确定已经会了吗？确认后该节点全部学习任务会被标记完成，路径自动跳到下一个知识点。`,
+      '跳过该知识点',
+      { type: 'warning', confirmButtonText: '确认跳过', cancelButtonText: '再想想' }
+    )
+    const res = await practiceApi.skipNode(chatStore.userId, node.node_id)
+    if (res.ok) {
+      ElMessage.success(`已跳过「${node.title}」，路径前移 ${res.marked || 0} 个任务`)
+      await refresh(true)
+    }
+  } catch (e) { /* 取消 */ }
+}
+
+// ==================== 搜B站热门视频（添加资源时选用） ====================
+
+const videoSearchVisible = ref(false)
+
+function openVideoSearch() {
+  videoSearchVisible.value = true
+}
+
+/** 选中搜索结果 → 回填添加资源表单（platform 固定 B站） */
+function onVideoSelected(v) {
+  addResForm.value = {
+    platform: v.platform || 'B站',
+    title: v.title,
+    url: v.url,
+  }
+  ElMessage.success(`已填入「${(v.title || '').slice(0, 20)}…」，点「添加」即可`)
 }
 
 onMounted(() => refresh())
@@ -744,6 +1068,37 @@ onMounted(() => refresh())
 }
 .prv-sub { font-size: 13px; color: #9ca3af; margin-top: 4px; }
 .prv-actions { display: flex; gap: 8px; }
+
+/* 内容快捷入口：点击在右侧开大框（错题集 / 我的题目 / 我的笔记） */
+.prv-quick-entry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.prv-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #eef0f4;
+  border-radius: 12px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.prv-entry:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.08);
+  transform: translateY(-1px);
+}
+.prv-entry-ico { font-size: 20px; }
+.prv-entry-name { font-size: 14px; font-weight: 600; color: #1f2937; flex: 1; }
+.prv-entry-count { font-size: 12px; color: #9ca3af; }
+@media (max-width: 700px) { .prv-quick-entry { grid-template-columns: 1fr; } }
+
+/* 右侧大框（抽屉）内容区 */
+.prv-drawer-body { padding: 4px 6px 20px; }
 
 .prv-body {
   flex: 1;
@@ -837,6 +1192,58 @@ onMounted(() => refresh())
 }
 .prv-stage-card-link:hover { border-color: #6366f1; background: #e0e7ff; }
 
+/* 阶段配套资源（标准模板：视频/练习网站/数据集，点击直达） */
+.prv-stage-res {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.prv-rec-video {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.prv-rec-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6366f1;
+  white-space: nowrap;
+}
+.prv-stage-res-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  text-decoration: none;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.prv-stage-res-link:hover {
+  border-color: #6366f1;
+  box-shadow: 0 1px 4px rgba(99, 102, 241, 0.15);
+}
+.prv-stage-res-plat {
+  font-weight: 600;
+  color: #6366f1;
+}
+.prv-stage-res-title {
+  color: #4b5563;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 260px;
+}
+.prv-stage-res-ext {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
 /* 节点 */
 .prv-nodes { margin-top: 16px; }
 .prv-node {
@@ -865,18 +1272,72 @@ onMounted(() => refresh())
 .prv-node-days { font-size: 11px; color: #9ca3af; flex-shrink: 0; }
 .prv-node-desc { font-size: 12.5px; color: #6b7280; margin-top: 4px; }
 
-.prv-tasks { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
-.prv-task-chip {
-  font-size: 10px;
-  padding: 2px 7px;
-  border-radius: 6px;
-  background: #eef0f4;
-  color: #6b7280;
-  cursor: default;
+/* 学习记录（日计划）：用户自由记录 + 打钩 */
+.prv-daily-log {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fafbff;
+  border: 1px solid #eef0f4;
+  border-radius: 8px;
 }
-.prv-task-chip.done { background: #dcfce7; color: #166534; }
-.prv-task-more { font-size: 10px; color: #9ca3af; align-self: center; }
-.prv-node-cards { margin-top: 10px; }
+.prv-daily-log-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.prv-daily-log-label { font-size: 12.5px; font-weight: 600; color: #374151; }
+.prv-daily-log-count { font-size: 11px; color: #9ca3af; }
+.prv-log-add {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.prv-log-date { width: 150px; }
+.prv-log-add .el-input { flex: 1; min-width: 200px; }
+.prv-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+.prv-log-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: #fff;
+  border: 1px solid #f0f1f5;
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: #374151;
+  transition: opacity 0.15s;
+}
+.prv-log-item.done {
+  opacity: 0.55;
+}
+.prv-log-item.done .prv-log-content {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+.prv-log-date {
+  flex-shrink: 0;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #eef0ff;
+  color: #6366f1;
+}
+.prv-log-content { flex: 1; min-width: 0; word-break: break-all; }
+.prv-log-toggle { flex-shrink: 0; font-size: 12px; }
+.prv-log-del { flex-shrink: 0; font-size: 14px; }
+.prv-log-empty {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+}
 
 /* 统计 */
 .prv-stats-row {
@@ -930,6 +1391,25 @@ onMounted(() => refresh())
   font-weight: 600;
   margin-bottom: 8px;
 }
+.prv-ai-wrong-ops {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 4px;
+}
+.prv-ai-wrong-ans {
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: #f0f7ff;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: #374151;
+  line-height: 1.6;
+}
+.prv-ai-wrong-ans-line + .prv-ai-wrong-ans-line { margin-top: 4px; }
+.prv-ai-wrong-ans-line b { color: #2563eb; font-weight: 600; }
 
 /* 打卡记录 */
 .prv-checkin-list { display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto; }
@@ -957,6 +1437,7 @@ onMounted(() => refresh())
 .prv-mistake-head { display: flex; align-items: center; gap: 8px; }
 .prv-mistake-no { font-size: 11px; color: #9ca3af; background: #fee2e2; padding: 1px 6px; border-radius: 4px; }
 .prv-mistake-link { margin-left: auto; font-size: 12px; color: #ef4444; text-decoration: none; font-weight: 600; }
+.prv-mistake-remove { flex-shrink: 0; }
 .prv-mistake-title { font-size: 13px; font-weight: 600; color: #374151; margin-top: 3px; }
 .prv-mistake-note { font-size: 12px; color: #6b7280; margin-top: 3px; }
 
@@ -984,6 +1465,15 @@ onMounted(() => refresh())
 .prv-recent-time { font-size: 11px; color: #9ca3af; flex-shrink: 0; }
 
 .prv-dialog-tip { font-size: 12.5px; color: #6b7280; margin-bottom: 10px; }
+
+/* 添加资源：搜B站热门入口 */
+.prv-addres-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.prv-addres-search-tip { font-size: 12px; color: #9ca3af; }
 
 /* 我的题目（题目集） */
 .prv-collections-head {
@@ -1016,7 +1506,61 @@ onMounted(() => refresh())
 .prv-col-q { margin-top: 12px; }
 .prv-col-q-ops { display: flex; justify-content: flex-end; }
 
-/* 节点外部学习 */
+/* 我的笔记（思维导图图片） */
+.prv-notes-head { margin-bottom: 10px; }
+.prv-notes-title { font-size: 13px; font-weight: 600; color: #6b7280; }
+.prv-note-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+.prv-note {
+  border: 1px solid #eef0f4;
+  border-radius: 10px;
+  background: #fbfbfd;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.prv-note-img {
+  width: 100%;
+  height: 220px;
+  background: #ffffff;
+  display: block;
+  cursor: zoom-in;
+}
+.prv-note-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px dashed #eef0f4;
+}
+.prv-note-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.prv-note-ops {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.prv-note-download {
+  font-size: 12px;
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+.prv-note-download:hover { color: #4f46e5; }
+
+/* 节点跳过 */
 .prv-node-study {
   display: flex;
   align-items: center;
@@ -1026,23 +1570,74 @@ onMounted(() => refresh())
   padding-top: 10px;
   border-top: 1px dashed #eef0f4;
 }
-.prv-node-study-summary {
-  font-size: 12.5px;
-  color: #6b7280;
-  background: #eef2ff;
-  border: 1px solid #e0e7ff;
-  border-radius: 8px;
-  padding: 4px 10px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.prv-mastery { color: #f59e0b; }
-.prv-node-study-note { color: #9ca3af; }
-.prv-node-study-btn { flex-shrink: 0; }
 
-/* 外部学习弹窗 */
+/* 通用弹窗表单（添加资源等） */
 .prv-study-form { margin-top: 4px; }
 .prv-study-form .el-form-item { margin-bottom: 14px; }
-.prv-form-unit { font-size: 12px; color: #9ca3af; margin-left: 8px; }
+
+/* 节点学习资源 */
+.prv-node-res {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #eef0f4;
+}
+/* 非编程科目：没有官方 OJ 题库，只在顶部提示一次 */
+.prv-no-oj-tip {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.prv-node-res-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.prv-node-res-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+}
+.prv-res-list { display: flex; flex-direction: column; gap: 6px; }
+.prv-res-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  padding: 5px 10px;
+  background: #fff;
+  border: 1px solid #eef0f4;
+  border-radius: 8px;
+}
+.prv-res-item.watched { background: #f0fdf4; border-color: #bbf7d0; }
+.prv-res-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #374151;
+  flex: 1;
+  min-width: 0;
+}
+.prv-res-link:hover { color: #6366f1; }
+.prv-res-plat {
+  font-size: 11px;
+  color: #6366f1;
+  background: #eef2ff;
+  padding: 1px 6px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.prv-res-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.prv-res-watched { font-size: 12px; color: #16a34a; flex-shrink: 0; }
+.prv-res-watch-btn, .prv-res-del { flex-shrink: 0; }
+.prv-res-empty { font-size: 12px; color: #d1d5db; }
+.prv-node-skip-btn { flex-shrink: 0; }
 </style>

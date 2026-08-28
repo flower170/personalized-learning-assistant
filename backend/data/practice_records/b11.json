@@ -1,0 +1,238 @@
+{
+  "student_id": "b11",
+  "path_topic": "",
+  "records": {},
+  "ai_exercises": [
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_662d58711ede8419",
+      "topic": "我需要练习题",
+      "type": "choice",
+      "difficulty": "basic",
+      "question": "以下 Python 代码的输出结果是什么？\\nnums = [1, 2, 3]\\nresult = []\\nfor x in nums:\\n    if x % 2 == 0:\\n        result.append(x * 2)\\nprint(result)",
+      "options": [
+        {
+          "label": "A",
+          "text": "[2, 4, 6]"
+        },
+        {
+          "label": "B",
+          "text": "[4]"
+        },
+        {
+          "label": "C",
+          "text": "[2, 6]"
+        },
+        {
+          "label": "D",
+          "text": "[]"
+        }
+      ],
+      "answer": "B",
+      "explanation": "循环遍历列表 nums，仅当 x 为偶数（x % 2 == 0）时执行 append；只有 x=2 满足条件，故 result = [2*2] = [4]。",
+      "user_answer": "C",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-20T21:01:49",
+      "updated_at": "2026-08-20T21:01:49"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_99e83a0be20625fa",
+      "topic": "我需要练习题",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "执行以下代码后，变量 count 的值是多少？\\narr = [5, 3, 8, 3, 1]\\ncount = 0\\nfor i in range(len(arr)):\\n    if arr[i] > 4:\\n        count += 1\\n    elif arr[i] == 3:\\n        break",
+      "options": [
+        {
+          "label": "A",
+          "text": "0"
+        },
+        {
+          "label": "B",
+          "text": "1"
+        },
+        {
+          "label": "C",
+          "text": "2"
+        },
+        {
+          "label": "D",
+          "text": "3"
+        }
+      ],
+      "answer": "B",
+      "explanation": "循环从 i=0 开始：arr[0]=5>4 → count=1；i=1：arr[1]=3==3 → 执行 break 退出循环，后续不执行，最终 count=1。",
+      "user_answer": "B",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-20T21:01:49",
+      "updated_at": "2026-08-20T21:01:49"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_793d16e3afeaaac6",
+      "topic": "我需要练习题",
+      "type": "fill",
+      "difficulty": "basic",
+      "question": "补全以下代码，使其输出列表 [0, 2, 4, 6, 8]：\\nmy_list = []\\nfor i in range(__):\\n    my_list.append(i * 2)",
+      "options": [],
+      "answer": "5",
+      "explanation": "i 取值为 0,1,2,3,4，对应 i*2 得到 0,2,4,6,8，共 5 个元素，因此 range(5)。",
+      "user_answer": "3",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-20T21:01:49",
+      "updated_at": "2026-08-20T21:01:49"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_a29e3be807baa8bb",
+      "topic": "我需要练习题",
+      "type": "choice",
+      "difficulty": "intermediate",
+      "question": "下列代码中，哪一项能正确统计列表中正数的个数？",
+      "options": [
+        {
+          "label": "A",
+          "text": "count = 0\\nfor x in lst:\\n    if x > 0:\\n        count += 1"
+        },
+        {
+          "label": "B",
+          "text": "count = len([x for x in lst if x > 0])"
+        },
+        {
+          "label": "C",
+          "text": "count = sum(1 for x in lst if x > 0)"
+        },
+        {
+          "label": "D",
+          "text": "以上全部正确"
+        }
+      ],
+      "answer": "D",
+      "explanation": "A 使用基础循环+条件语句；B 使用列表推导式+len；C 使用生成器表达式+sum；三者均能正确统计正数个数。",
+      "user_answer": "A",
+      "correct": false,
+      "attempts": 1,
+      "created_at": "2026-08-20T21:01:49",
+      "updated_at": "2026-08-20T21:01:49"
+    },
+    {
+      "record_type": "ai_exercise",
+      "exercise_id": "ai_d42ca522e5dde49a",
+      "topic": "我需要练习题",
+      "type": "judge",
+      "difficulty": "basic",
+      "question": "Python 中，for 循环可以直接遍历列表、字符串和字典。",
+      "options": [],
+      "answer": "对",
+      "explanation": "for 循环可直接迭代可迭代对象，列表、字符串、字典（默认遍历键）均为可迭代对象，语法合法且常用。",
+      "user_answer": "true",
+      "correct": true,
+      "attempts": 1,
+      "created_at": "2026-08-20T21:01:49",
+      "updated_at": "2026-08-20T21:01:49"
+    }
+  ],
+  "collections": [
+    {
+      "collection_id": "col_11fff92b3eaa",
+      "name": "py",
+      "created_at": "2026-08-20T21:01:17",
+      "updated_at": "2026-08-20T21:01:43",
+      "questions": [
+        {
+          "qid": "cq_662d58711ede8419",
+          "topic": "我需要练习题",
+          "type": "choice",
+          "difficulty": "basic",
+          "question": "以下 Python 代码的输出结果是什么？\\nnums = [1, 2, 3]\\nresult = []\\nfor x in nums:\\n    if x % 2 == 0:\\n        result.append(x * 2)\\nprint(result)",
+          "options": [
+            {
+              "label": "A",
+              "text": "[2, 4, 6]"
+            },
+            {
+              "label": "B",
+              "text": "[4]"
+            },
+            {
+              "label": "C",
+              "text": "[2, 6]"
+            },
+            {
+              "label": "D",
+              "text": "[]"
+            }
+          ],
+          "answer": "B",
+          "explanation": "循环遍历列表 nums，仅当 x 为偶数（x % 2 == 0）时执行 append；只有 x=2 满足条件，故 result = [2*2] = [4]。",
+          "user_answer": "",
+          "correct": null,
+          "attempts": 0,
+          "created_at": "2026-08-20T21:01:17",
+          "updated_at": "2026-08-20T21:01:17"
+        },
+        {
+          "qid": "cq_793d16e3afeaaac6",
+          "topic": "我需要练习题",
+          "type": "fill",
+          "difficulty": "basic",
+          "question": "补全以下代码，使其输出列表 [0, 2, 4, 6, 8]：\\nmy_list = []\\nfor i in range(__):\\n    my_list.append(i * 2)",
+          "options": [],
+          "answer": "5",
+          "explanation": "i 取值为 0,1,2,3,4，对应 i*2 得到 0,2,4,6,8，共 5 个元素，因此 range(5)。",
+          "user_answer": "",
+          "correct": null,
+          "attempts": 0,
+          "created_at": "2026-08-20T21:01:33",
+          "updated_at": "2026-08-20T21:01:33"
+        },
+        {
+          "qid": "cq_d42ca522e5dde49a",
+          "topic": "我需要练习题",
+          "type": "judge",
+          "difficulty": "basic",
+          "question": "Python 中，for 循环可以直接遍历列表、字符串和字典。",
+          "options": [],
+          "answer": "对",
+          "explanation": "for 循环可直接迭代可迭代对象，列表、字符串、字典（默认遍历键）均为可迭代对象，语法合法且常用。",
+          "user_answer": "",
+          "correct": null,
+          "attempts": 0,
+          "created_at": "2026-08-20T21:01:43",
+          "updated_at": "2026-08-20T21:01:43"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "node_studies": [],
+  "node_resources": [],
+  "checkins": [
+    {
+      "date": "2026-08-20",
+      "node_id": "step_01",
+      "note": ""
+    }
+  ],
+  "streak": {
+    "current": 1,
+    "longest": 1,
+    "last_checkin": "2026-08-20"
+  },
+  "created_at": "2026-08-20T20:42:36",
+  "updated_at": "2026-08-20T21:01:49",
+  "daily_logs": [
+    {
+      "id": "log_d12425010b80",
+      "node_id": "step_01",
+      "date": "2026-08-20",
+      "content": "掌握lsll",
+      "done": true,
+      "created_at": "2026-08-20T20:42:36",
+      "updated_at": "2026-08-20T20:42:45"
+    }
+  ]
+}

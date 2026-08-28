@@ -57,7 +57,7 @@ class LearningPathAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="LearningPathAgent",
-            model_name="spark-4.0-ultra",
+            model_name="qwen-plus",
             system_prompt=LEARNING_PATH_SYSTEM_PROMPT,
             temperature=0.4,
         )

@@ -40,7 +40,7 @@ class SparkModelConfig:
     app_id: str = ""
     api_key: str = ""
     api_secret: str = ""
-    provider: str = "xunfei" # xunfei: Bearer api_key:api_secret; zhipu: Bearer api_key
+    provider: str = "xunfei" # xunfei: Bearer api_key:api_secret; zhipu/bailian: Bearer api_key
     available: bool = True   # 模型是否开通可用
 
 
@@ -96,7 +96,7 @@ class Settings:
     )
 
     # ========== GLM（智谱 AI）— OpenAI 兼容接口 ==========
-    GLM_API_KEY: str = _read_env("GLM_API_KEY", "e1970f97f8694f598dd39f5a39ca8b6f.nNpKraj4zf1r5Vc9")
+    GLM_API_KEY: str = _read_env("GLM_API_KEY", "")
     GLM_API_URL: str = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
 
     # glm-4.7-flash — 用户指定资源生成模型
@@ -115,6 +115,22 @@ class Settings:
     GLM_4_FLASH: SparkModelConfig = SparkModelConfig(
         name="glm-4-flash", domain="glm-4-flash",
         api_url=GLM_API_URL, api_key=GLM_API_KEY, provider="zhipu",
+    )
+
+    # ========== 阿里云百炼（通义千问/DashScope）— OpenAI 兼容接口 ==========
+    DASHSCOPE_API_KEY: str = _read_env("DASHSCOPE_API_KEY", "")
+    DASHSCOPE_API_URL: str = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+
+    # qwen-plus — 主力模型（通用能力均衡）
+    QWEN_PLUS: SparkModelConfig = SparkModelConfig(
+        name="qwen-plus", domain="qwen-plus",
+        api_url=DASHSCOPE_API_URL, api_key=DASHSCOPE_API_KEY, provider="bailian",
+    )
+
+    # qwen-turbo — 快速兜底
+    QWEN_TURBO: SparkModelConfig = SparkModelConfig(
+        name="qwen-turbo", domain="qwen-turbo",
+        api_url=DASHSCOPE_API_URL, api_key=DASHSCOPE_API_KEY, provider="bailian",
     )
 
     # ========== 知识库（星火知识库 chatdoc.xfyun.cn）==========
@@ -138,6 +154,8 @@ class Settings:
             "glm-4.7-flash": self.GLM_4_7_FLASH,
             "glm-4.5-flash": self.GLM_4_5_FLASH,
             "glm-4-flash": self.GLM_4_FLASH,
+            "qwen-plus": self.QWEN_PLUS,
+            "qwen-turbo": self.QWEN_TURBO,
         }
         # 旧名称兼容
         for old_name in ["spark-edu-x1", "spark-base-cn", "spark-math-pro", "spark-code-asst"]:
@@ -153,7 +171,7 @@ class Settings:
 
     @property
     def is_configured(self) -> bool:
-        return bool(self.APP_ID and self.API_KEY and self.API_SECRET)
+        return bool((self.APP_ID and self.API_KEY and self.API_SECRET) or self.DASHSCOPE_API_KEY)
 
 
 settings = Settings()

@@ -20,42 +20,6 @@
         "updated_at": "2026-08-10T11:46:14",
         "solved_at": "2026-08-10T11:46:14",
         "_fallback": true
-      },
-      {
-        "card_id": "牛客_哈希表牛客练习题_哈希表牛客练习题",
-        "node_id": "step_01",
-        "platform": "牛客",
-        "problem_no": "",
-        "title": "哈希表 · 牛客练习题",
-        "link": "https://www.nowcoder.com/search?query=%E5%93%88%E5%B8%8C%E8%A1%A8",
-        "knowledge_point": "哈希表",
-        "difficulty": "简单",
-        "status": "undone",
-        "my_answer": "",
-        "note": "",
-        "search_url": "https://www.nowcoder.com/search?query=%E5%93%88%E5%B8%8C%E8%A1%A8",
-        "created_at": "2026-08-10T11:46:14",
-        "updated_at": "2026-08-10T11:46:14",
-        "solved_at": null,
-        "_fallback": true
-      },
-      {
-        "card_id": "洛谷_哈希表洛谷练习题_哈希表洛谷练习题",
-        "node_id": "step_01",
-        "platform": "洛谷",
-        "problem_no": "",
-        "title": "哈希表 · 洛谷练习题",
-        "link": "https://www.luogu.com.cn/problem/list?keyword=%E5%93%88%E5%B8%8C%E8%A1%A8",
-        "knowledge_point": "哈希表",
-        "difficulty": "简单",
-        "status": "undone",
-        "my_answer": "",
-        "note": "",
-        "search_url": "https://www.luogu.com.cn/problem/list?keyword=%E5%93%88%E5%B8%8C%E8%A1%A8",
-        "created_at": "2026-08-10T11:46:14",
-        "updated_at": "2026-08-10T11:46:14",
-        "solved_at": null,
-        "_fallback": true
       }
     ]
   },

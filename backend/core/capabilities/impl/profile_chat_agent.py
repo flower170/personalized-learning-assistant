@@ -35,10 +35,10 @@ from core.models.spark_client import SparkAPIError
 
 logger = logging.getLogger(__name__)
 
-# 对话轮：glm-4-flash 非推理快模型；spark-x2-flash 在该账号 401，会静默降级到弱模型 spark-lite
-DEFAULT_MODEL = "glm-4-flash"
-# 抽取/完成轮：长输出 + 关推理防 token 溢出（见记忆 a3-profile-chat-extraction）
-EXTRACT_MODEL = "glm-4.5-flash"
+# 对话轮：qwen-plus（通义千问主力模型）
+DEFAULT_MODEL = "qwen-plus"
+# 抽取/完成轮：同样用 qwen-plus（无独立推理模型）
+EXTRACT_MODEL = "qwen-plus"
 DEFAULT_TEMPERATURE = 0.7
 
 # 画像维度顺序（用于兜底提问与重复检测）

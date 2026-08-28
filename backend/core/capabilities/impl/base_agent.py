@@ -13,6 +13,17 @@ from core.models.schemas import Message, ResourceResponse
 
 logger = logging.getLogger(__name__)
 
+# 模型偶发模仿提示词里的"学生：/助手："对话标签，在回答开头误输出角色标签（如"【助手回答】"）。
+# 这些前缀在流式输出时会被剥离，保证正文直接以内容开头。
+ROLE_LABEL_PREFIXES = (
+    "【助手回答】", "【智能助手】", "【AI 助手】", "【AI助手】",
+    "【AI】：", "【AI】:", "【AI】",
+    "助手回答：", "助手回答:", "助手回答",
+    "AI 助手：", "AI助手：", "AI助手:", "AI助手",
+    "AI：", "AI:", "助手：", "助手:",
+)
+_MAX_ROLE_LABEL_LEN = max(len(p) for p in ROLE_LABEL_PREFIXES)
+
 
 class BaseAgent(ABC):
     """
@@ -20,7 +31,7 @@ class BaseAgent(ABC):
     提供统一的模型调用接口和日志/追踪能力
     """
 
-    fallback_model: str = "spark-lite"  # 生成失败时降级到的模型（子类可覆盖）
+    fallback_model: str = "qwen-turbo"  # 生成失败时降级到的模型（子类可覆盖）
 
     def __init__(
         self,
@@ -92,17 +103,46 @@ class BaseAgent(ABC):
         temp = temperature if temperature is not None else self.temperature
         try:
             client = self.client if model is None else SparkAPIClient.for_model(model)
-            async for chunk in client.chat_stream(messages, temperature=temp, max_tokens=max_tokens, thinking=thinking):
+            async for chunk in self._strip_role_label(client.chat_stream(messages, temperature=temp, max_tokens=max_tokens, thinking=thinking)):
                 yield chunk
         except SparkAPIError as e:
             logger.warning(f"[{self.name}] 模型 {model or self.model_name} 流式失败: {e}，尝试降级到 {self.fallback_model}")
             try:
                 fallback = self._fallback_client()
-                async for chunk in fallback.chat_stream(messages, temperature=temp, max_tokens=max_tokens, thinking=thinking):
+                async for chunk in self._strip_role_label(fallback.chat_stream(messages, temperature=temp, max_tokens=max_tokens, thinking=thinking)):
                     yield chunk
             except SparkAPIError as e2:
                 logger.error(f"[{self.name}] 降级也失败: {e2}")
                 yield f"\n\n[生成中断: {e2}]"
+
+    @staticmethod
+    async def _strip_role_label(stream):
+        """剥离流式输出开头的角色标签前缀（如「【助手回答】你好」→「你好」）。
+
+        只判定开头一段（最长标签长度 + 1 个字符），判定完成后后续原样透传，不影响流式节奏。
+        防止弱模型模仿提示词里的对话标签格式、在正文前误加"助手回答""AI："等字样。
+        """
+        buf = ""
+        started = False
+        async for chunk in stream:
+            if started:
+                yield chunk
+                continue
+            buf += chunk
+            s = buf.lstrip()
+            hit = next((p for p in ROLE_LABEL_PREFIXES if s.startswith(p)), None)
+            if hit is not None:
+                started = True
+                rest = s[len(hit):].lstrip(" \t\r\n:：")
+                if rest:
+                    yield rest
+            elif len(s) >= _MAX_ROLE_LABEL_LEN + 1:
+                # 缓冲已超过最长标签，不可能再是角色标签前缀 → 原样输出
+                started = True
+                yield buf
+        # 流结束：缓冲里未及判定阈值的剩余内容必须原样输出，否则短回复会被整个吞掉
+        if buf and not started:
+            yield buf
 
     def _fallback_client(self):
         """降级到备用模型（子类可覆盖 fallback_model）"""

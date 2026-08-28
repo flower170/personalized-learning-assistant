@@ -50,4 +50,7 @@ backend/data/profiles/
 # 临时调试脚本
 _test_*.py
 _verify_*.py
+_tmp_*.py
+tmp_modify.py
+logs_restart.txt
 kb_test_content.txt

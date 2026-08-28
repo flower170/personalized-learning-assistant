@@ -32,6 +32,10 @@ STATUS_DONE = "done"
 STATUS_CORRECT = "correct"
 STATUS_WRONG = "wrong"
 
+# 课程级资源哨兵 node_id：node_resources 里 node_id == COURSE_NODE_ID 的条目
+# 视为「整个路径共用」的课程视频，GET 时挂到 path["course_resources"] 顶层。
+COURSE_NODE_ID = "__course__"
+
 
 def _ensure_dir():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -48,7 +52,9 @@ def _empty_record(student_id: str) -> dict:
         "records": {},       # {node_id: [card, ...]}
         "ai_exercises": [],  # [ai_exercise, ...]（聊天 AI 出题作答记录）
         "collections": [],   # [collection, ...]（我的题目：用户命名收藏的题目集）
+        "notes": [],         # [note, ...]（我的笔记：保存的思维导图大纲等）
         "node_studies": [],  # [study, ...]（外部平台学习自评上报，按 node_id 呼应路径）
+        "node_resources": [],  # [resource, ...]（路径节点学习资源：B站/视频/文档链接 + 看完自评）
         "checkins": [],      # [{date, node_id, note}]
         "streak": {"current": 0, "longest": 0, "last_checkin": None},
         "created_at": datetime.now().isoformat(timespec="seconds"),
@@ -82,8 +88,30 @@ def save_records(student_id: str, data: dict):
 
 # ---------------- 练习卡 ----------------
 
+def dedupe_fallback_cards(bucket: list[dict]) -> list[dict]:
+    """每知识点只保留一张平台搜索兜底卡（_fallback 且无真实题号），
+    避免同一知识点在 LeetCode/牛客/洛谷 等平台重复出卡。
+    真实题目卡（有 problem_no）不参与去重。平台偏好 LeetCode > 牛客 > 洛谷 > AcWing > PTA。"""
+    order = {"LeetCode": 0, "牛客": 1, "洛谷": 2, "AcWing": 3, "PTA": 4}
+    real = [c for c in bucket if not (c.get("_fallback") and not c.get("problem_no"))]
+    placeholders = sorted(
+        (c for c in bucket if c.get("_fallback") and not c.get("problem_no")),
+        key=lambda c: order.get(c.get("platform", ""), 99),
+    )
+    seen_kp: set[str] = set()
+    kept = []
+    for c in placeholders:
+        kp = c.get("knowledge_point") or c.get("title") or ""
+        if kp in seen_kp:
+            continue
+        seen_kp.add(kp)
+        kept.append(c)
+    return real + kept
+
+
 def seed_cards(student_id: str, node_id: str, cards: list[dict]) -> list[dict]:
-    """批量写入练习卡，按 card_id 幂等 upsert（已存在的卡保留状态/笔记）。"""
+    """批量写入练习卡，按 card_id 幂等 upsert（已存在的卡保留状态/笔记）。
+    落盘前对兜底卡按知识点去重，保证每知识点最多一张平台搜索入口卡。"""
     if not cards:
         return []
     data = load_records(student_id)
@@ -104,7 +132,7 @@ def seed_cards(student_id: str, node_id: str, cards: list[dict]) -> list[dict]:
                 if old.get(k):
                     card[k] = old[k]
         existing[cid] = card
-    data["records"][node_id] = list(existing.values())
+    data["records"][node_id] = dedupe_fallback_cards(list(existing.values()))
     save_records(student_id, data)
     return data["records"][node_id]
 
@@ -290,6 +318,18 @@ def update_ai_exercise(student_id: str, exercise_id: str,
     return None
 
 
+def remove_ai_exercise(student_id: str, exercise_id: str) -> bool:
+    """从错题集移除一条 AI 错题：删除对应记录，返回是否真的删掉了。"""
+    data = load_records(student_id)
+    before = len(data["ai_exercises"])
+    data["ai_exercises"] = [r for r in data["ai_exercises"]
+                            if r.get("exercise_id") != exercise_id]
+    if len(data["ai_exercises"]) != before:
+        save_records(student_id, data)
+        return True
+    return False
+
+
 # ---------------- 题目集（我的题目：用户命名收藏） ----------------
 
 def _collection_question_id(topic: str, question: str) -> str:
@@ -428,6 +468,85 @@ def delete_collection(student_id: str, collection_id: str) -> bool:
     return False
 
 
+# ---------------- 我的笔记（保存的思维导图图片） ----------------
+
+NOTES_DIR = Path(__file__).parent.parent.parent / "data" / "notes"
+
+
+def _note_image_file(student_id: str, note_id: str) -> Path:
+    """笔记图片的落盘路径：data/notes/{student_id}/{note_id}.png"""
+    return NOTES_DIR / student_id / f"{note_id}.png"
+
+
+def note_image_file(student_id: str, note_id: str) -> Optional[Path]:
+    """返回某笔记的图片文件（不存在返回 None）。"""
+    p = _note_image_file(student_id, note_id)
+    return p if p.exists() else None
+
+
+def _save_note_image(student_id: str, note_id: str, image_bytes: bytes) -> Optional[str]:
+    """写入笔记图片文件，返回相对 data 目录的路径；失败返回 None。"""
+    try:
+        p = _note_image_file(student_id, note_id)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(image_bytes)
+        return str(p.relative_to(Path(__file__).parent.parent.parent / "data"))
+    except Exception as e:
+        logger.error(f"[PracticeData] 保存笔记图片失败 {student_id}: {e}")
+        return None
+
+
+def list_notes(student_id: str) -> list[dict]:
+    """全部笔记，updated_at 倒序（新保存的在前）。"""
+    data = load_records(student_id)
+    return sorted(data.get("notes", []),
+                  key=lambda n: n.get("updated_at") or "", reverse=True)
+
+
+def add_note(student_id: str, title: str, topic: str,
+             image_bytes: bytes) -> Optional[dict]:
+    """保存一条思维导图图片笔记。标题去空格；空标题或空图片返回 None。"""
+    title = (title or "").strip()
+    if not title or not image_bytes:
+        return None
+    data = load_records(student_id)
+    now = datetime.now().isoformat(timespec="seconds")
+    note_id = "note_" + uuid.uuid4().hex[:12]
+    image_rel = _save_note_image(student_id, note_id, image_bytes)
+    if not image_rel:
+        return None
+    note = {
+        "note_id": note_id,
+        "title": title,
+        "topic": (topic or "").strip(),
+        "image": image_rel,          # 相对 data 目录路径，如 notes/stu_001/note_xxx.png
+        "created_at": now,
+        "updated_at": now,
+    }
+    data.setdefault("notes", []).append(note)
+    save_records(student_id, data)
+    return note
+
+
+def delete_note(student_id: str, note_id: str) -> bool:
+    """删除一条笔记（含图片文件），返回是否真的删掉了。"""
+    data = load_records(student_id)
+    before = len(data.get("notes", []))
+    data["notes"] = [n for n in data.get("notes", [])
+                     if n.get("note_id") != note_id]
+    if len(data["notes"]) == before:
+        return False
+    # 清理图片文件（尽力而为，文件缺失不报错）
+    try:
+        p = _note_image_file(student_id, note_id)
+        if p.exists():
+            p.unlink()
+    except Exception as e:
+        logger.warning(f"[PracticeData] 删除笔记图片失败 {student_id}: {e}")
+    save_records(student_id, data)
+    return True
+
+
 # ---------------- 外部平台学习打卡（自评，挂到路径节点） ----------------
 
 def add_node_study(student_id: str, node_id: str, platform: str,
@@ -486,6 +605,168 @@ def sync_studies_to_path(student_id: str, path_data: dict) -> dict:
         nid = node.get("node_id")
         if nid in summary:
             node["node_study"] = summary[nid]
+    return path_data
+
+
+# ---------------- 路径节点学习资源（B站/视频/文档链接 + 看完自评） ----------------
+
+def add_node_resource(student_id: str, node_id: str, title: str,
+                      url: str, platform: str = "") -> Optional[dict]:
+    """给路径节点添加一条学习资源（如 B站课程链接）。标题/链接为空返回 None。"""
+    title = (title or "").strip()
+    url = (url or "").strip()
+    if not title or not url:
+        return None
+    data = load_records(student_id)
+    now = datetime.now().isoformat(timespec="seconds")
+    entry = {
+        "rid": "res_" + uuid.uuid4().hex[:12],
+        "node_id": node_id,
+        "title": title,
+        "url": url,
+        "platform": (platform or "").strip() or "其他",
+        "watched": False,
+        "watch_note": "",
+        "date": date.today().isoformat(),
+        "created_at": now,
+    }
+    data.setdefault("node_resources", []).append(entry)
+    save_records(student_id, data)
+    return entry
+
+
+def delete_node_resource(student_id: str, rid: str) -> bool:
+    """删除一条节点学习资源，返回是否真的删掉了。"""
+    data = load_records(student_id)
+    before = len(data.get("node_resources", []))
+    data["node_resources"] = [r for r in data.get("node_resources", [])
+                              if r.get("rid") != rid]
+    if len(data["node_resources"]) == before:
+        return False
+    save_records(student_id, data)
+    return True
+
+
+def list_node_resources(student_id: str, node_id: str) -> list[dict]:
+    """某节点下的学习资源（插入顺序）。"""
+    data = load_records(student_id)
+    return [r for r in data.get("node_resources", []) if r.get("node_id") == node_id]
+
+
+def mark_resource_watched(student_id: str, rid: str,
+                          watch_note: str = "") -> Optional[dict]:
+    """标记某条资源「看完了」并记录自评（学到什么）。找不到返回 None。"""
+    data = load_records(student_id)
+    now = datetime.now().isoformat(timespec="seconds")
+    for r in data.get("node_resources", []):
+        if r.get("rid") != rid:
+            continue
+        r["watched"] = True
+        if watch_note:
+            r["watch_note"] = (watch_note or "").strip()
+        r["updated_at"] = now
+        save_records(student_id, data)
+        return r
+    return None
+
+
+def sync_resources_to_path(student_id: str, path_data: dict) -> dict:
+    """把节点学习资源回写到路径 nodes 的 resources 字段（供前端聚合展示）。"""
+    data = load_records(student_id)
+    by_node: dict[str, list[dict]] = {}
+    for r in data.get("node_resources", []):
+        nid = r.get("node_id") or ""
+        if nid:
+            by_node.setdefault(nid, []).append(r)
+    for node in path_data.get("nodes", []):
+        nid = node.get("node_id")
+        res = by_node.get(nid)
+        if res:
+            node["resources"] = res
+    return path_data
+
+
+def sync_course_resources_to_path(student_id: str, path_data: dict) -> dict:
+    """把课程级资源（node_id == COURSE_NODE_ID）挂到 path 顶层 course_resources。
+
+    不写进任何 node；与 sync_resources_to_path 互不干扰（哨兵 node_id 不会匹配真实节点）。"""
+    data = load_records(student_id)
+    course_res = [r for r in data.get("node_resources", [])
+                  if r.get("node_id") == COURSE_NODE_ID]
+    if course_res:
+        path_data["course_resources"] = course_res
+    return path_data
+
+
+# ---------------- 日计划：用户自由记录每天学了什么 + 打钩 ----------------
+
+def add_daily_log(student_id: str, node_id: str, content: str,
+                  log_date: Optional[str] = None) -> Optional[dict]:
+    """给路径节点加一条「今天学了什么」记录（未打钩）。内容为空返回 None。"""
+    content = (content or "").strip()
+    if not content:
+        return None
+    data = load_records(student_id)
+    now = datetime.now().isoformat(timespec="seconds")
+    entry = {
+        "id": "log_" + uuid.uuid4().hex[:12],
+        "node_id": node_id,
+        "date": log_date or date.today().isoformat(),
+        "content": content,
+        "done": False,
+        "created_at": now,
+        "updated_at": now,
+    }
+    data.setdefault("daily_logs", []).append(entry)
+    save_records(student_id, data)
+    return entry
+
+
+def update_daily_log(student_id: str, log_id: str,
+                     content: Optional[str] = None,
+                     done: Optional[bool] = None) -> Optional[dict]:
+    """编辑一条学习记录的内容 / 打钩状态。找不到返回 None。"""
+    data = load_records(student_id)
+    now = datetime.now().isoformat(timespec="seconds")
+    for entry in data.get("daily_logs", []):
+        if entry.get("id") != log_id:
+            continue
+        if content is not None:
+            entry["content"] = (content or "").strip()
+        if done is not None:
+            entry["done"] = bool(done)
+        entry["updated_at"] = now
+        save_records(student_id, data)
+        return entry
+    return None
+
+
+def delete_daily_log(student_id: str, log_id: str) -> bool:
+    """删除一条学习记录，返回是否真的删掉了。"""
+    data = load_records(student_id)
+    before = len(data.get("daily_logs", []))
+    data["daily_logs"] = [e for e in data.get("daily_logs", [])
+                          if e.get("id") != log_id]
+    if len(data["daily_logs"]) == before:
+        return False
+    save_records(student_id, data)
+    return True
+
+
+def sync_daily_logs_to_path(student_id: str, path_data: dict) -> dict:
+    """把用户学习记录按 node_id 归组回写到路径 nodes 的 daily_logs 字段（date 升序）。"""
+    data = load_records(student_id)
+    by_node: dict[str, list[dict]] = {}
+    for e in data.get("daily_logs", []):
+        nid = e.get("node_id") or ""
+        if nid:
+            by_node.setdefault(nid, []).append(e)
+    for node in path_data.get("nodes", []):
+        nid = node.get("node_id")
+        logs = sorted(by_node.get(nid, []), key=lambda x: x.get("date", ""))
+        # 只有存在日志才写 daily_logs；旧路径没有日志时保持原样，进度回退 daily_tasks 口径
+        if logs:
+            node["daily_logs"] = logs
     return path_data
 
 
@@ -619,13 +900,16 @@ def calc_practice_progress(student_id: str) -> dict:
 
 
 __all__ = [
-    "load_records", "save_records", "seed_cards", "update_record",
+    "load_records", "save_records", "dedupe_fallback_cards", "seed_cards", "update_record",
     "get_cards_by_node", "get_all_records", "sync_cards_to_path",
     "save_ai_exercises", "get_ai_exercises", "list_wrong_ai_exercises",
-    "update_ai_exercise", "_judge_answer",
+    "update_ai_exercise", "remove_ai_exercise", "_judge_answer",
     "list_collections", "create_collection", "add_question_to_collection",
     "redo_collection_question", "remove_question_from_collection",
     "delete_collection",
+    "list_notes", "add_note", "delete_note", "note_image_file",
     "add_node_study", "summarize_node_studies", "sync_studies_to_path",
+    "add_node_resource", "delete_node_resource", "list_node_resources",
+    "mark_resource_watched", "sync_resources_to_path",
     "check_in", "calc_streak", "calc_practice_progress",
 ]

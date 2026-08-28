@@ -8,7 +8,7 @@
     </div>
 
     <div class="setting-section">
-      <h3 class="section-title">🌐 {{ t('settings.language') }}</h3>
+      <h3 class="section-title">{{ t('settings.language') }}</h3>
       <p class="section-desc">{{ t('settings.language_description') }}</p>
       <div class="language-card">
         <div class="language-label">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="setting-section">
-      <h3 class="section-title">🎨 {{ t('settings.theme') }}</h3>
+      <h3 class="section-title">{{ t('settings.theme') }}</h3>
       <p class="section-desc">{{ t('settings.theme_description') }}</p>
       <div class="theme-grid">
         <div
@@ -92,7 +92,6 @@
 
         <el-form label-width="100px" size="small" class="form-section">
           <div class="section-header">
-            <span class="section-icon">🔐</span>
             <span class="section-label">密码修改</span>
           </div>
           <el-form-item label="原密码">
@@ -113,7 +112,6 @@
 
         <el-form label-width="100px" size="small" class="form-section">
           <div class="section-header">
-            <span class="section-icon">🗑️</span>
             <span class="section-label" style="color:var(--accent-danger)">用户注销</span>
           </div>
           <p class="delete-warning">⚠️ 注销账号将永久删除所有数据，包括学习记录、会话历史和个人画像，请谨慎操作</p>
@@ -145,7 +143,7 @@
     </div>
 
     <div class="setting-section">
-      <h3 class="section-title">⚙️ {{ t('settings.system_info') }}</h3>
+      <h3 class="section-title">{{ t('settings.system_info') }}</h3>
       <el-descriptions :column="1" border size="small" class="system-info">
         <el-descriptions-item :label="t('settings.version')">2.0.0</el-descriptions-item>
         <el-descriptions-item :label="t('settings.backend_url')">{{ backendUrl }}</el-descriptions-item>
@@ -161,6 +159,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useChatStore } from '@/stores/chat'
+import { profileApi } from '@/api'
 import { Setting, Back, Document } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
@@ -207,10 +206,20 @@ function getThemeLabel(value) {
   return labels[value] || value
 }
 
-function saveSettings() {
+async function saveSettings() {
   chatStore.userName = localName.value
   chatStore.userGrade = localGrade.value
   chatStore.userMajor = localMajor.value
+  try {
+    // 持久化到后端画像，确保「数据报告」能读到最新姓名/年级/专业
+    await profileApi.updateProfile(chatStore.userId, {
+      name: localName.value,
+      grade: localGrade.value,
+      major: localMajor.value,
+    })
+  } catch (e) {
+    console.error('[Settings] 画像信息更新失败:', e)
+  }
   ElMessage.success(t('common.success') || '设置已保存')
 }
 

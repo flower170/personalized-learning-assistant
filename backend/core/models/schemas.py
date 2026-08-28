@@ -329,6 +329,24 @@ class WebPathConfirmRequest(BaseModel):
     feedback: Optional[str] = None        # 留空=确认；非空=修改意见
 
 
+class DraftStreamRequest(BaseModel):
+    """流式路径草案生成（SSE）：draft_id 非空表示按意见重新生成"""
+    student_id: str
+    topic: str
+    collected: dict = Field(default_factory=dict)
+    draft_id: str = ""
+
+
+class DraftResourceRequest(BaseModel):
+    """向导草案阶段：给某个节点加一条学习资源（根据规划选 B站/文档链接）"""
+    student_id: str
+    draft_id: str
+    node_id: str
+    title: str
+    url: str
+    platform: str = ""
+
+
 class PracticeDeepSearchRequest(BaseModel):
     """用户选「深入练习」时：按知识点搜官方 OJ 练习卡"""
     student_id: str
@@ -369,6 +387,13 @@ class RedoAiExerciseRequest(BaseModel):
     user_answer: str = ""
 
 
+class WrongRemoveRequest(BaseModel):
+    """错题集移除：AI 错题删记录 / OJ 错题置为 done 移出错题集"""
+    student_id: str
+    kind: str = "ai"          # ai | oj
+    target_id: str = ""       # AI: exercise_id；OJ: card_id
+
+
 class CreateCollectionRequest(BaseModel):
     """新建命名题目集（我的题目）"""
     student_id: str
@@ -404,6 +429,15 @@ class DeleteCollectionRequest(BaseModel):
     collection_id: str
 
 
+class DeleteNoteRequest(BaseModel):
+    """删除一条笔记"""
+    student_id: str
+    note_id: str
+    """删除一条笔记"""
+    student_id: str
+    note_id: str
+
+
 class NodeStudyRequest(BaseModel):
     """外部平台学习自评打卡"""
     student_id: str
@@ -413,6 +447,77 @@ class NodeStudyRequest(BaseModel):
     problems: int = 0
     mastery: int = 0
     note: str = ""
+
+
+class NodeResourceAddRequest(BaseModel):
+    """给路径节点添加一条学习资源（如 B站课程链接）"""
+    student_id: str
+    node_id: str
+    title: str
+    url: str
+    platform: str = ""
+
+
+class NodeResourceDeleteRequest(BaseModel):
+    """删除一条节点学习资源"""
+    student_id: str
+    rid: str
+
+
+class NodeResourceWatchRequest(BaseModel):
+    """标记某条资源「看完了」+ 自评"""
+    student_id: str
+    rid: str
+    watch_note: str = ""
+
+
+class NodeSkipRequest(BaseModel):
+    """用户「这个知识点我会了」→ 跳过该节点"""
+    student_id: str
+    node_id: str
+
+
+class DailyExerciseRequest(BaseModel):
+    """今日练习：按节点/知识点出题"""
+    student_id: str
+    node_id: str = ""
+    count: int = 3
+    task_day: int | None = None
+
+
+class VideoSearchRequest(BaseModel):
+    """搜索 B站热门视频（按播放量/点赞排序）"""
+    keyword: str
+    page: int = 1
+
+
+class TaskToggleRequest(BaseModel):
+    """逐小任务打√（可逆）：标记/取消某节点的某一天任务完成"""
+    student_id: str
+    node_id: str
+    day: int
+
+
+class DailyLogAddRequest(BaseModel):
+    """日计划：用户记录今天学了什么（自由添加）"""
+    student_id: str
+    node_id: str
+    content: str
+    date: Optional[str] = None   # 默认当天
+
+
+class DailyLogUpdateRequest(BaseModel):
+    """日计划：编辑某条记录内容 / 打钩"""
+    student_id: str
+    log_id: str
+    content: Optional[str] = None
+    done: Optional[bool] = None
+
+
+class DailyLogDeleteRequest(BaseModel):
+    """日计划：删除一条记录"""
+    student_id: str
+    log_id: str
 
 
 class SkillGapRequest(BaseModel):

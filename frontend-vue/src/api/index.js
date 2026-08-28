@@ -180,9 +180,12 @@ export const reportApi = {
 // ======================== 8. 学习路径 API（交互式：画像起步 → 提问补充 → 草案确认） ========================
 
 export const onlinePathApi = {
-  /** Stage 1: 发起路径规划（画像+联网） */
-  start: async (studentId, topic) => {
-    const { data } = await http.post('/online-path/start', { student_id: studentId, topic })
+  /** Stage 1: 发起路径规划（画像+联网）。opts 可带 dailyHours/cycle（弹窗已问的时间投入） */
+  start: async (studentId, topic, opts = {}) => {
+    const { data } = await http.post('/online-path/start', {
+      student_id: studentId, topic,
+      daily_hours: opts.dailyHours, cycle: opts.cycle,
+    })
     return data
   },
 
@@ -206,6 +209,25 @@ export const onlinePathApi = {
   confirm: async (studentId, draftId, feedback = '') => {
     const { data } = await http.post('/online-path/confirm', {
       student_id: studentId, draft_id: draftId, feedback,
+    })
+    return data
+  },
+
+  /** 流式生成路径草案（SSE）：返回 fetch Response，由调用方 parseSSEStream 消费 */
+  draftStream: async (studentId, topic, collected = {}, draftId = '') => {
+    const response = await fetch('http://127.0.0.1:8000/api/online-path/draft-stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ student_id: studentId, topic, collected, draft_id: draftId }),
+    })
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    return response
+  },
+
+  /** 向导草案阶段：给某个节点添加一条学习资源（根据规划选 B站/文档链接） */
+  addDraftResource: async (studentId, draftId, nodeId, title, url, platform = '') => {
+    const { data } = await http.post('/online-path/draft-resource', {
+      student_id: studentId, draft_id: draftId, node_id: nodeId, title, url, platform,
     })
     return data
   },
@@ -280,6 +302,14 @@ export const practiceApi = {
     return data
   },
 
+  /** 错题集移除：AI 错题删记录 / OJ 错题置为 done 移出错题集 */
+  wrongRemove: async (studentId, kind, targetId) => {
+    const { data } = await http.post('/practice/wrong-remove', {
+      student_id: studentId, kind, target_id: targetId,
+    })
+    return data
+  },
+
   /** 我的题目：全部命名题目集（含题目/题型/作答状态） */
   listCollections: async (studentId) => {
     const { data } = await http.get('/practice/collections', { params: { student_id: studentId } })
@@ -324,10 +354,118 @@ export const practiceApi = {
     return data
   },
 
+  /** 我的笔记：全部保存的思维导图图片 */
+  listNotes: async (studentId) => {
+    const { data } = await http.get('/practice/notes', { params: { student_id: studentId } })
+    return data
+  },
+
+  /** 保存一条思维导图图片笔记（multipart 上传 PNG） */
+  addNote: async (studentId, title, topic, imageFile) => {
+    const fd = new FormData()
+    fd.append('student_id', studentId)
+    fd.append('title', title)
+    fd.append('topic', topic || '')
+    fd.append('image', imageFile, imageFile.name || 'mindmap.png')
+    const { data } = await http.post('/practice/notes/add', fd)
+    return data
+  },
+
+  /** 删除一条笔记 */
+  deleteNote: async (studentId, noteId) => {
+    const { data } = await http.post('/practice/notes/delete', {
+      student_id: studentId, note_id: noteId,
+    })
+    return data
+  },
+
+  /** 笔记图片地址（直接给 <img src> 用，经 Vite 代理到后端） */
+  noteImageUrl: (studentId, noteId) => `/api/practice/notes/image/${studentId}/${noteId}`,
+
   /** 外部平台学习打卡（自评，呼应路径） */
   nodeStudy: async (studentId, nodeId, fields) => {
     const { data } = await http.post('/practice/node-study', {
       student_id: studentId, node_id: nodeId, ...fields,
+    })
+    return data
+  },
+
+  /** 给路径节点添加学习资源（如 B站课程链接） */
+  addNodeResource: async (studentId, nodeId, title, url, platform = '') => {
+    const { data } = await http.post('/practice/node-resources/add', {
+      student_id: studentId, node_id: nodeId, title, url, platform,
+    })
+    return data
+  },
+
+  /** 删除一条节点学习资源 */
+  deleteNodeResource: async (studentId, rid) => {
+    const { data } = await http.post('/practice/node-resources/delete', {
+      student_id: studentId, rid,
+    })
+    return data
+  },
+
+  /** 标记某条资源「看完了」+ 自评（学到什么）→ 推进路径进度 */
+  markResourceWatched: async (studentId, rid, watchNote = '') => {
+    const { data } = await http.post('/practice/node-resources/watched', {
+      student_id: studentId, rid, watch_note: watchNote,
+    })
+    return data
+  },
+
+  /** 用户「这个知识点我会了」→ 跳过该节点（全部日任务标完成） */
+  skipNode: async (studentId, nodeId) => {
+    const { data } = await http.post('/practice/node-skip', {
+      student_id: studentId, node_id: nodeId,
+    })
+    return data
+  },
+
+  /** 今日练习：按当天知识点 AI 出题（非流式，直接返回题目数组） */
+  dailyExercises: async (studentId, nodeId = '', count = 3, taskDay = null) => {
+    const body = { student_id: studentId, node_id: nodeId, count }
+    if (taskDay != null) body.task_day = taskDay
+    const { data } = await http.post('/practice/daily-exercises', body)
+    return data
+  },
+
+  /** 搜索 B站热门视频（按播放量/点赞排序）→ 用户选用加入节点资源 */
+  searchVideos: async (keyword, page = 1) => {
+    const { data } = await http.post('/practice/video-search', {
+      keyword, page,
+    })
+    return data
+  },
+
+  /** 逐小任务打√（可逆）：切换某节点某天任务的完成状态 */
+  toggleTask: async (studentId, nodeId, day) => {
+    const { data } = await http.post('/practice/task-toggle', {
+      student_id: studentId, node_id: nodeId, day,
+    })
+    return data
+  },
+
+  /** 日计划：给某节点加一条「今天学了什么」记录 */
+  dailyLogAdd: async (studentId, nodeId, content, date = null) => {
+    const body = { student_id: studentId, node_id: nodeId, content }
+    if (date) body.date = date
+    const { data } = await http.post('/practice/daily-log/add', body)
+    return data
+  },
+
+  /** 日计划：编辑某条记录的内容 / 打钩 */
+  dailyLogUpdate: async (studentId, logId, payload = {}) => {
+    const { data } = await http.post('/practice/daily-log/update', {
+      student_id: studentId, log_id: logId, ...payload,
+    })
+    return data
+  },
+
+  /** 日计划：删除一条记录 */
+  dailyLogDelete: async (studentId, logId) => {
+    const { data } = await http.post('/practice/daily-log/delete', {
+      student_id: studentId, log_id: logId,
     })
     return data
   },

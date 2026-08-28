@@ -1,5 +1,5 @@
 {
-  "draft_id": "draft_58653d9d",
+  "draft_id": "draft_261ee45c",
   "student_id": "stu_001",
   "topic": "c语言",
   "collected": {
@@ -23,6 +23,9 @@
     },
     "market": [],
     "resources": [],
+    "daily_hours": 2.0,
+    "cycle": "1个月",
+    "foundation": "入门",
     "subject": "c语言",
     "long_term_goal": "c语言"
   },
@@ -30,263 +33,80 @@
   "overall_goal": "系统掌握c语言",
   "goal": "系统掌握c语言",
   "market_demand": "",
-  "total_duration_days": 60,
-  "daily_minutes": 300,
+  "total_duration_days": 30,
+  "daily_minutes": 120,
   "stages": [
     {
       "stage": 1,
       "title": "c语言 · 基础入门",
       "description": "系统学习c语言的「c语言 · 基础入门」，配练习巩固",
-      "estimated_days": 20,
+      "estimated_days": 10,
       "focus_points": [
-        "核心概念",
-        "基础工具"
+        "核心概念与术语",
+        "入门工具与软件",
+        "基本操作流程",
+        "常见术语表",
+        "经典入门案例",
+        "学习资源整理"
       ],
       "expected_outcome": "掌握c语言·c语言 · 基础入门并能独立应用",
-      "practice_cards": [
+      "resources": [
         {
-          "card_id": "leetcode_搜索核心概念_搜索核心概念",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「核心概念」",
-          "link": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "knowledge_point": "核心概念",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索核心概念_搜索核心概念",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「核心概念」",
-          "link": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "knowledge_point": "核心概念",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "leetcode_搜索基础工具_搜索基础工具",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「基础工具」",
-          "link": "https://leetcode.cn/problemset/?search=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "knowledge_point": "基础工具",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索基础工具_搜索基础工具",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「基础工具」",
-          "link": "https://www.nowcoder.com/search?query=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "knowledge_point": "基础工具",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
+          "platform": "练习网站",
+          "title": "牛客网刷题：c语言 · 基础入门",
+          "url": "https://www.nowcoder.com/search?query=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8"
         }
-      ]
+      ],
+      "_fallback": true,
+      "practice_cards": []
     },
     {
       "stage": 2,
       "title": "c语言 · 核心技能",
       "description": "系统学习c语言的「c语言 · 核心技能」，配练习巩固",
-      "estimated_days": 20,
+      "estimated_days": 10,
       "focus_points": [
-        "核心技能",
-        "练习"
+        "核心方法掌握",
+        "常用技巧与套路",
+        "典型操作练习",
+        "易错点规避",
+        "专项练习若干",
+        "阶段性小结"
       ],
       "expected_outcome": "掌握c语言·c语言 · 核心技能并能独立应用",
-      "practice_cards": [
+      "resources": [
         {
-          "card_id": "leetcode_搜索核心技能_搜索核心技能",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「核心技能」",
-          "link": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "knowledge_point": "核心技能",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索核心技能_搜索核心技能",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「核心技能」",
-          "link": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "knowledge_point": "核心技能",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "leetcode_搜索练习_搜索练习",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「练习」",
-          "link": "https://leetcode.cn/problemset/?search=%E7%BB%83%E4%B9%A0",
-          "knowledge_point": "练习",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E7%BB%83%E4%B9%A0",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索练习_搜索练习",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「练习」",
-          "link": "https://www.nowcoder.com/search?query=%E7%BB%83%E4%B9%A0",
-          "knowledge_point": "练习",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E7%BB%83%E4%B9%A0",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
+          "platform": "练习网站",
+          "title": "牛客网刷题：c语言 · 核心技能",
+          "url": "https://www.nowcoder.com/search?query=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E6%A0%B8%E5%BF%83%E6%8A%80%E8%83%BD"
         }
-      ]
+      ],
+      "_fallback": true,
+      "practice_cards": []
     },
     {
       "stage": 3,
       "title": "c语言 · 综合实战",
       "description": "系统学习c语言的「c语言 · 综合实战」，配练习巩固",
-      "estimated_days": 20,
+      "estimated_days": 10,
       "focus_points": [
-        "综合",
-        "实战"
+        "综合题目演练",
+        "真实场景应用",
+        "常见问题排查",
+        "作品/成果产出",
+        "复盘与查漏补缺",
+        "进阶方向梳理"
       ],
       "expected_outcome": "掌握c语言·c语言 · 综合实战并能独立应用",
-      "practice_cards": [
+      "resources": [
         {
-          "card_id": "leetcode_搜索综合_搜索综合",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「综合」",
-          "link": "https://leetcode.cn/problemset/?search=%E7%BB%BC%E5%90%88",
-          "knowledge_point": "综合",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E7%BB%BC%E5%90%88",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索综合_搜索综合",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「综合」",
-          "link": "https://www.nowcoder.com/search?query=%E7%BB%BC%E5%90%88",
-          "knowledge_point": "综合",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E7%BB%BC%E5%90%88",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "leetcode_搜索实战_搜索实战",
-          "node_id": "",
-          "platform": "LeetCode",
-          "problem_no": "",
-          "title": "搜索「实战」",
-          "link": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E6%88%98",
-          "knowledge_point": "实战",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://leetcode.cn/problemset/?search=%E5%AE%9E%E6%88%98",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
-        },
-        {
-          "card_id": "牛客_搜索实战_搜索实战",
-          "node_id": "",
-          "platform": "牛客",
-          "problem_no": "",
-          "title": "搜索「实战」",
-          "link": "https://www.nowcoder.com/search?query=%E5%AE%9E%E6%88%98",
-          "knowledge_point": "实战",
-          "difficulty": "简单",
-          "status": "undone",
-          "my_answer": "",
-          "note": "",
-          "search_url": "https://www.nowcoder.com/search?query=%E5%AE%9E%E6%88%98",
-          "created_at": "2026-08-14T23:05:08",
-          "updated_at": "2026-08-14T23:05:08",
-          "solved_at": null,
-          "_fallback": true
+          "platform": "练习网站",
+          "title": "牛客网刷题：c语言 · 综合实战",
+          "url": "https://www.nowcoder.com/search?query=c%E8%AF%AD%E8%A8%80%20%C2%B7%20%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98"
         }
-      ]
+      ],
+      "_fallback": true,
+      "practice_cards": []
     }
   ],
   "nodes": [
@@ -294,532 +114,57 @@
       "node_id": "step_01",
       "title": "c语言 · 基础入门",
       "description": "系统学习c语言的「c语言 · 基础入门」，配练习巩固",
-      "estimated_days": 20,
+      "estimated_days": 10,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
       "reason": "掌握c语言·c语言 · 基础入门并能独立应用",
-      "daily_tasks": [
-        {
-          "day": 1,
-          "title": "c语言 · 基础入门 - 第1天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 2,
-          "title": "c语言 · 基础入门 - 第2天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 3,
-          "title": "c语言 · 基础入门 - 第3天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 4,
-          "title": "c语言 · 基础入门 - 第4天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 5,
-          "title": "c语言 · 基础入门 - 第5天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 6,
-          "title": "c语言 · 基础入门 - 第6天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 7,
-          "title": "c语言 · 基础入门 - 第7天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 8,
-          "title": "c语言 · 基础入门 - 第8天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 9,
-          "title": "c语言 · 基础入门 - 第9天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 10,
-          "title": "c语言 · 基础入门 - 第10天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 11,
-          "title": "c语言 · 基础入门 - 第11天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 12,
-          "title": "c语言 · 基础入门 - 第12天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 13,
-          "title": "c语言 · 基础入门 - 第13天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 14,
-          "title": "c语言 · 基础入门 - 第14天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 15,
-          "title": "c语言 · 基础入门 - 第15天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 16,
-          "title": "c语言 · 基础入门 - 第16天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 17,
-          "title": "c语言 · 基础入门 - 第17天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 18,
-          "title": "c语言 · 基础入门 - 第18天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 19,
-          "title": "c语言 · 基础入门 - 第19天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 20,
-          "title": "c语言 · 基础入门 - 第20天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        }
-      ]
+      "resources": [],
+      "daily_logs": []
     },
     {
       "node_id": "step_02",
       "title": "c语言 · 核心技能",
       "description": "系统学习c语言的「c语言 · 核心技能」，配练习巩固",
-      "estimated_days": 20,
+      "estimated_days": 10,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
       "reason": "掌握c语言·c语言 · 核心技能并能独立应用",
-      "daily_tasks": [
-        {
-          "day": 21,
-          "title": "c语言 · 核心技能 - 第1天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 22,
-          "title": "c语言 · 核心技能 - 第2天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 23,
-          "title": "c语言 · 核心技能 - 第3天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 24,
-          "title": "c语言 · 核心技能 - 第4天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 25,
-          "title": "c语言 · 核心技能 - 第5天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 26,
-          "title": "c语言 · 核心技能 - 第6天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 27,
-          "title": "c语言 · 核心技能 - 第7天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 28,
-          "title": "c语言 · 核心技能 - 第8天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 29,
-          "title": "c语言 · 核心技能 - 第9天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 30,
-          "title": "c语言 · 核心技能 - 第10天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 31,
-          "title": "c语言 · 核心技能 - 第11天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 32,
-          "title": "c语言 · 核心技能 - 第12天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 33,
-          "title": "c语言 · 核心技能 - 第13天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 34,
-          "title": "c语言 · 核心技能 - 第14天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 35,
-          "title": "c语言 · 核心技能 - 第15天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 36,
-          "title": "c语言 · 核心技能 - 第16天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 37,
-          "title": "c语言 · 核心技能 - 第17天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 38,
-          "title": "c语言 · 核心技能 - 第18天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 39,
-          "title": "c语言 · 核心技能 - 第19天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 40,
-          "title": "c语言 · 核心技能 - 第20天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        }
-      ]
+      "resources": [],
+      "daily_logs": []
     },
     {
       "node_id": "step_03",
       "title": "c语言 · 综合实战",
       "description": "系统学习c语言的「c语言 · 综合实战」，配练习巩固",
-      "estimated_days": 20,
+      "estimated_days": 10,
       "resource_types": [
         "lecture",
         "exercise",
         "oj"
       ],
       "reason": "掌握c语言·c语言 · 综合实战并能独立应用",
-      "daily_tasks": [
-        {
-          "day": 41,
-          "title": "c语言 · 综合实战 - 第1天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 42,
-          "title": "c语言 · 综合实战 - 第2天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 43,
-          "title": "c语言 · 综合实战 - 第3天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 44,
-          "title": "c语言 · 综合实战 - 第4天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 45,
-          "title": "c语言 · 综合实战 - 第5天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 46,
-          "title": "c语言 · 综合实战 - 第6天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 47,
-          "title": "c语言 · 综合实战 - 第7天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 48,
-          "title": "c语言 · 综合实战 - 第8天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 49,
-          "title": "c语言 · 综合实战 - 第9天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 50,
-          "title": "c语言 · 综合实战 - 第10天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 51,
-          "title": "c语言 · 综合实战 - 第11天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 52,
-          "title": "c语言 · 综合实战 - 第12天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 53,
-          "title": "c语言 · 综合实战 - 第13天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 54,
-          "title": "c语言 · 综合实战 - 第14天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 55,
-          "title": "c语言 · 综合实战 - 第15天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 56,
-          "title": "c语言 · 综合实战 - 第16天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 57,
-          "title": "c语言 · 综合实战 - 第17天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 58,
-          "title": "c语言 · 综合实战 - 第18天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 59,
-          "title": "c语言 · 综合实战 - 第19天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        },
-        {
-          "day": 60,
-          "title": "c语言 · 综合实战 - 第20天",
-          "description": "学习时长: 300分钟",
-          "completed": false,
-          "checkin_date": null,
-          "checkin_notes": ""
-        }
-      ]
+      "resources": [],
+      "daily_logs": []
     }
   ],
   "status": "approved",
   "version": 1,
-  "created_at": "2026-08-14T23:05:08",
-  "approved_at": "2026-08-14T23:05:22",
+  "created_at": "2026-08-17T09:26:36",
+  "recommended_video": {
+    "platform": "视频",
+    "title": "c语言编程C语言程序设计c语言考研复试C语言基础入门教…（1845.4万播放·c语言程序设计-）",
+    "url": "https://www.bilibili.com/video/BV1q54y1q79w"
+  },
+  "approved_at": "2026-08-17T09:26:50",
   "data_source": {
     "market": "search|model",
     "practice": "search|model"
   },
-  "updated_at": "2026-08-14T23:05:22.641346"
+  "updated_at": "2026-08-17T09:26:50.601532"
 }

@@ -78,141 +78,23 @@ def _build_demand_section(user_demand: str, additional_info: str) -> str:
 
 # ======================== 1. 课程讲解文档 Agent ========================
 
-LECTURE_SYSTEM_PROMPT = """你是一个专业的课程讲解讲师。请生成**结构清晰、排版舒适**的教学文档。
+LECTURE_SYSTEM_PROMPT = """你是一个专业的课程讲解讲师。请生成结构清晰、排版舒适的 Python 教学文档，渲染效果对标豆包教学文档风格。严格使用本次用户输入的主题，不混入历史对话中的其他知识点。
 
-## 📐 输出格式规范（必须严格遵守）
-
-### 1. 标题层级
-- 一级标题：`# ` 开头，仅用于文档总标题，全文只出现一次
-- 二级标题：`## ` 开头，用于主要章节（一、二、三、四）
-- 三级标题：`### ` 开头，用于子章节（1.1、1.2、2.1）
-
-> ⚠️ 标题中的 `#` 和文字之间必须有空格
-
-### 2. 必须包含的章节
-
-## 一、概念解释
-用通俗语言解释核心概念，重要术语用 **加粗** 强调
-
-### 1.1 定义
-核心定义说明
-
-### 1.2 核心要素
-分点列出关键要素
-
----
-
-## 二、原理分析
-拆解核心原理，分步骤讲解，技术术语用 `反引号` 标注
-
----
-
-## 三、示例说明
-提供完整的实操示例，代码块**必须标注语言**
-
-### 3.1 基础示例
-```python
-# 完整代码，必须标注语言
-```
-
-> 💡 **提示**：补充说明
-
----
-
-## 四、小结
-
-### 4.1 知识要点回顾
-- 要点1
-- 要点2
-
-### 4.2 延伸学习方向
-- 方向1
-- 方向2
-
-### 3. 排版规范
-- **加粗**：重要概念、关键术语、核心结论
-- `反引号`：技术术语、函数名、变量名、文件名
-- `> 💡 提示`：补充说明或小技巧
-- `> ⚠️ 注意`：重要提醒或易错点
-- `> 📌 说明`：额外说明
-- `---`：主要章节之间的分隔线
-- 每个段落之间空一行
-
-### 4. 代码块规范
-- **必须**标注语言：```python、```java、```bash
-- 核心逻辑添加中文注释
-- 代码块前后各空一行
-
-### 5. 禁止事项
-- ❌ 不要重复一级标题
-- ❌ 不要出现 `###1.1` 这种格式（必须加空格）
-- ❌ 不要用纯文本罗列代替列表
-- ❌ 不要让代码块缺少语言标注
-
-## 📋 格式示例
-
-# Python 装饰器
-
-> 📖 本节学习 Python 装饰器的原理和使用方法。
-
----
-
-## 一、概念解释
-
-### 1.1 什么是装饰器
-
-装饰器是 Python 中用于**动态增强函数功能**的一种语法结构。它本质上是一个**高阶函数**，接收一个函数作为参数，返回一个新的函数。
-
----
-
-## 二、原理分析
-
-### 2.1 闭包基础
-
-装饰器依赖于 Python 的**闭包**特性。闭包是指一个函数记住了其外部作用域的变量。
-
-```python
-def outer(x):
-    def inner(y):
-        return x + y
-    return inner
-```
-
----
-
-## 三、示例说明
-
-### 3.1 基础装饰器
-
-```python
-def timer(func):
-    def wrapper(*args, **kwargs):
-        import time
-        start = time.time()
-        result = func(*args, **kwargs)
-        print(f"耗时: {time.time()-start:.3f}s")
-        return result
-    return wrapper
-```
-
-> 💡 `@timer` 等价于 `func = timer(func)`
-
----
-
-## 四、小结
-
-### 4.1 知识要点回顾
-- 装饰器是**高阶函数**的应用
-- `@` 语法糖简化了装饰器的使用
-
-### 4.2 延伸学习方向
-- 学习 `functools.wraps` 保留原函数元数据
-- 学习带参数的装饰器
+输出规范（必须严格遵守）：
+1. 结构层级：使用标准 Markdown 标题。一级标题「## 一、XXX」，二级标题「### 1.1 XXX」，层级清晰不混乱。
+2. 段落节奏：拒绝大段长文本堆砌，单段控制在 2~4 行，段落之间留空行，保证阅读呼吸感。
+3. 重点提取：核心概念、关键结论用引用块 + ✅ 前缀做成提示卡片，单独突出，不混在正文里。格式：> ✅ 关键词强化：xxx
+4. 信息表格化：所有并列要素、对比项、参数说明，全部整理成 Markdown 表格输出，禁止纯文字逐条罗列。
+5. 易错提醒：语法坑点、常见报错、认知误区，用引用块 + ⚠️ 前缀做成警示卡片，单独标注。格式：> ⚠️ 注意：xxx
+6. 代码规范：代码片段用 ```python 代码块包裹，缩进完整、注释清晰，可直接运行；代码块前后留空行，不和正文挤压。
+7. 术语高亮：专业名词、关键字、核心语法点用 **加粗** 突出，方便快速抓取重点。
+8. 模块固定顺序：概念解释 → 核心定义 → 关键词提示卡 → 核心要素表格 → 代码示例 → 易错提醒 → 扩展案例。
+9. 禁止输出无意义分割线、冗余装饰，整体简洁清爽，和豆包教学内容的排版节奏保持一致。
 """
 
 
 class LectureAgent(BaseAgent):
-    fallback_model = "glm-4.5-flash"
+    fallback_model = "qwen-turbo"
     """
     课程讲解文档 Agent
     模型: spark-4.0-ultra（旗舰模型，适合生成大型教学文档）
@@ -220,7 +102,7 @@ class LectureAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="LectureAgent",
-            model_name="glm-4.7-flash",
+            model_name="qwen-plus",
             system_prompt=(
                 SAFETY_SYSTEM_PROMPT + "\n\n"
                 + ANTI_HALLUCINATION_SYSTEM_PROMPT + "\n\n"
@@ -375,41 +257,59 @@ class LectureAgent(BaseAgent):
 
 # ======================== 2. 知识点思维导图 Agent ========================
 
-MINDMAP_SYSTEM_PROMPT = """你是一个知识结构化专家。请将知识点组织为层级化的思维导图结构。
+MINDMAP_SYSTEM_PROMPT = """你是一个知识整理专家，擅长把知识点整理成「细致读书笔记式」的 Markdown 大纲思维导图。
 
-输出必须严格遵循以下两种格式之一（二选一）：
+只输出一个 Markdown 大纲，不要输出 Mermaid、不要用代码块包裹整个大纲、不要任何解释文字（大纲内部可以出现代码块）。
 
-格式一 — Mermaid.js（优先，可自动渲染为图形）：
-```mermaid
-mindmap
-  root((中心主题))
-    一级分支1
-      二级节点1.1
-        三级节点1.1.1
-      二级节点1.2
-    一级分支2
-      二级节点2.1
+结构要求（细致维度，像认真做的手写读书笔记，信息密集但结构清晰）：
+1. 层次：# 中心主题 → ## 一级分类（用中文序号：一、二、三…）→ ### 二级子类（用数字序号：1. 2. 3…）→ - 内容项 → 必要时再缩进一层 - 子项。列表最多嵌套 2 层，层级最多 4 层。
+2. 规模：中心主题 + 4~6 个一级分类；每个一级分类下 2~4 个二级子类（或直接列内容项）；全图约 30~50 条内容，覆盖到位但不啰嗦。
+3. 关键词加粗：把每个内容项的**关键术语**用 **加粗** 标出，后面用冒号补一句简短解释，例如：`- **标量子查询**：返回单行单列`。
+4. 术语可用中文括号补充英文或简称，例如：**派生表（虚拟表）**。
+5. 技术主题（如 SQL、编程）要给出简短实用的 ```代码块``` 示例；重要的注意事项写成列表项 `- **注意**：…`（不要用 > 引用块，思维导图渲染不支持）。
+6. 一级分类按读书笔记维度组织，选最适合主题的，例如：基础概念 / 分类 / 常见位置 / 语法要点 / 示例 / 易错点 / 性能注意。
+7. 同级节点避免重复、重叠；序号与编号保持连贯。
+
+示例（SQL 子查询，即要达到的细致标准）：
+# 子查询
+## 一、基础概念
+- **定义**：嵌套在 SELECT / FROM / WHERE / HAVING / EXISTS 中的查询（内部查询）
+- **外部查询**：父查询；**内部查询**：子查询
+- **执行顺序**：先子查询，后父查询（相关子查询除外）
+- **语法规范**：子查询必须包裹 `()`
+- 限制：
+  - 普通子查询不能使用 ORDER BY（除非配合 LIMIT）
+  - SELECT 子查询只允许返回单列
+## 二、分类（两大维度）
+### 1. 按相关性划分
+- **非相关子查询**（独立子查询）：子查询不依赖父查询，只执行 1 次
+- **相关子查询**：子查询引用父表字段，父查询每一行都执行一次子查询
+  - 常搭配 EXISTS / NOT EXISTS
+  - **性能注意**：大数据量容易慢
+### 2. 按返回结果形式划分
+- **标量子查询**：返回**单行单列**，可用运算符 = > < >= <= <>
+- **列子查询**：返回**多行单列**，运算符 IN / ANY / SOME / ALL
+- **表子查询**：返回**多行多列**（虚拟表），多用于 FROM 后面 → 派生表
+## 三、出现的五大位置
+### 1. WHERE / HAVING 后（最常用）
+- 标量比较：`salary > (SELECT AVG(sal) FROM emp)`
+- IN：`dept IN (SELECT dept_id FROM dept)`
+- ANY / ALL
+### 2. FROM 后面 →【派生表（虚拟表）】
+- 别名**必须写**！
+- 语法：SELECT * FROM (子查询) AS t
+- 适用：先聚合、再二次筛选
+- **注意**：MySQL 派生表不支持直接 LIMIT 外层关联（旧版本限制）
+### 3. SELECT 字段列表中（标量子查询）
+- 每行执行一次子查询
+```sql
+SELECT name,(SELECT dname FROM dept d WHERE d.id=e.dept_id) FROM emp e
 ```
-
-格式二 — Markdown 层级列表（备选）：
-```markdown
-# 中心主题
-## 一级分支 1
-- 二级节点 1.1
-...
-```
-
-要求：
-1. 层次深度至少3层，展现知识体系结构
-2. 每个节点名称简洁明了（不超过15字）
-3. 包含知识点之间的关联关系标注
-4. 重要/核心概念可以突出标记
-5. 优先输出完整的 ```mermaid mindmap 代码块，方便直接渲染为图形
 """
 
 
 class MindmapAgent(BaseAgent):
-    fallback_model = "glm-4.5-flash"
+    fallback_model = "qwen-turbo"
     """
     知识点思维导图 Agent
     模型: spark-4.0-ultra（稳定结构化输出）
@@ -417,7 +317,7 @@ class MindmapAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="MindmapAgent",
-            model_name="glm-4.7-flash",
+            model_name="qwen-plus",
             system_prompt=MINDMAP_SYSTEM_PROMPT,
             temperature=0.6,
         )
@@ -438,7 +338,7 @@ class MindmapAgent(BaseAgent):
         try:
             profile = _safe_profile(student_id)
             lang_hint = _get_language_hint(language)
-            prompt_parts = [f"请为「{topic}」生成知识点思维导图，优先输出 Mermaid 格式。", f"语言要求：{lang_hint}"]
+            prompt_parts = [f"请为「{topic}」生成知识点思维导图的 Markdown 大纲（读书笔记式，细致维度，参照系统提示词中的标准）。", f"语言要求：{lang_hint}"]
 
             if course:
                 prompt_parts.append(f"课程：{course}")
@@ -532,7 +432,7 @@ EXERCISE_SYSTEM_PROMPT = """你是一个专业的出题老师。请根据知识�
 
 
 class ExerciseAgent(BaseAgent):
-    fallback_model = "glm-4.5-flash"
+    fallback_model = "qwen-turbo"
     """
     练习题目 Agent
     模型: spark-4.0-ultra（检测到数学主题时降低温度保证推导准确性）
@@ -540,7 +440,7 @@ class ExerciseAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="ExerciseAgent",
-            model_name="glm-4.7-flash",
+            model_name="qwen-plus",
             system_prompt=EXERCISE_SYSTEM_PROMPT,
             temperature=0.7,
         )
@@ -723,7 +623,7 @@ READING_SYSTEM_PROMPT = """你是一个学术阅读推荐助手。请根据知�
 
 
 class ReadingAgent(BaseAgent):
-    fallback_model = "glm-4.5-flash"
+    fallback_model = "qwen-turbo"
     """
     拓展阅读材料 Agent
     模型: spark-4.0-ultra（长上下文，适合生成长篇阅读材料）
@@ -731,7 +631,7 @@ class ReadingAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="ReadingAgent",
-            model_name="glm-4.7-flash",
+            model_name="qwen-plus",
             system_prompt=(
                 SAFETY_SYSTEM_PROMPT + "\n\n"
                 + ANTI_HALLUCINATION_SYSTEM_PROMPT + "\n\n"
@@ -865,7 +765,7 @@ CODE_SYSTEM_PROMPT = """你是一个编程教学助手（使用 Spark-Code-Asst 
 
 
 class CodeAgent(BaseAgent):
-    fallback_model = "glm-4.5-flash"
+    fallback_model = "qwen-turbo"
     """
     代码实操案例 Agent
     模型: spark-4.0-ultra（代码生成能力强）
@@ -873,7 +773,7 @@ class CodeAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="CodeAgent",
-            model_name="glm-4.7-flash",
+            model_name="qwen-plus",
             system_prompt=CODE_SYSTEM_PROMPT,
             temperature=0.5,
         )
@@ -1035,7 +935,7 @@ VIDEO_SYSTEM_PROMPT = """你是一个学习资源推荐助手。请根据知识�
 
 
 class VideoAgent(BaseAgent):
-    fallback_model = "glm-4.5-flash"
+    fallback_model = "qwen-turbo"
     """
     视频推荐 Agent
     使用 DuckDuckGo 视频搜索 + LLM 智能推荐
@@ -1045,7 +945,7 @@ class VideoAgent(BaseAgent):
     def __init__(self):
         super().__init__(
             name="VideoAgent",
-            model_name="glm-4.7-flash",
+            model_name="qwen-plus",
             system_prompt=VIDEO_SYSTEM_PROMPT,
             temperature=0.7,
         )

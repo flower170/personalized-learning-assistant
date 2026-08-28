@@ -1,0 +1,512 @@
+{
+  "draft_id": "draft_c1b29ddd",
+  "student_id": "b11",
+  "topic": "sql",
+  "collected": {
+    "topic": "sql",
+    "profile": {
+      "mastered": [
+        "变量"
+      ],
+      "weak": [
+        "条件语句",
+        "循环语句",
+        "列表",
+        "字典",
+        "缩进规范"
+      ],
+      "interests": [
+        "Python开发",
+        "实习导向的项目实践"
+      ],
+      "cognitive_style": "动觉型",
+      "preferred_pace": "慢速细学",
+      "daily_hours": 0,
+      "long_term_goal": "通过Python开发能力获得实习机会",
+      "short_term_goal": "学习Python并完成一个小项目",
+      "goal_attribute": "就业"
+    },
+    "market": [],
+    "resources": [],
+    "daily_hours": 1,
+    "cycle": "1个月",
+    "foundation": "入门",
+    "subject": "sql",
+    "long_term_goal": "sql"
+  },
+  "path_name": "SQL学习路径",
+  "overall_goal": "系统掌握SQL，能独立完成数据库连接、单表查询、多表关联、聚合分析、子查询及简单业务场景建模任务。",
+  "goal": "系统掌握sql",
+  "market_demand": "SQL是数据分析、后端开发、BI工程师等岗位的硬性基础技能，90%以上相关岗位JD明确要求熟练使用SELECT/JOIN/GROUP BY/窗口函数等核心能力。",
+  "total_duration_days": 30,
+  "daily_minutes": 60,
+  "stages": [
+    {
+      "stage": 1,
+      "title": "数据库与SQL环境搭建",
+      "description": "建立对关系型数据库的直观认知，完成本地/在线环境配置，理解SQL执行逻辑与基本语法结构。",
+      "estimated_days": 5,
+      "focus_points": [
+        "关系型数据库核心概念（表、行、列、主键、外键）",
+        "SQLite/MySQL/PostgreSQL差异与选型依据",
+        "DB Browser for SQLite 或 MySQL Workbench 安装与连接",
+        "CREATE DATABASE / CREATE TABLE 语句（含数据类型 INT/TEXT/DATE/REAL）",
+        "INSERT INTO VALUES 批量插入单条与多条记录",
+        "SELECT * FROM 表名 基础查询语法",
+        "WHERE 条件过滤（=, !=, >, <, BETWEEN, IN, LIKE）",
+        "ORDER BY ASC/DESC 排序与 LIMIT 限制结果行数"
+      ],
+      "expected_outcome": "能独立安装并连接本地SQLite或在线MySQL环境，创建含主键的用户表，插入10+测试数据，并用WHERE+ORDER BY+LIMIT完成带条件的有序筛选查询。",
+      "resources": [
+        {
+          "platform": "练习网站",
+          "title": "牛客网刷题：数据库与SQL环境搭建",
+          "url": "https://www.nowcoder.com/search?query=%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ESQL%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"
+        }
+      ],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索关系型数据库核心概念_搜索关系型数据库核心概念",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「关系型数据库核心概念（表、行、列、主键、外键）」",
+          "link": "https://leetcode.cn/problemset/?search=%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%88%E8%A1%A8%E3%80%81%E8%A1%8C%E3%80%81%E5%88%97%E3%80%81%E4%B8%BB%E9%94%AE%E3%80%81%E5%A4%96%E9%94%AE%EF%BC%89",
+          "knowledge_point": "关系型数据库核心概念（表、行、列、主键、外键）",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%88%E8%A1%A8%E3%80%81%E8%A1%8C%E3%80%81%E5%88%97%E3%80%81%E4%B8%BB%E9%94%AE%E3%80%81%E5%A4%96%E9%94%AE%EF%BC%89",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索sqlitemysq_搜索sqlitemysq",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「SQLite/MySQL/PostgreSQL差异与选型依据」",
+          "link": "https://leetcode.cn/problemset/?search=SQLite/MySQL/PostgreSQL%E5%B7%AE%E5%BC%82%E4%B8%8E%E9%80%89%E5%9E%8B%E4%BE%9D%E6%8D%AE",
+          "knowledge_point": "SQLite/MySQL/PostgreSQL差异与选型依据",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=SQLite/MySQL/PostgreSQL%E5%B7%AE%E5%BC%82%E4%B8%8E%E9%80%89%E5%9E%8B%E4%BE%9D%E6%8D%AE",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索dbbrowserf_搜索dbbrowserf",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「DB Browser for SQLite 或 MySQL Workbench 安装与连接」",
+          "link": "https://leetcode.cn/problemset/?search=DB%20Browser%20for%20SQLite%20%E6%88%96%20MySQL%20Workbench%20%E5%AE%89%E8%A3%85%E4%B8%8E%E8%BF%9E%E6%8E%A5",
+          "knowledge_point": "DB Browser for SQLite 或 MySQL Workbench 安装与连接",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=DB%20Browser%20for%20SQLite%20%E6%88%96%20MySQL%20Workbench%20%E5%AE%89%E8%A3%85%E4%B8%8E%E8%BF%9E%E6%8E%A5",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "单表查询进阶与字符串/日期处理",
+      "description": "强化WHERE逻辑表达能力，掌握常用内置函数，提升对文本与时间字段的精准操作能力。",
+      "estimated_days": 7,
+      "focus_points": [
+        "AND/OR/NOT 多条件组合与括号优先级",
+        "NULL判断（IS NULL / IS NOT NULL）",
+        "字符串函数：SUBSTR() / LENGTH() / UPPER() / LOWER() / TRIM() / REPLACE()",
+        "日期函数：DATE() / DATETIME() / strftime('%Y-%m', date) / julianday()（SQLite）或 DATE_FORMAT()（MySQL）",
+        "CASE WHEN THEN ELSE END 条件分支表达式",
+        "COALESCE() 处理空值替代",
+        "DISTINCT 去重与 COUNT(DISTINCT col) 统计去重数量",
+        "LIKE通配符（%/_）与ESCAPE转义"
+      ],
+      "expected_outcome": "能对含姓名、注册时间、城市等字段的用户表，独立编写SQL完成：按城市分组统计非空邮箱数、提取注册年份并标记新老用户、清洗手机号前后空格并标准化格式、识别未填城市且注册超30天的用户。",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索andornot多条_搜索andornot多条",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「AND/OR/NOT 多条件组合与括号优先级」",
+          "link": "https://leetcode.cn/problemset/?search=AND/OR/NOT%20%E5%A4%9A%E6%9D%A1%E4%BB%B6%E7%BB%84%E5%90%88%E4%B8%8E%E6%8B%AC%E5%8F%B7%E4%BC%98%E5%85%88%E7%BA%A7",
+          "knowledge_point": "AND/OR/NOT 多条件组合与括号优先级",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=AND/OR/NOT%20%E5%A4%9A%E6%9D%A1%E4%BB%B6%E7%BB%84%E5%90%88%E4%B8%8E%E6%8B%AC%E5%8F%B7%E4%BC%98%E5%85%88%E7%BA%A7",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索null判断isnu_搜索null判断isnu",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「NULL判断（IS NULL / IS NOT NULL）」",
+          "link": "https://leetcode.cn/problemset/?search=NULL%E5%88%A4%E6%96%AD%EF%BC%88IS%20NULL%20/%20IS%20NOT%20NULL%EF%BC%89",
+          "knowledge_point": "NULL判断（IS NULL / IS NOT NULL）",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=NULL%E5%88%A4%E6%96%AD%EF%BC%88IS%20NULL%20/%20IS%20NOT%20NULL%EF%BC%89",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索字符串函数subst_搜索字符串函数subst",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「字符串函数：SUBSTR() / LENGTH() / UPPER() / LOWER() / TRIM() / REPLACE()」",
+          "link": "https://leetcode.cn/problemset/?search=%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0%EF%BC%9ASUBSTR%28%29%20/%20LENGTH%28%29%20/%20UPPER%28%29%20/%20LOWER%28%29%20/%20TRIM%28%29%20/%20REPLACE%28%29",
+          "knowledge_point": "字符串函数：SUBSTR() / LENGTH() / UPPER() / LOWER() / TRIM() / REPLACE()",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0%EF%BC%9ASUBSTR%28%29%20/%20LENGTH%28%29%20/%20UPPER%28%29%20/%20LOWER%28%29%20/%20TRIM%28%29%20/%20REPLACE%28%29",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "多表JOIN与关联查询",
+      "description": "掌握表间关系建模与连接逻辑，区分不同JOIN语义，解决现实业务中跨表数据整合问题。",
+      "estimated_days": 7,
+      "focus_points": [
+        "主键-外键约束定义与作用",
+        "INNER JOIN 等值连接原理与ON条件写法",
+        "LEFT JOIN 保留左表全部记录 + NULL补右表缺失",
+        "RIGHT JOIN 与 FULL OUTER JOIN（SQLite不支持，MySQL 8.0+支持）对比",
+        "自连接（Self-JOIN）处理层级关系（如员工-上级）",
+        "USING(col) 简化同名列连接",
+        "多表JOIN链式书写（A JOIN B ON ... JOIN C ON ...）",
+        "JOIN + WHERE + GROUP BY 混合使用顺序与执行逻辑"
+      ],
+      "expected_outcome": "能基于用户表、订单表、商品表三张表，独立写出SQL：查出每个用户的最新订单时间及对应商品名称；列出所有有订单但未评价的用户；统计每个品类下销量Top3的商品（需JOIN+ROW_NUMBER()模拟）。",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索主键外键约束定义与作_搜索主键外键约束定义与作",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「主键-外键约束定义与作用」",
+          "link": "https://leetcode.cn/problemset/?search=%E4%B8%BB%E9%94%AE-%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%9C%E7%94%A8",
+          "knowledge_point": "主键-外键约束定义与作用",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E4%B8%BB%E9%94%AE-%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%9C%E7%94%A8",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索innerjoin等_搜索innerjoin等",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「INNER JOIN 等值连接原理与ON条件写法」",
+          "link": "https://leetcode.cn/problemset/?search=INNER%20JOIN%20%E7%AD%89%E5%80%BC%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86%E4%B8%8EON%E6%9D%A1%E4%BB%B6%E5%86%99%E6%B3%95",
+          "knowledge_point": "INNER JOIN 等值连接原理与ON条件写法",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=INNER%20JOIN%20%E7%AD%89%E5%80%BC%E8%BF%9E%E6%8E%A5%E5%8E%9F%E7%90%86%E4%B8%8EON%E6%9D%A1%E4%BB%B6%E5%86%99%E6%B3%95",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索leftjoin保留_搜索leftjoin保留",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「LEFT JOIN 保留左表全部记录 + NULL补右表缺失」",
+          "link": "https://leetcode.cn/problemset/?search=LEFT%20JOIN%20%E4%BF%9D%E7%95%99%E5%B7%A6%E8%A1%A8%E5%85%A8%E9%83%A8%E8%AE%B0%E5%BD%95%20%2B%20NULL%E8%A1%A5%E5%8F%B3%E8%A1%A8%E7%BC%BA%E5%A4%B1",
+          "knowledge_point": "LEFT JOIN 保留左表全部记录 + NULL补右表缺失",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=LEFT%20JOIN%20%E4%BF%9D%E7%95%99%E5%B7%A6%E8%A1%A8%E5%85%A8%E9%83%A8%E8%AE%B0%E5%BD%95%20%2B%20NULL%E8%A1%A5%E5%8F%B3%E8%A1%A8%E7%BC%BA%E5%A4%B1",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "聚合函数与GROUP BY分组统计",
+      "description": "深入理解分组聚合机制，掌握常见统计指标计算与分组过滤HAVING，支撑业务报表需求。",
+      "estimated_days": 6,
+      "focus_points": [
+        "COUNT(*) / COUNT(col) / COUNT(DISTINCT col) 区别",
+        "SUM() / AVG() / MIN() / MAX() 数值聚合",
+        "GROUP BY 单列/多列分组规则与SELECT列限制",
+        "HAVING 对分组后结果过滤（区别于WHERE）",
+        "GROUP_CONCAT()（SQLite）或 GROUP_CONCAT() / STRING_AGG()（PostgreSQL）合并字符串",
+        "WITH ROLLUP 生成小计与总计（MySQL）",
+        "嵌套聚合（如AVG(COUNT(*))需子查询实现）",
+        "分组后排序：ORDER BY COUNT(*) DESC"
+      ],
+      "expected_outcome": "能独立完成：统计各城市用户平均订单金额（排除NULL）、找出订单数≥5的城市TOP5、合并每个用户的收货地址列表（用逗号分隔）、计算各产品类别的销售额占比（需SUM+子查询或窗口函数铺垫）。",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索countcount_搜索countcount",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「COUNT(*) / COUNT(col) / COUNT(DISTINCT col) 区别」",
+          "link": "https://leetcode.cn/problemset/?search=COUNT%28%2A%29%20/%20COUNT%28col%29%20/%20COUNT%28DISTINCT%20col%29%20%E5%8C%BA%E5%88%AB",
+          "knowledge_point": "COUNT(*) / COUNT(col) / COUNT(DISTINCT col) 区别",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=COUNT%28%2A%29%20/%20COUNT%28col%29%20/%20COUNT%28DISTINCT%20col%29%20%E5%8C%BA%E5%88%AB",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索sumavgminm_搜索sumavgminm",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「SUM() / AVG() / MIN() / MAX() 数值聚合」",
+          "link": "https://leetcode.cn/problemset/?search=SUM%28%29%20/%20AVG%28%29%20/%20MIN%28%29%20/%20MAX%28%29%20%E6%95%B0%E5%80%BC%E8%81%9A%E5%90%88",
+          "knowledge_point": "SUM() / AVG() / MIN() / MAX() 数值聚合",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=SUM%28%29%20/%20AVG%28%29%20/%20MIN%28%29%20/%20MAX%28%29%20%E6%95%B0%E5%80%BC%E8%81%9A%E5%90%88",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索groupby单列多_搜索groupby单列多",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「GROUP BY 单列/多列分组规则与SELECT列限制」",
+          "link": "https://leetcode.cn/problemset/?search=GROUP%20BY%20%E5%8D%95%E5%88%97/%E5%A4%9A%E5%88%97%E5%88%86%E7%BB%84%E8%A7%84%E5%88%99%E4%B8%8ESELECT%E5%88%97%E9%99%90%E5%88%B6",
+          "knowledge_point": "GROUP BY 单列/多列分组规则与SELECT列限制",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=GROUP%20BY%20%E5%8D%95%E5%88%97/%E5%A4%9A%E5%88%97%E5%88%86%E7%BB%84%E8%A7%84%E5%88%99%E4%B8%8ESELECT%E5%88%97%E9%99%90%E5%88%B6",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "子查询与CTE公共表表达式",
+      "description": "掌握嵌套查询逻辑与模块化思维，用CTE提升复杂SQL可读性与复用性。",
+      "estimated_days": 5,
+      "focus_points": [
+        "标量子查询（返回单值）在SELECT/WHERE中使用",
+        "行子查询（返回一行多列）与列子查询（返回一列多行）",
+        "EXISTS/NOT EXISTS 关联存在性判断",
+        "IN/NOT IN 与子查询结果匹配",
+        "WITH语句定义CTE（非递归）",
+        "CTE多层引用（cte1 AS (...) , cte2 AS (SELECT * FROM cte1)）",
+        "CTE替代子查询提升可维护性",
+        "CTE + 窗口函数组合（如先分组再排名）"
+      ],
+      "expected_outcome": "能独立编写：查出订单金额高于全站平均值的用户列表；找出从未下单的用户（用NOT EXISTS）；用CTE分步计算‘各城市用户数→城市等级→等级用户占比’三层逻辑；将复杂JOIN+GROUP BY结果封装为CTE供后续过滤。",
+      "resources": [],
+      "_fallback": false,
+      "practice_cards": [
+        {
+          "card_id": "leetcode_搜索标量子查询返回单值在_搜索标量子查询返回单值在",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「标量子查询（返回单值）在SELECT/WHERE中使用」",
+          "link": "https://leetcode.cn/problemset/?search=%E6%A0%87%E9%87%8F%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BF%94%E5%9B%9E%E5%8D%95%E5%80%BC%EF%BC%89%E5%9C%A8SELECT/WHERE%E4%B8%AD%E4%BD%BF%E7%94%A8",
+          "knowledge_point": "标量子查询（返回单值）在SELECT/WHERE中使用",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E6%A0%87%E9%87%8F%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BF%94%E5%9B%9E%E5%8D%95%E5%80%BC%EF%BC%89%E5%9C%A8SELECT/WHERE%E4%B8%AD%E4%BD%BF%E7%94%A8",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索行子查询返回一行多列_搜索行子查询返回一行多列",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「行子查询（返回一行多列）与列子查询（返回一列多行）」",
+          "link": "https://leetcode.cn/problemset/?search=%E8%A1%8C%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BF%94%E5%9B%9E%E4%B8%80%E8%A1%8C%E5%A4%9A%E5%88%97%EF%BC%89%E4%B8%8E%E5%88%97%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BF%94%E5%9B%9E%E4%B8%80%E5%88%97%E5%A4%9A%E8%A1%8C%EF%BC%89",
+          "knowledge_point": "行子查询（返回一行多列）与列子查询（返回一列多行）",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=%E8%A1%8C%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BF%94%E5%9B%9E%E4%B8%80%E8%A1%8C%E5%A4%9A%E5%88%97%EF%BC%89%E4%B8%8E%E5%88%97%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BF%94%E5%9B%9E%E4%B8%80%E5%88%97%E5%A4%9A%E8%A1%8C%EF%BC%89",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        },
+        {
+          "card_id": "leetcode_搜索existsnote_搜索existsnote",
+          "node_id": "",
+          "platform": "LeetCode",
+          "problem_no": "",
+          "title": "搜索「EXISTS/NOT EXISTS 关联存在性判断」",
+          "link": "https://leetcode.cn/problemset/?search=EXISTS/NOT%20EXISTS%20%E5%85%B3%E8%81%94%E5%AD%98%E5%9C%A8%E6%80%A7%E5%88%A4%E6%96%AD",
+          "knowledge_point": "EXISTS/NOT EXISTS 关联存在性判断",
+          "difficulty": "简单",
+          "status": "undone",
+          "my_answer": "",
+          "note": "",
+          "search_url": "https://leetcode.cn/problemset/?search=EXISTS/NOT%20EXISTS%20%E5%85%B3%E8%81%94%E5%AD%98%E5%9C%A8%E6%80%A7%E5%88%A4%E6%96%AD",
+          "created_at": "2026-08-20T20:39:56",
+          "updated_at": "2026-08-20T20:39:56",
+          "solved_at": null,
+          "_fallback": true
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "step_01",
+      "title": "数据库与SQL环境搭建",
+      "description": "建立对关系型数据库的直观认知，完成本地/在线环境配置，理解SQL执行逻辑与基本语法结构。",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能独立安装并连接本地SQLite或在线MySQL环境，创建含主键的用户表，插入10+测试数据，并用WHERE+ORDER BY+LIMIT完成带条件的有序筛选查询。",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_02",
+      "title": "单表查询进阶与字符串/日期处理",
+      "description": "强化WHERE逻辑表达能力，掌握常用内置函数，提升对文本与时间字段的精准操作能力。",
+      "estimated_days": 7,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能对含姓名、注册时间、城市等字段的用户表，独立编写SQL完成：按城市分组统计非空邮箱数、提取注册年份并标记新老用户、清洗手机号前后空格并标准化格式、识别未填城市且注册超30天的用户。",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_03",
+      "title": "多表JOIN与关联查询",
+      "description": "掌握表间关系建模与连接逻辑，区分不同JOIN语义，解决现实业务中跨表数据整合问题。",
+      "estimated_days": 7,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能基于用户表、订单表、商品表三张表，独立写出SQL：查出每个用户的最新订单时间及对应商品名称；列出所有有订单但未评价的用户；统计每个品类下销量Top3的商品（需JOIN+ROW_NUMBER()模拟）。",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_04",
+      "title": "聚合函数与GROUP BY分组统计",
+      "description": "深入理解分组聚合机制，掌握常见统计指标计算与分组过滤HAVING，支撑业务报表需求。",
+      "estimated_days": 6,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能独立完成：统计各城市用户平均订单金额（排除NULL）、找出订单数≥5的城市TOP5、合并每个用户的收货地址列表（用逗号分隔）、计算各产品类别的销售额占比（需SUM+子查询或窗口函数铺垫）。",
+      "resources": [],
+      "daily_logs": []
+    },
+    {
+      "node_id": "step_05",
+      "title": "子查询与CTE公共表表达式",
+      "description": "掌握嵌套查询逻辑与模块化思维，用CTE提升复杂SQL可读性与复用性。",
+      "estimated_days": 5,
+      "resource_types": [
+        "lecture",
+        "exercise",
+        "oj"
+      ],
+      "reason": "能独立编写：查出订单金额高于全站平均值的用户列表；找出从未下单的用户（用NOT EXISTS）；用CTE分步计算‘各城市用户数→城市等级→等级用户占比’三层逻辑；将复杂JOIN+GROUP BY结果封装为CTE供后续过滤。",
+      "resources": [],
+      "daily_logs": []
+    }
+  ],
+  "status": "approved",
+  "version": 1,
+  "created_at": "2026-08-20T20:39:55",
+  "recommended_video": {
+    "platform": "视频",
+    "title": "MySQL_基础+高级篇- 数据库 -sql -mys…（747.2万播放·黎曼的猜想）",
+    "url": "https://www.bilibili.com/video/BV12b411K7Zu"
+  },
+  "approved_at": "2026-08-20T20:41:58",
+  "data_source": {
+    "market": "search|model",
+    "practice": "search|model"
+  },
+  "updated_at": "2026-08-20T20:41:58.467788"
+}

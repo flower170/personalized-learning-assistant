@@ -34,8 +34,8 @@ class SparkAPIClient:
         return self._client
 
     def _build_headers(self) -> dict:
-        """构建认证头（xunfei: Bearer api_key:api_secret；zhipu/openai: Bearer api_key）"""
-        if getattr(self.config, "provider", "xunfei") == "zhipu":
+        """构建认证头（xunfei: Bearer api_key:api_secret；zhipu/bailian: Bearer api_key）"""
+        if getattr(self.config, "provider", "xunfei") in ("zhipu", "bailian"):
             return {
                 "Authorization": f"Bearer {self.config.api_key}",
                 "Content-Type": "application/json",

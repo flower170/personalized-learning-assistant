@@ -1,0 +1,35 @@
+{
+  "student_id": "yy",
+  "path_topic": "",
+  "records": {},
+  "ai_exercises": [],
+  "collections": [],
+  "notes": [],
+  "node_studies": [],
+  "node_resources": [],
+  "checkins": [
+    {
+      "date": "2026-08-18",
+      "node_id": "step_01_01",
+      "note": ""
+    }
+  ],
+  "streak": {
+    "current": 1,
+    "longest": 1,
+    "last_checkin": "2026-08-18"
+  },
+  "created_at": "2026-08-18T16:11:12",
+  "updated_at": "2026-08-18T16:11:42",
+  "daily_logs": [
+    {
+      "id": "log_de5ac0b26871",
+      "node_id": "step_01_01",
+      "date": "2026-08-18",
+      "content": "掌握了sum函数",
+      "done": true,
+      "created_at": "2026-08-18T16:11:12",
+      "updated_at": "2026-08-18T16:11:18"
+    }
+  ]
+}

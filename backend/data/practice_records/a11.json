@@ -1,0 +1,59 @@
+{
+  "student_id": "a11",
+  "path_topic": "",
+  "records": {},
+  "ai_exercises": [],
+  "collections": [
+    {
+      "collection_id": "col_aa14f5500f0a",
+      "name": "sql错题",
+      "created_at": "2026-08-18T22:11:52",
+      "updated_at": "2026-08-18T22:11:52",
+      "questions": [
+        {
+          "qid": "cq_1826b39edc9d4768",
+          "topic": "给我出几道关于sql的选择题",
+          "type": "choice",
+          "difficulty": "basic",
+          "question": "以下哪个是SQL中用于创建表的语句？",
+          "options": [
+            {
+              "label": "A",
+              "text": "INSERT"
+            },
+            {
+              "label": "B",
+              "text": "UPDATE"
+            },
+            {
+              "label": "C",
+              "text": "CREATE TABLE"
+            },
+            {
+              "label": "D",
+              "text": "DELETE"
+            }
+          ],
+          "answer": "C",
+          "explanation": "CREATE TABLE语句用于在数据库中创建新表。",
+          "user_answer": "",
+          "correct": null,
+          "attempts": 0,
+          "created_at": "2026-08-18T22:11:52",
+          "updated_at": "2026-08-18T22:11:52"
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "node_studies": [],
+  "node_resources": [],
+  "checkins": [],
+  "streak": {
+    "current": 0,
+    "longest": 0,
+    "last_checkin": null
+  },
+  "created_at": "2026-08-18T22:11:52",
+  "updated_at": "2026-08-18T22:11:52"
+}
