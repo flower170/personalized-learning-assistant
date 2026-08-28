@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """应用生命周期管理"""
-    logger.info("🚀 A3 多智能体学习系统启动中...")
+    logger.info("🚀 个性化学习助手启动中...")
 
     # 检查 LLM 配置
     if not settings.is_configured:
@@ -63,19 +63,19 @@ async def lifespan(app: FastAPI):
                 f"会话数: {cache_health.get('memory_sessions', 0)}")
 
     logger.info("✅ 所有能力已就绪")
-    logger.info("🎯 A3 系统启动完成")
+    logger.info("🎯 个性化学习助手启动完成")
     yield
 
     # 清理
     from services.rag import kb_client
     await kb_client.close()
-    logger.info("👋 A3 系统已关闭")
+    logger.info("👋 个性化学习助手已关闭")
 
 
 # ======================== FastAPI 应用 ========================
 
 app = FastAPI(
-    title="A3 多智能体学习系统",
+    title="个性化学习助手",
     description="基于 LangGraph + 大模型的个性化学习工作区",
     version="2.0.0",
     lifespan=lifespan,
@@ -189,7 +189,7 @@ async def root():
     from core import capability_registry
     names = capability_registry.list_names()
     return {
-        "service": "A3 多智能体学习系统",
+        "service": "个性化学习助手",
         "version": "2.0.0",
         "status": "running",
         "models": settings.list_models(),
